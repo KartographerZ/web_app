@@ -12,4 +12,5 @@
 /composer.phar
 *.sublime-workspace
 /nbproject/*
-/web/vendor/
+/node_modules/
+/app/Resources/lib
