@@ -1,0 +1,23 @@
+{
+  "name": "Bower",
+  "version": "1.0.0",
+  "homepage": "https://github.com/KartographerZ/web_app",
+  "authors": [
+    "Franck Mazzolo <franck.mazzolo@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fontawesome": "~4.2.0",
+    "kendo-ui-core": "~2014.3.1204",
+    "bootstrap": "~3.3.1",
+    "arbor": "*"
+  }
+}

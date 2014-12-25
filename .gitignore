@@ -12,3 +12,4 @@
 /composer.phar
 *.sublime-workspace
 /nbproject/*
+/web/vendor/
