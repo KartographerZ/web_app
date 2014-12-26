@@ -5,6 +5,8 @@ kartographerz_cartography_index:
 kartographerz_cartography_view:
     path:     /view/{id}
     defaults: { _controller: KartographerzCartographyBundle:Cartography:view }
+    requirements:
+        id : ^[1-9]\d*
 
 kartographerz_cartography_add:
     path:     /add
