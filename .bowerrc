@@ -1,4 +1,4 @@
 {
-  "directory": "app/Resources/lib",
+  "directory": "app/Resources/public",
   "json": "bower.json"
 }
