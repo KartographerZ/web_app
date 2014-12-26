@@ -1,3 +1,7 @@
+kartographerz_cartography:
+    resource: "@KartographerzCartographyBundle/Resources/config/routing.yml"
+    prefix:   /cartography
+
 app:
     resource: @AppBundle/Controller/
     type:     annotation
