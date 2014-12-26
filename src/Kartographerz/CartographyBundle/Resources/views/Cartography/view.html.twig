@@ -1,8 +1,22 @@
-{% extends "::base.html.twig" %}
+{% extends "KartographerzCartographyBundle::layout.html.twig" %}
 
-{% block title %}KartographerzCartographyBundle:Cartography:view{% endblock %}
+
+{% block title %}{{parent()}} - View{% endblock %}
 
 {% block body %}
     <h1>Welcome to the Cartography:view page</h1>
     <h2>cartography : {{id}}</h2>
+
+    <h1>Affichage d'une cartographie</h1>
+
+    <p>
+        {# On affiche tous les messages flash dont le nom est « info » #}
+        {% for message in app.session.flashbag.get('info') %}
+        <p>Message flash : {{ message }}</p>
+        {% endfor %}
+    </p>
+
+    <p>
+        On le fera dans le prochain Sprint...
+    </p>
 {% endblock %}
