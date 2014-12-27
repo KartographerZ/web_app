@@ -1,5 +1,5 @@
 <?php
-
+umask(0000); // Définit une permission 0777
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
