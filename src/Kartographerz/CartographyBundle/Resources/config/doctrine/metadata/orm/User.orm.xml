@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="User" table="user">
+    <indexes>
+      <index name="enterprise_id" columns="enterprise_id"/>
+      <index name="type_user_id" columns="type_user_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="login" type="string" column="login" length="255" nullable="false"/>
+    <field name="password" type="string" column="password" length="255" nullable="false"/>
+    <field name="name" type="string" column="name" length="255" nullable="false"/>
+    <field name="firstname" type="string" column="firstname" length="255" nullable="false"/>
+    <field name="mail" type="string" column="mail" length="255" nullable="false"/>
+    <many-to-one field="typeUser" target-entity="TypeUser">
+      <join-columns>
+        <join-column name="type_user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="enterprise" target-entity="Enterprise">
+      <join-columns>
+        <join-column name="enterprise_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
