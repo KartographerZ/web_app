@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Cartography
  *
- * @ORM\Table(name="cartography", indexes={@ORM\Index(name="typeVisibiliteId", columns={"type_visibility_id"})})
+ * @ORM\Table(name="cartography", indexes={@ORM\Index(name="type_visibility_id", columns={"type_visibility_id"})})
  * @ORM\Entity
  */
 class Cartography
