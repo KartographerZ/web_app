@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  *
- * @ORM\Table(name="user", indexes={@ORM\Index(name="enterprise_id", columns={"enterprise_id"}), @ORM\Index(name="type_user_id", columns={"type_user_id"})})
+ * @ORM\Table(name="user", indexes={@ORM\Index(name="enterprise_id", columns={"enterprise_id"}) })
  * @ORM\Entity
  */
 class User
@@ -59,24 +59,27 @@ class User
     /**
      * @var \Enterprise
      *
-     * @ORM\ManyToOne(targetEntity="Enterprise")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="enterprise_id", referencedColumnName="id")
-     * })
+     * @ORM\OneToOne(targetEntity="KartographerZ\CartographyBundle\Entity\Enterprise",  cascade={"persist"}))
      */
     private $enterprise;
 
     /**
-     * @var \TypeUser
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="TypeUser")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="type_user_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="typeUser", type="string", length=255, nullable=false)
      */
     private $typeUser;
 
 
+    function __construct($login, $password, $name, $firstname, $mail, $enterprise,  $typeUser) {
+        $this->login = $login;
+        $this->password = $password;
+        $this->name = $name;
+        $this->firstname = $firstname;
+        $this->mail = $mail;
+        $this->enterprise = $enterprise;
+        $this->typeUser = $typeUser;
+    }
 
     /**
      * Get id
@@ -202,50 +205,22 @@ class User
     {
         return $this->mail;
     }
-
-    /**
-     * Set enterprise
-     *
-     * @param \Kartographerz\CartographyBundle\Entity\Enterprise $enterprise
-     * @return User
-     */
-    public function setEnterprise(\Kartographerz\CartographyBundle\Entity\Enterprise $enterprise = null)
-    {
-        $this->enterprise = $enterprise;
-
-        return $this;
-    }
-
-    /**
-     * Get enterprise
-     *
-     * @return \Kartographerz\CartographyBundle\Entity\Enterprise 
-     */
-    public function getEnterprise()
-    {
+    function getEnterprise() {
         return $this->enterprise;
     }
 
-    /**
-     * Set typeUser
-     *
-     * @param \Kartographerz\CartographyBundle\Entity\TypeUser $typeUser
-     * @return User
-     */
-    public function setTypeUser(\Kartographerz\CartographyBundle\Entity\TypeUser $typeUser = null)
-    {
-        $this->typeUser = $typeUser;
-
-        return $this;
+    function setEnterprise(\Enterprise $enterprise) {
+        $this->enterprise = $enterprise;
     }
 
-    /**
-     * Get typeUser
-     *
-     * @return \Kartographerz\CartographyBundle\Entity\TypeUser 
-     */
-    public function getTypeUser()
-    {
+        function getTypeUser() {
         return $this->typeUser;
     }
+
+    function setTypeUser($typeUser) {
+        $this->typeUser = $typeUser;
+    }
+
+
+  
 }
