@@ -24,7 +24,7 @@ class CartographyController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($cartography);
             $em->flush();
-            return $this->render('KartographerzCartographyBundle:Cartography:index.html.twig');
+            return $this->render('KartographerzCartographyBundle:Cartography:view.html.twig' , array( "id" => $cartography->getId()));
         }
         // Si on n'est pas en POST, alors on affiche le formulaire
         return $this->render('KartographerzCartographyBundle:Cartography:add.html.twig', array( "form" => $form->createView()));
