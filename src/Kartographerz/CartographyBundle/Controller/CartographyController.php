@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+use Kartographerz\CartographyBundle\Entity\Cartography;
+use Kartographerz\CartographyBundle\Form\CartographyType;
+
 class CartographyController extends Controller {
 
     public function indexAction() {
@@ -14,27 +17,17 @@ class CartographyController extends Controller {
 
     public function addAction(Request $request) {
 
-        // Si la requête est en POST, c'est que le visiteur a soumis le formulaire
-        if ($request->isMethod('POST')) {
-            // Ici, on s'occupera de la création et de la gestion du formulaire
+        $cartography = new Cartography();
+        $form = $this->get('form.factory')->create(new CartographyType(), $cartography);
 
-            $id = rand(1, 100); // Exemple d'un id de carto
-
-            /*
-             * Si l'ajout s'est bien déroulé, on redirige vers la page de consultation
-             * de cette cartographie
-             */
-            // Définition d'un flashbag pour stocker un message d'ajout
-            $session = $request->getSession();
-            // Le « flashBag » est ce qui contient les messages flash dans la session
-            $session->getFlashBag()->add('info', 'Cartographie enregistrée');
-
-            // Redirection vers la page de consultation de la cartographie
-            return $this->redirect($this->generateUrl('kartographerz_cartography_view', array('id' => $id)));
+        if ($form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($cartography);
+            $em->flush();
+            return $this->render('KartographerzCartographyBundle:Cartography:index.html.twig');
         }
-
         // Si on n'est pas en POST, alors on affiche le formulaire
-        return $this->render('KartographerzCartographyBundle:Cartography:add.html.twig');
+        return $this->render('KartographerzCartographyBundle:Cartography:add.html.twig', array( "form" => $form->createView()));
     }
 
     public function viewAction($id, Request $request) {
