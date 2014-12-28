@@ -3,15 +3,18 @@
 namespace Kartographerz\CartographyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use Kartographerz\CartographyBundle\Entity\Enterprise;
+use Kartographerz\CartographyBundle\Entity\User;
 
 /**
  * Cartography
  *
- * @ORM\Table(name="cartography", indexes={@ORM\Index(name="type_visibility_id", columns={"type_visibility_id"})})
+ * @ORM\Table(name="cartography")
  * @ORM\Entity
  */
-class Cartography
-{
+class Cartography {
+
     /**
      * @var integer
      *
@@ -36,24 +39,29 @@ class Cartography
     private $date;
 
     /**
-     * @var \TypeVisibility
      *
-     * @ORM\ManyToOne(targetEntity="TypeVisibility")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="type_visibility_id", referencedColumnName="id")
+     * @ORM\Column(name="typeVisibility", type="string", length=255, nullable=false)
      * })
      */
     private $typeVisibility;
 
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="KartographerZ\CartographyBundle\Entity\User" ,  cascade={"persist"}))
+     */
+    private $author;
 
+    function __construct() {
+        $this->date = new \DateTime;
+        $this->author = new User("login", "password", "name", "firstname", "mail@gmail.com", new Enterprise("Air france"), TypeUser::ADMINISTRATEUR);
+    }
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -63,8 +71,7 @@ class Cartography
      * @param string $name
      * @return Cartography
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -75,8 +82,7 @@ class Cartography
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -86,8 +92,7 @@ class Cartography
      * @param \DateTime $date
      * @return Cartography
      */
-    public function setDate($date)
-    {
+    public function setDate($date) {
         $this->date = $date;
 
         return $this;
@@ -98,31 +103,29 @@ class Cartography
      *
      * @return \DateTime 
      */
-    public function getDate()
-    {
+    public function getDate() {
         return $this->date;
     }
 
     /**
-     * Set typeVisibility
+     * Get name
      *
-     * @param \Kartographerz\CartographyBundle\Entity\TypeVisibility $typeVisibility
-     * @return Cartography
+     * @return string 
      */
-    public function setTypeVisibility(\Kartographerz\CartographyBundle\Entity\TypeVisibility $typeVisibility = null)
-    {
-        $this->typeVisibility = $typeVisibility;
-
-        return $this;
-    }
-
-    /**
-     * Get typeVisibility
-     *
-     * @return \Kartographerz\CartographyBundle\Entity\TypeVisibility 
-     */
-    public function getTypeVisibility()
-    {
+    function getTypeVisibility() {
         return $this->typeVisibility;
     }
+
+    function setTypeVisibility($typeVisibility) {
+        $this->typeVisibility = $typeVisibility;
+    }
+
+    function getAuthor() {
+        return $this->author;
+    }
+
+    function setAuthor($author) {
+        $this->author = $author;
+    }
+
 }
