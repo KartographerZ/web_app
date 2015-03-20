@@ -1,13 +1,11 @@
 
 <html>
     <head>
-        <title>Create a cartography</title>
+        <title>Create a element </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     </head>
     <body>
-
-
-        <h3>Create a cartography</h3>
+        <h3>Create a Element</h3>
 
         <div class="well">
 
@@ -27,18 +25,15 @@
                     {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
+
             <div class="form-group">
                 {# Génération du label. #}
-                {{ form_label(form.typeVisibility, "Visibility type", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_label(form.typeElement, "Type element", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
 
-                {# Affichage des erreurs pour ce champ précis. #}
-                {{ form_errors(form.typeVisibility) }}
 
-                <div class="col-sm-4">
-                    {# Génération de l'input. #}
-                    {{ form_widget(form.typeVisibility, {'attr': {'class': 'form-control'}}) }}
-                </div>
+              
             </div>
+
             <div class="form-group">
                 <div class="col-sm-4">
                     {# Génération de l'input. #}

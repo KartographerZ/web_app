@@ -7,11 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Element
  *
- * @ORM\Table(name="element", indexes={@ORM\Index(name="type_element_id", columns={"type_element_id"})})
+ * @ORM\Table(name="element")
  * @ORM\Entity
  */
-class Element
-{
+class Element {
+
     /**
      * @var integer
      *
@@ -30,23 +30,16 @@ class Element
 
     /**
      * @var \TypeElement
-     *
-     * @ORM\ManyToOne(targetEntity="TypeElement")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="type_element_id", referencedColumnName="id")
-     * })
+     * @ORM\OneToOne(targetEntity="KartographerZ\CartographyBundle\Entity\TypeElement" ,  cascade={"persist"}))
      */
     private $typeElement;
-
-
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -56,8 +49,7 @@ class Element
      * @param string $name
      * @return Element
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -68,8 +60,7 @@ class Element
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -79,8 +70,7 @@ class Element
      * @param \Kartographerz\CartographyBundle\Entity\TypeElement $typeElement
      * @return Element
      */
-    public function setTypeElement(\Kartographerz\CartographyBundle\Entity\TypeElement $typeElement = null)
-    {
+    public function setTypeElement($typeElement = null) {
         $this->typeElement = $typeElement;
 
         return $this;
@@ -91,8 +81,8 @@ class Element
      *
      * @return \Kartographerz\CartographyBundle\Entity\TypeElement 
      */
-    public function getTypeElement()
-    {
+    public function getTypeElement() {
         return $this->typeElement;
     }
+
 }

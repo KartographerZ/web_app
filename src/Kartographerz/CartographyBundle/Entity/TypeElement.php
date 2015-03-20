@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="type_element")
  * @ORM\Entity
  */
-class TypeElement
-{
+class TypeElement {
+
     /**
      * @var integer
      *
@@ -28,15 +28,19 @@ class TypeElement
      */
     private $label;
 
-
+    /**
+     * @var \Image
+     *
+     * @ORM\OneToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Image" ,  cascade={"persist"}))
+     */
+    private $image;
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -46,8 +50,7 @@ class TypeElement
      * @param string $label
      * @return TypeElement
      */
-    public function setLabel($label)
-    {
+    public function setLabel($label) {
         $this->label = $label;
 
         return $this;
@@ -58,8 +61,18 @@ class TypeElement
      *
      * @return string 
      */
-    public function getLabel()
-    {
+    public function getLabel() {
         return $this->label;
     }
+    
+    function getImage() {
+        return $this->image;
+    }
+
+    function setImage(Image $image) {
+        $this->image = $image;
+    }
+
+
+
 }
