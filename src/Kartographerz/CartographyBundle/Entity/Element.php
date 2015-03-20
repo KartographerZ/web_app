@@ -70,7 +70,7 @@ class Element {
      * @param \Kartographerz\CartographyBundle\Entity\TypeElement $typeElement
      * @return Element
      */
-    public function setTypeElement($typeElement) {
+    public function setTypeElement($typeElement = null) {
         $this->typeElement = $typeElement;
 
         return $this;
