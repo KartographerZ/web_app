@@ -2,6 +2,7 @@
 
 namespace Kartographerz\CartographyBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user", indexes={@ORM\Index(name="enterprise_id", columns={"enterprise_id"}) })
  * @ORM\Entity
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var integer
@@ -72,6 +73,7 @@ class User
 
 
     function __construct($login, $password, $name, $firstname, $mail, $enterprise,  $typeUser) {
+        parent::__construct();
         $this->login = $login;
         $this->password = $password;
         $this->name = $name;
