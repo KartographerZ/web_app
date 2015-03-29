@@ -47,7 +47,7 @@ class Cartography {
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="KartographerZ\CartographyBundle\Entity\User" ,  cascade={"persist"}))
+     * @ORM\OneToOne(targetEntity="Kartographerz\CartographyBundle\Entity\User" ,  cascade={"persist"}))
      */
     private $author;
 
