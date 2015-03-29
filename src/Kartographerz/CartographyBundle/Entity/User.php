@@ -11,68 +11,51 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user", indexes={@ORM\Index(name="enterprise_id", columns={"enterprise_id"}) })
  * @ORM\Entity
  */
-class User extends BaseUser
-{
+class User extends BaseUser {
+
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="login", type="string", length=255, nullable=false)
      */
-    private $login;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
-     */
-    private $password;
+    protected $login;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255, nullable=false)
      */
-    private $firstname;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mail", type="string", length=255, nullable=false)
-     */
-    private $mail;
+    protected $firstname;
 
     /**
      * @var \Enterprise
      *
      * @ORM\OneToOne(targetEntity="KartographerZ\CartographyBundle\Entity\Enterprise",  cascade={"persist"}))
      */
-    private $enterprise;
+    protected $enterprise;
 
     /**
      * @var string
      *
      * @ORM\Column(name="typeUser", type="string", length=255, nullable=false)
      */
-    private $typeUser;
+    protected $typeUser;
 
-
-    function __construct($login, $password, $name, $firstname, $mail, $enterprise,  $typeUser) {
+    function __construct($login, $password, $name, $firstname, $mail, $enterprise, $typeUser) {
         parent::__construct();
         $this->login = $login;
         $this->password = $password;
@@ -88,8 +71,7 @@ class User extends BaseUser
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -99,8 +81,7 @@ class User extends BaseUser
      * @param string $login
      * @return User
      */
-    public function setLogin($login)
-    {
+    public function setLogin($login) {
         $this->login = $login;
 
         return $this;
@@ -111,8 +92,7 @@ class User extends BaseUser
      *
      * @return string 
      */
-    public function getLogin()
-    {
+    public function getLogin() {
         return $this->login;
     }
 
@@ -122,8 +102,7 @@ class User extends BaseUser
      * @param string $password
      * @return User
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -134,8 +113,7 @@ class User extends BaseUser
      *
      * @return string 
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
@@ -145,8 +123,7 @@ class User extends BaseUser
      * @param string $name
      * @return User
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -157,8 +134,7 @@ class User extends BaseUser
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -168,8 +144,7 @@ class User extends BaseUser
      * @param string $firstname
      * @return User
      */
-    public function setFirstname($firstname)
-    {
+    public function setFirstname($firstname) {
         $this->firstname = $firstname;
 
         return $this;
@@ -180,8 +155,7 @@ class User extends BaseUser
      *
      * @return string 
      */
-    public function getFirstname()
-    {
+    public function getFirstname() {
         return $this->firstname;
     }
 
@@ -191,8 +165,7 @@ class User extends BaseUser
      * @param string $mail
      * @return User
      */
-    public function setMail($mail)
-    {
+    public function setMail($mail) {
         $this->mail = $mail;
 
         return $this;
@@ -203,10 +176,10 @@ class User extends BaseUser
      *
      * @return string 
      */
-    public function getMail()
-    {
+    public function getMail() {
         return $this->mail;
     }
+
     function getEnterprise() {
         return $this->enterprise;
     }
@@ -215,7 +188,7 @@ class User extends BaseUser
         $this->enterprise = $enterprise;
     }
 
-        function getTypeUser() {
+    function getTypeUser() {
         return $this->typeUser;
     }
 
@@ -223,6 +196,4 @@ class User extends BaseUser
         $this->typeUser = $typeUser;
     }
 
-
-  
 }
