@@ -34,6 +34,8 @@ class TypeElement {
      * @ORM\OneToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Image" ,  cascade={"persist"}))
      */
     private $image;
+    
+   
 
     /**
      * Get id

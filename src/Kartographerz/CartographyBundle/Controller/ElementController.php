@@ -45,7 +45,7 @@ class ElementController extends Controller {
             $element->setTypeElement($repositoyElementType->find($element->getTypeElement()));
             $em->persist($element);
             $em->flush();
-            return $this->render('KartographerzCartographyBundle:Cartography:view.html.twig');
+            return $this->render('KartographerzCartographyBundle:Element:add.html.twig', array( "form" => $form->createView(), "element"=> $element) );
         }
             return $this->render('KartographerzCartographyBundle:Element:add.html.twig', array( "form" => $form->createView()));
     }

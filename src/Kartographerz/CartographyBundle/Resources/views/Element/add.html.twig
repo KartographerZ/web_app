@@ -5,12 +5,13 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     </head>
     <body>
+
         <h3>Create a Element</h3>
-
+        {% if element is defined %} 
+            <p class="alert alert-success">Vous avez bien ajouté un element</p>
+        {% endif %}
         <div class="well">
-
             {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-
             {# Les erreurs générales du formulaire. #}
             {{ form_errors(form) }}
             <div class="form-group">
