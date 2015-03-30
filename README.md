@@ -18,3 +18,9 @@ Bower (Pour le front-end):
 Télécharger Bower : http://bower.io/#install-bower
 
 à la racine du projet, lancer la commande "bower install". Toutes les dépendances nécessaires vont être installées.
+
+3) Mise à jour du schéma de base de données
+-----
+Lancez la commande : php app/console doctrine:schema:update --force
+
+
