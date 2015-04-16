@@ -29,6 +29,17 @@ class CartographyController extends Controller {
         // Si on n'est pas en POST, alors on affiche le formulaire
         return $this->render('KartographerzCartographyBundle:Cartography:add.html.twig', array( "form" => $form->createView()));
     }
+    
+    public function deleteAction(Request $request)
+    {
+        $id = $request->get("id");
+        $em = $this->getDoctrine()->getManager();
+        $repositoyCartography = $em->getRepository("KartographerzCartographyBundle:Cartography");
+        $carto = $repositoyCartography->find($id);
+        $em->remove($carto);
+        return $this->render('KartographerzCartographyBundle:Cartography:delete.html.twig',array("name"=>$carto->getName()));
+        
+    }
 
     public function viewAction($id, Request $request) {
         /*
