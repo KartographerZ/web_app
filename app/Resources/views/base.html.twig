@@ -7,32 +7,38 @@
             {% stylesheets
                 '%kernel.root_dir%/Resources/public/bootstrap/dist/css/*.min.css'
                 '%kernel.root_dir%/Resources/public/fontawesome/css/font-awesome.min.css'
-                '%kernel.root_dir%/Resources/public/kendo-ui-core/styles/kendo.common.min.css'
-                '%kernel.root_dir%/Resources/public/kendo-ui-core/styles/kendo.default.min.css'
+                '%kernel.root_dir%/Resources/public/datatables/media/css/jquery.dataTables.min.css'
             %}
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
             {% endstylesheets %} 
             {% block javascripts %}
                 {% javascripts
-            '%kernel.root_dir%/Resources/public/jquery/dist/jquery.min.js'
-            '%kernel.root_dir%/Resources/public/bootstrap/dist/js/*.min.js'
-            '%kernel.root_dir%/Resources/public/kendo-ui-core/js/kendo.ui.core.min.js'
-            '%kernel.root_dir%/Resources/public/arbor/lib/*.js'
+                    '%kernel.root_dir%/Resources/public/jquery/dist/jquery.min.js'
+                    '%kernel.root_dir%/Resources/public/bootstrap/dist/js/*.min.js'
+                    '%kernel.root_dir%/Resources/public/datatables/media/js/jquery.dataTables.min.js'
                 %}
-                <script src="{{ asset_url }}" type="text/javascript"></script>
+                <script src="{{ asset_url }}"></script>
                 {% endjavascripts %} 
+                {% javascripts '%kernel.root_dir%/Resources/public/arbor/lib/arbor.js' output='js/arbor.js' %}
+                <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+                {% javascripts '%kernel.root_dir%/Resources/public/arbor/lib/arbor-tween.js' output='js/arbor-tween.js' %}
+                <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
             {% endblock %}
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
+        </body>
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
 
-    {% block body %}{% endblock %}
+{% block body %}{% endblock %}
 
 
-</body>
 <footer>
     Ceci est un footer général<br />
     <i class="fa fa-camera-retro"></i> fa-camera-retro
 </footer>
+
+
 </html>
