@@ -16,7 +16,6 @@
   ],
   "dependencies": {
     "fontawesome": "~4.2.0",
-    "kendo-ui-core": "~2014.3.1204",
     "bootstrap": "~3.3.1",
     "arbor": "*"
   }
