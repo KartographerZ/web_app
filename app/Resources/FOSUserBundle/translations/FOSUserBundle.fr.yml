@@ -24,6 +24,9 @@ profile:
     show:
         username: Nom d'utilisateur
         email: Adresse e-mail
+        name: Nom de famille
+        firstname: Prénom
+        enterprise: Entreprise
     edit:
         submit: Mettre à jour
     flash:
