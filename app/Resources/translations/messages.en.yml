@@ -5,3 +5,4 @@ nav:
     logout: Logout
     login: Login
     register: Register
+    edit: Update

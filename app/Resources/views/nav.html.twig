@@ -18,6 +18,7 @@
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ path('fos_user_profile_show')}}">{{ app.user.username }}</a></li>
+                    <li><a href="{{ path('fos_user_profile_edit')}}">{% trans %}nav.edit{% endtrans %}</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">{% trans %}nav.logout{% endtrans %}</a></li>
                 </ul>
             {% else %}
