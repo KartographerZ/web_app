@@ -21,4 +21,8 @@ class RegistrationFormType extends AbstractType {
         return 'kartographerz_user_registration';
     }
 
+    public function getFirstname() {
+        return 'kartographerz_user_registration';
+    }
+
 }

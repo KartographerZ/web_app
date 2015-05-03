@@ -1,51 +1,28 @@
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            Connecté en tant que {{ app.user.username }} - <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a> - <a href="{{ path('fos_user_profile_show') }}">Voir son profil</a>
-        {% else %}
-        <a href="{{ path('fos_user_security_login') }}">Connexion</a> - <a href="{{ path('fos_user_registration_register') }}">S'inscrire</a>
-    {% endif %}
-    <hr>
-    {% block stylesheets %}
-        {% stylesheets
-                '%kernel.root_dir%/Resources/public/bootstrap/dist/css/*.min.css'
-                '%kernel.root_dir%/Resources/public/fontawesome/css/font-awesome.min.css'
-                '%kernel.root_dir%/Resources/public/datatables/media/css/jquery.dataTables.min.css'
-        %}
-        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
-        {% endstylesheets %} 
-        {% block javascripts %}
-            {% javascripts
-                    '%kernel.root_dir%/Resources/public/jquery/dist/jquery.min.js'
-                    '%kernel.root_dir%/Resources/public/bootstrap/dist/js/*.min.js'
-                    '%kernel.root_dir%/Resources/public/datatables/media/js/jquery.dataTables.min.js'
-            %}
-            <script src="{{ asset_url }}"></script>
-            {% endjavascripts %} 
-            {% javascripts '%kernel.root_dir%/Resources/public/arbor/lib/arbor.js' output='js/arbor.js' %}
-            <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-            {% javascripts '%kernel.root_dir%/Resources/public/arbor/lib/arbor-tween.js' output='js/arbor-tween.js' %}
-            <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
+        {% block stylesheets %}
+            {% include 'import.html.twig' %}
         {% endblock %}
-    </body>
-{% endblock %}
-<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
-<body>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% include 'nav.html.twig' %}
+        <div class="container">
+        {% block body %}{% endblock %}
+        <hr>
+        <footer>
+            Ceci est un footer général<br />
+            <i class="fa fa-camera-retro"></i> fa-camera-retro
+        </footer>
+    </div>
 
-{% block body %}{% endblock %}
 
-<hr>
-<footer>
-    Ceci est un footer général<br />
-    <i class="fa fa-camera-retro"></i> fa-camera-retro
-</footer>
-
+</body>
 
 </html>
