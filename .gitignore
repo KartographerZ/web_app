@@ -17,3 +17,4 @@
 /app/Resources/public
 /web/css
 /web/js
+composer.lock
