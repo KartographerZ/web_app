@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="right", indexes={@ORM\Index(name="type_right_id", columns={"type_right_id"}), @ORM\Index(name="cartography_id", columns={"cartography_id"}), @ORM\Index(name="user_id", columns={"user_id"})})
  * @ORM\Entity
  */
-class Right
-{
+class Right {
+
     /**
      * @var integer
      *
@@ -44,22 +44,19 @@ class Right
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Kartographerz\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })
      */
     private $user;
 
-
-
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -69,8 +66,7 @@ class Right
      * @param \Kartographerz\CartographyBundle\Entity\TypeRight $typeRight
      * @return Right
      */
-    public function setTypeRight(\Kartographerz\CartographyBundle\Entity\TypeRight $typeRight = null)
-    {
+    public function setTypeRight(\Kartographerz\CartographyBundle\Entity\TypeRight $typeRight = null) {
         $this->typeRight = $typeRight;
 
         return $this;
@@ -81,8 +77,7 @@ class Right
      *
      * @return \Kartographerz\CartographyBundle\Entity\TypeRight 
      */
-    public function getTypeRight()
-    {
+    public function getTypeRight() {
         return $this->typeRight;
     }
 
@@ -92,8 +87,7 @@ class Right
      * @param \Kartographerz\CartographyBundle\Entity\Cartography $cartography
      * @return Right
      */
-    public function setCartography(\Kartographerz\CartographyBundle\Entity\Cartography $cartography = null)
-    {
+    public function setCartography(\Kartographerz\CartographyBundle\Entity\Cartography $cartography = null) {
         $this->cartography = $cartography;
 
         return $this;
@@ -104,19 +98,17 @@ class Right
      *
      * @return \Kartographerz\CartographyBundle\Entity\Cartography 
      */
-    public function getCartography()
-    {
+    public function getCartography() {
         return $this->cartography;
     }
 
     /**
      * Set user
      *
-     * @param \Kartographerz\CartographyBundle\Entity\User $user
+     * @param \Kartographerz\UserBundle\Entity\User $user
      * @return Right
      */
-    public function setUser(\Kartographerz\CartographyBundle\Entity\User $user = null)
-    {
+    public function setUser(\Kartographerz\UserBundle\Entity\User $user = null) {
         $this->user = $user;
 
         return $this;
@@ -125,10 +117,10 @@ class Right
     /**
      * Get user
      *
-     * @return \Kartographerz\CartographyBundle\Entity\User 
+     * @return \Kartographerz\UserBundle\Entity\User 
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
+
 }

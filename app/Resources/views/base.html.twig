@@ -1,38 +1,28 @@
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            {% stylesheets
-                '%kernel.root_dir%/Resources/public/bootstrap/dist/css/*.min.css'
-                '%kernel.root_dir%/Resources/public/fontawesome/css/font-awesome.min.css'
-                '%kernel.root_dir%/Resources/public/kendo-ui-core/styles/kendo.common.min.css'
-                '%kernel.root_dir%/Resources/public/kendo-ui-core/styles/kendo.default.min.css'
-            %}
-            <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
-            {% endstylesheets %} 
-            {% block javascripts %}
-                {% javascripts
-            '%kernel.root_dir%/Resources/public/jquery/dist/jquery.min.js'
-            '%kernel.root_dir%/Resources/public/bootstrap/dist/js/*.min.js'
-            '%kernel.root_dir%/Resources/public/kendo-ui-core/js/kendo.ui.core.min.js'
-            '%kernel.root_dir%/Resources/public/arbor/lib/*.js'
-                %}
-                <script src="{{ asset_url }}" type="text/javascript"></script>
-                {% endjavascripts %} 
-            {% endblock %}
+            {% include 'import.html.twig' %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-
-    {% block body %}{% endblock %}
+        {% include 'nav.html.twig' %}
+        <div class="container">
+        {% block body %}{% endblock %}
+        <hr>
+        <footer>
+            Ceci est un footer général<br />
+            <i class="fa fa-camera-retro"></i> fa-camera-retro
+        </footer>
+    </div>
 
 
 </body>
-<footer>
-    Ceci est un footer général<br />
-    <i class="fa fa-camera-retro"></i> fa-camera-retro
-</footer>
+
 </html>

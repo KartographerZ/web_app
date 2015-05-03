@@ -5,7 +5,7 @@ namespace Kartographerz\CartographyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 use Kartographerz\CartographyBundle\Entity\Enterprise;
-use Kartographerz\CartographyBundle\Entity\User;
+use Kartographerz\UserBundle\Entity\User;
 
 /**
  * Cartography
@@ -47,7 +47,7 @@ class Cartography {
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="KartographerZ\CartographyBundle\Entity\User" ,  cascade={"persist"}))
+     * @ORM\OneToOne(targetEntity="Kartographerz\UserBundle\Entity\User" ,  cascade={"persist"}))
      */
     private $author;
 

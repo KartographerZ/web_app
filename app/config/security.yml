@@ -1,12 +1,33 @@
+# app/config/security.yml
+
 security:
+    encoders:
+        Kartographerz\UserBundle\Entity\User: sha512
+
+    role_hierarchy:
+        ROLE_MODELISATEUR: ROLE_USER
+        ROLE_ADMIN:       [ROLE_USER, ROLE_MODELISATEUR]
+
     providers:
-        in_memory:
-            memory: ~
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        main:
+            pattern:   ^/
+            anonymous: true
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: security.csrf.token_manager
+            logout:       true
+            remember_me:
+                key:        %secret%
 
-        default:
-            anonymous: ~
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }

@@ -1,0 +1,23 @@
+{% stylesheets
+                '%kernel.root_dir%/Resources/public/bootstrap/dist/css/*.min.css'
+                '%kernel.root_dir%/Resources/public/fontawesome/css/font-awesome.min.css'
+                '%kernel.root_dir%/Resources/public/datatables/media/css/jquery.dataTables.min.css'
+                '%kernel.root_dir%/Resources/public_shared/css/*'
+%}
+<link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+{% endstylesheets %} 
+{% block javascripts %}
+    {% javascripts
+                    '%kernel.root_dir%/Resources/public/jquery/dist/jquery.min.js'
+                    '%kernel.root_dir%/Resources/public/bootstrap/dist/js/*.min.js'
+                    '%kernel.root_dir%/Resources/public/datatables/media/js/jquery.dataTables.min.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %} 
+    {% javascripts '%kernel.root_dir%/Resources/public/arbor/lib/arbor.js' output='js/arbor.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts '%kernel.root_dir%/Resources/public/arbor/lib/arbor-tween.js' output='js/arbor-tween.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

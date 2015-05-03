@@ -18,3 +18,11 @@ Bower (Pour le front-end):
 Télécharger Bower : http://bower.io/#install-bower
 
 à la racine du projet, lancer la commande "bower install". Toutes les dépendances nécessaires vont être installées.
+
+
+3) Mettre à jour / générer la base de données
+------
+
+DD : (supprimer les tables si besoin) et lancer la commande qui créée les tables :
+
+php app/console doctrine:schema:update --force
