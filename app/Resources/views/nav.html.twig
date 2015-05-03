@@ -15,12 +15,9 @@
                 <li><a href="/cartography">Cartographie</a></li>
             </ul>
 
-
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Settings</a></li>
                     <li><a href="{{ path('fos_user_profile_show')}}">{{ app.user.username }}</a></li>
-                    <li><a href="#">Help</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                 </ul>
             {% else %}
@@ -33,8 +30,6 @@
 
 
         </div><!--/.nav-collapse -->
-
-
 
     </div>
 </nav>
