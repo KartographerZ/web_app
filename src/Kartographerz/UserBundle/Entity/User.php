@@ -65,7 +65,7 @@ class User extends BaseUser {
         $this->firstname = $firstname;
     }
 
-    function setEnterprise(\Enterprise $enterprise) {
+    function setEnterprise(\Kartographerz\CartographyBundle\Entity\Enterprise $enterprise) {
         $this->enterprise = $enterprise;
     }
 
