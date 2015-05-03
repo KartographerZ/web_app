@@ -1,0 +1,7 @@
+# Global strings
+nav:
+    cartography: Cartographies
+    home: Accueil
+    logout: Déconnexion
+    login: Connexion
+    register: Inscription
