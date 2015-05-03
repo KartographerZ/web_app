@@ -1,10 +1,9 @@
 <?php
 
-namespace Kartographerz\CartographyBundle\Entity;
+namespace Kartographerz\UserBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
@@ -45,5 +44,31 @@ class User extends BaseUser {
     function __construct() {
         parent::__construct();
     }
+    
+    function getName() {
+        return $this->name;
+    }
+
+    function getFirstname() {
+        return $this->firstname;
+    }
+
+    function getEnterprise() {
+        return $this->enterprise;
+    }
+
+    function setName($name) {
+        $this->name = $name;
+    }
+
+    function setFirstname($firstname) {
+        $this->firstname = $firstname;
+    }
+
+    function setEnterprise(\Enterprise $enterprise) {
+        $this->enterprise = $enterprise;
+    }
+
+
 
 }

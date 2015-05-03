@@ -5,16 +5,22 @@ namespace Kartographerz\CartographyBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Kartographerz\CartographyBundle\Entity\Cartography;
 use Kartographerz\CartographyBundle\Form\CartographyType;
 
 class CartographyController extends Controller {
 
+        /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function indexAction() {
         return $this->render('KartographerzCartographyBundle:Cartography:index.html.twig');
     }
 
+    /**
+     * @Security("has_role('ROLE_MODELISATEUR')")
+     */
     public function addAction(Request $request) {
 
         $cartography = new Cartography();
@@ -24,12 +30,15 @@ class CartographyController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($cartography);
             $em->flush();
-            return $this->render('KartographerzCartographyBundle:Cartography:view.html.twig' , array( "id" => $cartography->getId()));
+            return $this->render('KartographerzCartographyBundle:Cartography:view.html.twig', array("id" => $cartography->getId()));
         }
         // Si on n'est pas en POST, alors on affiche le formulaire
-        return $this->render('KartographerzCartographyBundle:Cartography:add.html.twig', array( "form" => $form->createView()));
+        return $this->render('KartographerzCartographyBundle:Cartography:add.html.twig', array("form" => $form->createView()));
     }
 
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function viewAction($id, Request $request) {
         /*
          * Ici, il va falloir vérifier si la cartographie existe.

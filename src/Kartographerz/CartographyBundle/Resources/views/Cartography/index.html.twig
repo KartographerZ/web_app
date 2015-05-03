@@ -4,4 +4,13 @@
 
 {% block body %}
 <h1>Welcome to the Cartography:index page</h1>
+{% if is_granted('ROLE_USER') %}
+  Un exemple pour montrer le mode USER
+{% endif %}
+{% if is_granted('ROLE_MODELISATEUR') %}
+  <li><a href="{{ path('kartographerz_cartography_add') }}">Ajouter une cartographie</a></li>
+{% endif %}
+{% if is_granted('ROLE_MODELISATEUR') %}
+  <li><a href="{{ path('kartographerz_cartography_addElement') }}">Ajouter un élément</a></li>
+{% endif %}
 {% endblock %}
