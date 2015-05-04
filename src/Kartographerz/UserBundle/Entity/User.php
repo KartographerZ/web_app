@@ -37,14 +37,17 @@ class User extends BaseUser {
     /**
      * @var \Enterprise
      *
-     * @ORM\OneToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Enterprise",  cascade={"persist"}))
+     * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Enterprise")
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="enterprise_id", referencedColumnName="id")
+     * })
      */
     private $enterprise;
 
     function __construct() {
         parent::__construct();
     }
-    
+
     function getName() {
         return $this->name;
     }
@@ -68,7 +71,5 @@ class User extends BaseUser {
     function setEnterprise(\Kartographerz\CartographyBundle\Entity\Enterprise $enterprise) {
         $this->enterprise = $enterprise;
     }
-
-
 
 }
