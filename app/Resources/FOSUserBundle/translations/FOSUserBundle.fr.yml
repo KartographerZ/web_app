@@ -98,3 +98,4 @@ form:
     name: "Nom de famille :"
     firstname: "Prénom :"
     enterprise: "Entreprise :"
+    groups: "Rôles :"

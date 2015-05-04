@@ -6,3 +6,12 @@ nav:
     login: Login
     register: Register
     edit: Update
+    account: "Your account: "
+    change_pwd: Change your password
+    admin: Administration
+    
+footer:
+    joinus: Join us!
+    about: About
+    faq: FAQ
+    contact: Contact

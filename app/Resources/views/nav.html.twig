@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">KartographerZ</a>
+            <a class="navbar-brand" href="{{ path('homepage')}}">KartographerZ</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -17,14 +17,16 @@
 
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ path('fos_user_profile_show')}}">{{ app.user.username }}</a></li>
-                    <li><a href="{{ path('fos_user_profile_edit')}}">{% trans %}nav.edit{% endtrans %}</a></li>
-                    <li><a href="{{ path('fos_user_security_logout') }}">{% trans %}nav.logout{% endtrans %}</a></li>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li><a href="{{ path('_admin')}}"><i class="fa fa-suitcase"></i> {{ 'nav.admin'|trans }}</a></li>
+                        {% endif %}
+                    <li><a href="{{ path('fos_user_profile_show')}}"><i class="fa fa-user"></i> {{ 'nav.account'|trans }}{{ app.user.username }}</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'nav.logout'|trans }}</a></li>
                 </ul>
             {% else %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ path('fos_user_security_login') }}">{% trans %}nav.login{% endtrans %}</a></li>
-                    <li><a href="{{ path('fos_user_registration_register') }}">{% trans %}nav.register{% endtrans %}</a></li>
+                    <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'nav.login'|trans }}</a></li>
+                    <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-unlock"></i> {{ 'nav.register'|trans }}</a></li>
                 </ul>
 
             {% endif %}
