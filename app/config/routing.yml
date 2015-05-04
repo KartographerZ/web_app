@@ -13,4 +13,16 @@ fos_user:
 
 fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
-    prefix: /group
+    prefix: /{_locale}/admin/group
+    requirements:
+        _locale: en|fr
+    
+_login:
+    pattern: /{_locale}/login
+    requirements:
+        _locale: en|fr
+        
+_admin:
+    pattern: /{_locale}/admin
+    requirements:
+        _locale: en|fr

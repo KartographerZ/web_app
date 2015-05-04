@@ -58,10 +58,4 @@ class CartographyController extends Controller {
         return $this->render('KartographerzCartographyBundle:Cartography:view.html.twig', array("id" => $id));
     }
 
-    public function translationAction($name) {
-        return $this->render('KartographerzCartographyBundle::translation.html.twig', array(
-                    'name' => $name
-        ));
-    }
-
 }

@@ -4,6 +4,7 @@ namespace Kartographerz\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use FOS\UserBundle\Model\GroupInterface;
 
 /**
  * User
@@ -53,10 +54,6 @@ class User extends BaseUser {
      */
     protected $groups;
 
-    function __construct() {
-        parent::__construct();
-    }
-
     function getName() {
         return $this->name;
     }
@@ -79,6 +76,32 @@ class User extends BaseUser {
 
     function setEnterprise(\Kartographerz\CartographyBundle\Entity\Enterprise $enterprise) {
         $this->enterprise = $enterprise;
+    }
+
+    function getGroups() {
+        return $this->groups;
+    }
+
+    function setGroups($groups) {
+        $groups2 = new ArrayCollection();
+        $groups2.add();
+        $this->groups = $groups2;
+    }
+
+    public function addGroup(GroupInterface $groups) {
+        parent::addGroup($groups);
+        $this->groups[] = $groups;
+
+        return $this;
+    }
+
+    public function removeGroup(GroupInterface $groups) {
+        $this->groups->removeElement($groups);
+    }
+
+    function __construct() {
+        parent::__construct();
+        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 }
