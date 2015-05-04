@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="fos_user_security_login" path="/login" methods="GET POST">
+    <route id="fos_user_security_login" path="/{_locale}/login" methods="GET POST">
         <default key="_controller">FOSUserBundle:Security:login</default>
     </route>
 

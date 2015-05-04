@@ -6,7 +6,7 @@
 
     <import
         resource="@FOSUserBundle/Resources/config/routing/security.xml" 
-        prefix="/{_locale}"/>
+        prefix="/"/>
     <import
         resource="@FOSUserBundle/Resources/config/routing/profile.xml"
         prefix="/{_locale}/profile" />
