@@ -10,3 +10,7 @@ app:
     
 fos_user:
     resource: "@KartographerzUserBundle/Resources/config/routing/all.xml"
+
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group

@@ -41,10 +41,19 @@ class User extends BaseUser {
      */
     private $enterprise;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Kartographerz\UserBundle\Entity\Group")
+     * @ORM\JoinTable(name="fos_user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
+
     function __construct() {
         parent::__construct();
     }
-    
+
     function getName() {
         return $this->name;
     }
@@ -68,7 +77,5 @@ class User extends BaseUser {
     function setEnterprise(\Kartographerz\CartographyBundle\Entity\Enterprise $enterprise) {
         $this->enterprise = $enterprise;
     }
-
-
 
 }

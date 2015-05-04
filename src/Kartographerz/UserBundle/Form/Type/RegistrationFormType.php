@@ -11,6 +11,7 @@ class RegistrationFormType extends AbstractType {
         // add your custom field
         $builder->add('name', null, array('label' => 'form.name', 'translation_domain' => 'FOSUserBundle'));
         $builder->add('firstname', null, array('label' => 'form.firstname', 'translation_domain' => 'FOSUserBundle'));
+        $builder->add('groups',  'entity', array('class' => 'KartographerzUserBundle:Group'));
         $builder->add('enterprise', 'entity', array(
             'class' => 'KartographerzCartographyBundle:Enterprise',
             'property' => 'name',
@@ -24,14 +25,6 @@ class RegistrationFormType extends AbstractType {
     }
 
     public function getName() {
-        return 'kartographerz_user_registration';
-    }
-
-    public function getFirstname() {
-        return 'kartographerz_user_registration';
-    }
-    
-    public function getEnterprise() {
         return 'kartographerz_user_registration';
     }
 
