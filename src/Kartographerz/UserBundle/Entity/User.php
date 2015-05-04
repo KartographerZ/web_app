@@ -37,7 +37,10 @@ class User extends BaseUser {
     /**
      * @var \Enterprise
      *
-     * @ORM\OneToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Enterprise",  cascade={"persist"}))
+     * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Enterprise")
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="enterprise_id", referencedColumnName="id")
+     * })
      */
     private $enterprise;
 
