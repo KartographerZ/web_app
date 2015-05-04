@@ -1,6 +1,8 @@
 kartographerz_cartography:
     resource: "@KartographerzCartographyBundle/Resources/config/routing.yml"
-    prefix:   /cartography
+    prefix:   /{_locale}/cartography
+    requirements:
+        _locale: en|fr
 
 app:
     resource: @AppBundle/Controller/
