@@ -26,3 +26,7 @@ Télécharger Bower : http://bower.io/#install-bower
 DD : (supprimer les tables si besoin) et lancer la commande qui créée les tables :
 
 php app/console doctrine:schema:update --force
+
+Insérer les données de test dans la base de données :
+
+php app/console doctrine:fixtures:load --fixtures=src/Kartographerz/UserBundle/DataFixtures/ORM --append
