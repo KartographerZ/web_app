@@ -19,3 +19,12 @@ kartographerz_cartography_addElement:
 kartographerz_cartography_addElementType:
     path:     /addElementType
     defaults: { _controller: KartographerzCartographyBundle:Element:addElementType }
+
+
+kartographerz_cartography_cartographyList:
+    path: /cartographyList
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:list }
+    
+kartographerz_element_elementList:
+    path: /elementList
+    defaults: { _controller: KartographerzCartographyBundle:Element:list }

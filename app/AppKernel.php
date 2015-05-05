@@ -19,6 +19,7 @@ class AppKernel extends Kernel {
             new Kartographerz\CartographyBundle\KartographerzCartographyBundle(),
             new Kartographerz\UserBundle\KartographerzUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

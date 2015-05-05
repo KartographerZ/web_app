@@ -8,14 +8,20 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Kartographerz\CartographyBundle\Entity\Cartography;
 use Kartographerz\CartographyBundle\Form\CartographyType;
-
+use Symfony\Component\HttpFoundation\Response;
 class CartographyController extends Controller {
 
-        /**
+    /**
      * @Security("has_role('ROLE_USER')")
      */
     public function indexAction() {
         return $this->render('KartographerzCartographyBundle:Cartography:index.html.twig');
+    }
+
+    public function listAction(Request $request) {
+        $conn = $this->get('database_connection');
+        $list = $conn->fetchAll('SELECT * FROM Cartography');
+        return new Response(json_encode($list));
     }
 
     /**
@@ -35,16 +41,14 @@ class CartographyController extends Controller {
         // Si on n'est pas en POST, alors on affiche le formulaire
         return $this->render('KartographerzCartographyBundle:Cartography:add.html.twig', array("form" => $form->createView()));
     }
-    
-    public function deleteAction(Request $request)
-    {
+
+    public function deleteAction(Request $request) {
         $id = $request->get("id");
         $em = $this->getDoctrine()->getManager();
         $repositoyCartography = $em->getRepository("KartographerzCartographyBundle:Cartography");
         $carto = $repositoyCartography->find($id);
         $em->remove($carto);
-        return $this->render('KartographerzCartographyBundle:Cartography:delete.html.twig',array("name"=>$carto->getName()));
-        
+        return $this->render('KartographerzCartographyBundle:Cartography:delete.html.twig', array("name" => $carto->getName()));
     }
 
     /**

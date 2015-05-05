@@ -51,7 +51,11 @@ class ElementController extends Controller {
         }
         return $this->render('KartographerzCartographyBundle:Element:add.html.twig', array("form" => $form->createView()));
     }
-
+    
+    public function listAction(Request $request){
+        
+        
+    }
     /**
      * @Security("has_role('ROLE_MODELISATEUR')")
      */
