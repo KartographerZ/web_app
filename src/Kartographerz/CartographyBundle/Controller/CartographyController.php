@@ -31,6 +31,12 @@ class CartographyController extends Controller {
 
         $cartography = new Cartography();
         $form = $this->get('form.factory')->create(new CartographyType(), $cartography);
+        $usr= $this->get('security.context')->getToken()->getUser();
+        $authorId = $usr->getId();
+        $author = $this->getDoctrine()
+        ->getRepository('KartographerzUserBundle:User')
+        ->find($authorId);
+        $cartography->setAuthor($author);
 
         if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();

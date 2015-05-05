@@ -53,7 +53,6 @@ class Cartography {
 
     function __construct() {
         $this->date = new \DateTime;
-        $this->author = new User("login", "password", "name", "firstname", "mail@gmail.com", new Enterprise("Air france"), TypeUser::ADMINISTRATEUR);
     }
 
     /**
