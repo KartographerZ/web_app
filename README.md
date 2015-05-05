@@ -19,6 +19,8 @@ Télécharger Bower : http://bower.io/#install-bower
 
 à la racine du projet, lancer la commande "bower install". Toutes les dépendances nécessaires vont être installées.
 
+Erreur bower liée à git : http://stackoverflow.com/questions/21789683/howto-fix-bower-ecmderr
+
 
 3) Mettre à jour / générer la base de données
 ------
