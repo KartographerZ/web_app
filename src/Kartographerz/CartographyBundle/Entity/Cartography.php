@@ -47,7 +47,11 @@ class Cartography {
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="Kartographerz\UserBundle\Entity\User" ,  cascade={"persist"}))
+     * @ORM\ManyToOne(targetEntity="Kartographerz\UserBundle\Entity\User",  cascade={"persist"})
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     * })
+     * 
      */
     private $author;
 
