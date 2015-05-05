@@ -48,6 +48,9 @@ class CartographyController extends Controller {
         return $this->render('KartographerzCartographyBundle:Cartography:add.html.twig', array("form" => $form->createView()));
     }
 
+    /**
+     * @Security("has_role('ROLE_MODELISATEUR')")
+     */
     public function deleteAction(Request $request) {
         $id = $request->get("id");
         $em = $this->getDoctrine()->getManager();
