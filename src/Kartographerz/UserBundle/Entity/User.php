@@ -4,6 +4,7 @@ namespace Kartographerz\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use FOS\UserBundle\Model\GroupInterface;
 
 /**
  * User
@@ -37,14 +38,22 @@ class User extends BaseUser {
     /**
      * @var \Enterprise
      *
-     * @ORM\OneToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Enterprise",  cascade={"persist"}))
+     * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Enterprise")
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="enterprise_id", referencedColumnName="id")
+     * })
      */
     private $enterprise;
 
-    function __construct() {
-        parent::__construct();
-    }
-    
+    /**
+     * @ORM\ManyToMany(targetEntity="Kartographerz\UserBundle\Entity\Group")
+     * @ORM\JoinTable(name="fos_user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
+
     function getName() {
         return $this->name;
     }
@@ -65,10 +74,34 @@ class User extends BaseUser {
         $this->firstname = $firstname;
     }
 
-    function setEnterprise(\Enterprise $enterprise) {
+    function setEnterprise(\Kartographerz\CartographyBundle\Entity\Enterprise $enterprise) {
         $this->enterprise = $enterprise;
     }
 
+    function getGroups() {
+        return $this->groups;
+    }
 
+    function setGroups($groups) {
+        $groups2 = new ArrayCollection();
+        $groups2.add();
+        $this->groups = $groups2;
+    }
+
+    public function addGroup(GroupInterface $groups) {
+        parent::addGroup($groups);
+        $this->groups[] = $groups;
+
+        return $this;
+    }
+
+    public function removeGroup(GroupInterface $groups) {
+        $this->groups->removeElement($groups);
+    }
+
+    function __construct() {
+        parent::__construct();
+        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 }

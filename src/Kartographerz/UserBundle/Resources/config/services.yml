@@ -3,3 +3,7 @@ services:
         class: Kartographerz\UserBundle\Form\Type\RegistrationFormType
         tags:
             - { name: form.type, alias: kartographerz_user_registration }
+    kartographerz_user.profile.form.type:
+        class: Kartographerz\UserBundle\Form\Type\ProfileFormType
+        tags:
+            - { name: form.type, alias: kartographerz_user_profile }

@@ -22,6 +22,7 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider: security.csrf.token_manager
+                login_path: _login
             logout:       true
             remember_me:
                 key:        %secret%

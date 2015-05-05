@@ -1,0 +1,17 @@
+# Global strings
+nav:
+    cartography: Cartographies
+    home: Accueil
+    logout: Déconnexion
+    login: Connexion
+    register: Inscription
+    edit: Editer 
+    account: "Votre compte : "
+    change_pwd: Changez votre mot de passe
+    admin: Administration
+    
+footer:
+    joinus: Rejoignez-nous !
+    about: A propos
+    faq: FAQ
+    contact: Contact

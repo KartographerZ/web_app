@@ -100,3 +100,8 @@ fos_user:
     registration:
         form:
             type: kartographerz_user_registration
+    profile:
+        form:
+            type: kartographerz_user_profile
+    group:
+        group_class: Kartographerz\UserBundle\Entity\Group

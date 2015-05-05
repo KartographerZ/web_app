@@ -9,8 +9,21 @@ class RegistrationFormType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         // add your custom field
-        $builder->add('name');
-        $builder->add('firstname');
+        $builder->add('name', null, array('label' => 'form.name', 'translation_domain' => 'FOSUserBundle'));
+        $builder->add('firstname', null, array('label' => 'form.firstname', 'translation_domain' => 'FOSUserBundle'));
+
+        $builder->add('groups', 'entity', array('class' => 'KartographerzUserBundle:Group',
+            'multiple' => true,
+            'label' => 'form.groups', 
+            'translation_domain' => 'FOSUserBundle'
+        ));
+
+        $builder->add('enterprise', 'entity', array(
+            'class' => 'KartographerzCartographyBundle:Enterprise',
+            'property' => 'name',
+            'placeholder' => 'Choose an option',
+            'label' => 'form.enterprise', 'translation_domain' => 'FOSUserBundle'
+        ));
     }
 
     public function getParent() {
@@ -18,10 +31,6 @@ class RegistrationFormType extends AbstractType {
     }
 
     public function getName() {
-        return 'kartographerz_user_registration';
-    }
-
-    public function getFirstname() {
         return 'kartographerz_user_registration';
     }
 

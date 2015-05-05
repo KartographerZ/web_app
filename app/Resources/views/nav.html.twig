@@ -7,34 +7,32 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">KartographerZ</a>
+            <a class="navbar-brand" href="{{ path('homepage')}}">KartographerZ</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Accueil</a></li>
-                <li><a href="/cartography">Cartographie</a></li>
+                <li class="active"><a href="{{ path('homepage')}}">{% trans %}nav.home{% endtrans %}</a></li>
+                <li><a href="{{ path('kartographerz_cartography_index')}}">{% trans %}nav.cartography{% endtrans %}</a></li>
             </ul>
-
 
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="{{ path('fos_user_profile_show')}}">{{ app.user.username }}</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li><a href="{{ path('_admin')}}"><i class="fa fa-suitcase"></i> {{ 'nav.admin'|trans }}</a></li>
+                        {% endif %}
+                    <li><a href="{{ path('fos_user_profile_show')}}"><i class="fa fa-user"></i> {{ 'nav.account'|trans }}{{ app.user.username }}</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'nav.logout'|trans }}</a></li>
                 </ul>
             {% else %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
-                    <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
+                    <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'nav.login'|trans }}</a></li>
+                    <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-unlock"></i> {{ 'nav.register'|trans }}</a></li>
                 </ul>
 
             {% endif %}
 
 
         </div><!--/.nav-collapse -->
-
-
 
     </div>
 </nav>
