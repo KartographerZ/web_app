@@ -9,32 +9,46 @@
                 <h4 class="modal-title" id="myModalLabel">Ajouter un element</h4>
             </div>
             <div class="modal-body">
-                <table id="elementList" class="display" cellspacing="0" width="100%">
+          <table id="elementList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>Nom</th>
+                            <th>type element</th>
+                            <th>Choisir</th>
                         </tr>
                     </thead>
-
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                        </tr>
-                    </tfoot>
+       
                 </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary">Ajouter</button>
+                <button type="button" class="btn btn-primary" id="addElementToACartography">Ajouter</button>
             </div>
         </div>
     </div>
 </div>
-
+      
+    
 <script>
     $(document).ready(function () {
         $('#elementList').DataTable({
-            "sAjaxSource": path("kartographerz_element_elementList")
+            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}", 
+            "aoColumns": [
+                { "mData": "name" },
+                { "mData": "typeelementlabel" },
+                { "mData":  function ( source, type, val ) {
+                        return " <input type='checkbox' name='option1'>";
+                    }
+                }
+            ],
         });
+
+        $("#addElementToACartography").click(function(){
+            $("#elementList tbody tr").each(function(){
+                alert($(this).find("td:eq(2)").html());
+            });
+        });
+        
+            
     });
 </script>

@@ -22,9 +22,19 @@ use Kartographerz\CartographyBundle\Form\ElementType;
 use Kartographerz\CartographyBundle\Entity\TypeElement;
 use Kartographerz\CartographyBundle\Form\TypeElementType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
+use Symfony\Component\HttpFoundation\Response;
 class ElementController extends Controller {
+
     //put your code here
+
+
+    public function listAction(Request $request) {
+        $conn = $this->get('database_connection');
+        $list = $conn->fetchAll('SELECT name, typeElement_id, (select label from type_element where id= typeElement_id) as typeelementlabel '
+                . 'FROM Element');
+        return new Response(json_encode(array('data' => $list)));
+        
+    }
 
     /**
      * @Security("has_role('ROLE_MODELISATEUR')")
@@ -47,15 +57,12 @@ class ElementController extends Controller {
             $element->setTypeElement($repositoyElementType->find($element->getTypeElement()));
             $em->persist($element);
             $em->flush();
-            return $this->render('KartographerzCartographyBundle:Element:add.html.twig', array( "form" => $form->createView(), "element"=> $element) );
+            return $this->render('KartographerzCartographyBundle:Element:add.html.twig', array("form" => $form->createView(), "element" => $element));
         }
         return $this->render('KartographerzCartographyBundle:Element:add.html.twig', array("form" => $form->createView()));
     }
-    
-    public function listAction(Request $request){
-        
-        
-    }
+
+  
     /**
      * @Security("has_role('ROLE_MODELISATEUR')")
      */
