@@ -67,6 +67,8 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
+#        types:
+#            json: Sonata\Doctrine\Types\JsonType
         driver:   "%database_driver%"
         host:     "%database_host%"
         port:     "%database_port%"
@@ -84,6 +86,11 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+#        entity_managers:
+#            default:
+#                mappings:
+#                    ApplicationSonataPageBundle: ~ # only once the ApplicationSonataPageBundle is generated
+#                    SonataPageBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -105,3 +112,75 @@ fos_user:
             type: kartographerz_user_profile
     group:
         group_class: Kartographerz\UserBundle\Entity\Group
+
+#cmf_routing:
+#    chain:
+#        routers_by_id:
+#            # enable the DynamicRouter with high priority to allow overwriting configured routes with content
+#            #cmf_routing.dynamic_router: 200
+#            # enable the symfony default router with a lower priority
+#            sonata.page.router: 150
+#            router.default: 100
+#
+#sonata_page:
+#    multisite: host
+#    use_streamed_response: true # set the value to false in debug mode or if the reverse proxy does not handle streamed response
+#    ignore_route_patterns:
+#        - ^(.*)admin(.*)   # ignore admin route, ie route containing 'admin'
+#        - ^_(.*)          # ignore symfony routes
+#
+#    ignore_routes:
+#        - sonata_page_cache_esi
+#        - sonata_page_cache_ssi
+#        - sonata_page_js_sync_cache
+#        - sonata_page_js_async_cache
+#        - sonata_cache_esi
+#        - sonata_cache_ssi
+#        - sonata_cache_js_async
+#        - sonata_cache_js_sync
+#        - sonata_cache_apc
+#
+#    ignore_uri_patterns:
+#        - ^/admin\/   # ignore admin route, ie route containing 'admin'
+#
+#    page_defaults:
+#        homepage: {decorate: false} # disable decoration for homepage, key - is a page route
+#
+#    default_template: default # template key from templates section, used as default for pages
+#    templates:
+#        default:  { path: 'SonataPageBundle::layout.html.twig',          name: 'default' }
+#        2columns: { path: 'SonataPageBundle::2columns_layout.html.twig', name: '2 columns layout' }
+#
+#    # manage the http errors
+#    catch_exceptions:
+#        not_found: [404]    # render 404 page with "not_found" key (name generated: _page_internal_error_{key})
+#        fatal:     [500]    # so you can use the same page for different http errors or specify specific page for each error
+
+#
+#sonata_admin:
+#    assets:
+#        javascripts:
+#            - bundles/sonataadmin/vendor/jquery/dist/jquery.min.js
+#            - bundles/sonataadmin/vendor/jquery.scrollTo/jquery.scrollTo.js
+#            - bundles/sonataadmin/vendor/jqueryui/ui/minified/jquery-ui.min.js
+#            - bundles/sonataadmin/vendor/jqueryui/ui/minified/i18n/jquery-ui-i18n.min.js
+#            - bundles/sonatapage/sonata-page.back.min.js
+#
+#        stylesheets:
+#            - bundles/sonataadmin/vendor/AdminLTE/css/font-awesome.min.css
+#            - bundles/sonataadmin/vendor/jqueryui/themes/flick/jquery-ui.min.css
+#            - bundles/sonatapage/sonata-page.back.min.css
+#
+#sonata_block:
+#    context_manager: sonata.page.block.context_manager
+# app/config/config.yml
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # Enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+        # Your other blocks
+        # app/config/config.yml
+imports:
+    - { resource: @KartographerzUserBundle/Resources/config/services.xml }

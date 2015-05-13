@@ -7,3 +7,13 @@ services:
         class: Kartographerz\UserBundle\Form\Type\ProfileFormType
         tags:
             - { name: form.type, alias: kartographerz_user_profile }
+    sonata.admin.user:
+        class: Kartographerz\UserBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "User" }
+        arguments:
+            - ~
+            - Kartographerz\UserBundle\Entity\User
+            - ~
+        calls:
+            - [ setTranslationDomain, [KartographerzCartographyBundle]]
