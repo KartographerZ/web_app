@@ -9,7 +9,7 @@
                 <h4 class="modal-title" id="myModalLabel">Ajouter un element</h4>
             </div>
             <div class="modal-body">
-          <table id="elementList" class="display" cellspacing="0" width="100%">
+                <table id="elementList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>Nom</th>
@@ -17,7 +17,7 @@
                             <th>Choisir</th>
                         </tr>
                     </thead>
-       
+
                 </table>
             </div>
             <div class="modal-footer">
@@ -27,28 +27,52 @@
         </div>
     </div>
 </div>
-      
-    
+
+
 <script>
     $(document).ready(function () {
         $('#elementList').DataTable({
-            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}", 
+            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
             "aoColumns": [
-                { "mData": "name" },
-                { "mData": "typeelementlabel" },
-                { "mData":  function ( source, type, val ) {
+                {"mData": "name"},
+                {"mData": "typeelementlabel"},
+                {"mData": function (source, type, val) {
                         return " <input type='checkbox' name='option1'>";
                     }
                 }
             ],
         });
 
-        $("#addElementToACartography").click(function(){
-            $("#elementList tbody tr").each(function(){
-                alert($(this).find("td:eq(2)").html());
-            });
+        $("#addElementToACartography").click(function () {
+            var elements = $("#elementList tbody tr");
+            var checkedCheckboxes = getAllCheckedCheckboxes();
+            var elementsId = getCheckboxesId(checkedCheckboxes);
+            console.log(elementsId)
         });
-        
-            
+
+        function getAllCheckedCheckboxes() {
+            var checkboxes = $("#elementList input[type=checkbox]");
+            var checkedCheckboxes = new Array();
+            $(checkboxes).each(function () {
+                var checkbox = $(this);
+                if (isChecked(checkbox)) {
+                    checkedCheckboxes.push(checkbox);
+                }
+            })
+            return checkedCheckboxes;
+        }
+
+        function getCheckboxesId(checkboxes) {
+            var ids = new Array();
+            $(checkboxes).each(function () {
+                ids.push($(this).attr('id'));
+            });
+            return ids;
+        }
+
+        function isChecked(theCheckbox) {
+            return $(theCheckbox).prop('checked');
+        }
+
     });
 </script>
