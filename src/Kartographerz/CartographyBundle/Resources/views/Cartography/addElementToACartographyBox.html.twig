@@ -22,6 +22,7 @@
        
             </table>
 
+                <!--
           <table id="elementList2" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -33,7 +34,7 @@
                     </thead>
        
             </table>
-
+-->
 
             </div>
             <div class="modal-footer">
@@ -54,9 +55,9 @@
                 { "mData": "id" },
                 { "mData": "name" },
                 { "mData": "typeelementlabel" },
-                { "mData":  function ( source, type, val ) {
+                { "mData":  function (row, source, type, val ) {
 
-                        return " <input type='checkbox' name='option1'>";
+                        return " <input id="+row.id+" type='checkbox'>";
                     }
                 }
             ],
@@ -67,13 +68,13 @@
 // récupération des éléments de la cartographie courante ________________________________________________________________________________________
 
 
-   $('#elementList2').DataTable({
+  /* $('#elementList2').DataTable({
             "sAjaxSource": "{{ path("kartographerz_element_elementList") }}", 
             "aoColumns": [
                 { "mData": "id" }
             ],
         });
-
+*/
 
 // _________________________________________________________________________________________________________________________________________________
 
