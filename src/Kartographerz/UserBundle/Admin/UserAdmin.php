@@ -14,7 +14,11 @@ class UserAdmin extends Admin{
         $formMapper
             ->add('name', 'text', array('label' => 'Name'))
             ->add('firstname')
-            ->add('name')
+            ->add('email')
+            ->add('password')
+            ->add('username')
+            ->add('roles')
+            ->add('enterprise')
         ;
     }
 
@@ -23,7 +27,7 @@ class UserAdmin extends Admin{
     {
         $datagridMapper
             ->add('name')
-            ->add('firstname')
+            ->add('roles')
         ;
     }
 
@@ -32,7 +36,6 @@ class UserAdmin extends Admin{
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('firstname')
         ;
     }
 }
