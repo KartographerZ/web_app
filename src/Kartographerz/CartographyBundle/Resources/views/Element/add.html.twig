@@ -30,12 +30,13 @@
             <div class="form-group">
                 {# Génération du label. #}
                 {{ form_label(form.typeElement, "Type element", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-
-
-              
+                <div class="col-sm-4">
+                    {{ form_widget(form.typeElement, {'attr': {'class': 'form-control'}}) }}
+                </div>
             </div>
-
             <div class="form-group">
+
+
                 <div class="col-sm-4">
                     {# Génération de l'input. #}
                     {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}

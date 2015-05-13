@@ -6,35 +6,114 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Ajouter un element</h4>
+                <h4 class="modal-title" id="myModalLabel">{{'element_to_carto.add'|trans}}</h4>
             </div>
             <div class="modal-body">
                 <table id="elementList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>Nom</th>
+                            <th>id</th>
+                            <th>{{'element_to_carto.name'|trans}}</th>
+                            <th>{{'element_to_carto.type'|trans}}</th>
+                            <th>{{'element_to_carto.choice'|trans}}</th>
                         </tr>
                     </thead>
 
-                    <tfoot>
+       
+            </table>
+
+                <!--
+          <table id="elementList2" class="display" cellspacing="0" width="100%">
+                    <thead>
                         <tr>
+                            <th>id</th>
                             <th>Nom</th>
+                            <th>type element</th>
+                            <th>Choisir</th>
                         </tr>
-                    </tfoot>
-                </table>
+                    </thead>
+       
+            </table>
+-->
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary">Ajouter</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{'submit.close'|trans}}</button>
+                <button type="button" class="btn btn-primary" id="addElementToACartography">{{'submit.add'|trans}}</button>
             </div>
         </div>
     </div>
 </div>
 
+
 <script>
     $(document).ready(function () {
         $('#elementList').DataTable({
-            "sAjaxSource": path("kartographerz_element_elementList")
+            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
+            "aoColumns": [
+
+                { "mData": "id" },
+                { "mData": "name" },
+                { "mData": "typeelementlabel" },
+                { "mData":  function (row, source, type, val ) {
+
+                        return " <input id="+row.id+" type='checkbox'>";
+                    }
+                }
+            ],
         });
+
+
+     
+// récupération des éléments de la cartographie courante ________________________________________________________________________________________
+
+
+  /* $('#elementList2').DataTable({
+            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}", 
+            "aoColumns": [
+                { "mData": "id" }
+            ],
+        });
+*/
+
+// _________________________________________________________________________________________________________________________________________________
+
+
+
+
+        $("#addElementToACartography").click(function () {
+            var elements = $("#elementList tbody tr");
+            var checkedCheckboxes = getAllCheckedCheckboxes();
+            var elementsId = getCheckboxesId(checkedCheckboxes);
+            console.log(elementsId)
+
+        });
+
+        function getAllCheckedCheckboxes() {
+            var checkboxes = $("#elementList input[type=checkbox]");
+            var checkedCheckboxes = new Array();
+            $(checkboxes).each(function () {
+                var checkbox = $(this);
+                if (isChecked(checkbox)) {
+                    checkedCheckboxes.push(checkbox);
+                }
+            })
+            return checkedCheckboxes;
+        }
+
+        function getCheckboxesId(checkboxes) {
+            var ids = new Array();
+            $(checkboxes).each(function () {
+                ids.push($(this).attr('id'));
+            });
+            return ids;
+        }
+
+        function isChecked(theCheckbox) {
+            return $(theCheckbox).prop('checked');
+        }
+
     });
+
+//alert("test");
 </script>
