@@ -6,16 +6,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Ajouter un element</h4>
+                <h4 class="modal-title" id="myModalLabel">{{'element_to_carto.add'|trans}}</h4>
             </div>
             <div class="modal-body">
                 <table id="elementList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>Nom</th>
-                            <th>type element</th>
-                            <th>Choisir</th>
+                            <th>{{'element_to_carto.name'|trans}}</th>
+                            <th>{{'element_to_carto.type'|trans}}</th>
+                            <th>{{'element_to_carto.choice'|trans}}</th>
                         </tr>
                     </thead>
 
@@ -38,8 +38,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary" id="addElementToACartography">Ajouter</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{'submit.close'|trans}}</button>
+                <button type="button" class="btn btn-primary" id="addElementToACartography">{{'submit.add'|trans}}</button>
             </div>
         </div>
     </div>

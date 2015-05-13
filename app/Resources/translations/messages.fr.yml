@@ -18,3 +18,27 @@ footer:
     
 home:
     title: Bienvenue
+    
+cartography:
+    add: Ajouter une cartographie
+    create : Création d'une cartographie
+    name: Nom
+    type: Visibilité
+    list: Liste
+    
+action:
+    add: Création
+    
+submit:
+    click: Cliquez ici
+    close: Fermer
+    add: Ajouter
+    
+element_to_carto:
+    add: Ajouter un élément à la cartographie
+    name: Nom
+    type: Type
+    choice: Choix
+    
+element:
+    add: Ajouter un élément

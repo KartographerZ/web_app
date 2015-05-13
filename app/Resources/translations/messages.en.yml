@@ -18,3 +18,28 @@ footer:
     
 home:
     title: Welcome
+    
+    
+cartography:
+    add: Add a cartography
+    create : Create a cartography
+    name: Name
+    type: Visibility
+    list: List
+    
+action:
+    add: Create
+    
+submit:
+    click: Submit
+    close: Close
+    add: Add
+    
+element_to_carto:
+    add: Add an element to the cartography
+    name: Name
+    type: Type
+    choice: Choice
+    
+element:
+    add: Add an element

@@ -1,6 +1,6 @@
 {% extends "KartographerzCartographyBundle::layout.html.twig" %}
 
-{% block title %}{{parent()}} - Index{% endblock %}
+{% block title %}{{parent()}} - {{'cartography.list' | trans}}{% endblock %}
 
 {% block body %}
 <h1>Welcome to the Cartography:index page</h1>
@@ -45,9 +45,9 @@
 
 {% endif %}
 {% if is_granted('ROLE_MODELISATEUR') %}
-  <li><a href="{{ path('kartographerz_cartography_add') }}">Ajouter une cartographie</a></li>
+  <li><a href="{{ path('kartographerz_cartography_add') }}">{{'cartography.add' | trans}}</a></li>
 {% endif %}
 {% if is_granted('ROLE_MODELISATEUR') %}
-  <li><a href="{{ path('kartographerz_cartography_addElement') }}">Ajouter un élément</a></li>
+  <li><a href="{{ path('kartographerz_cartography_addElement') }}">{{'element.add' | trans}}</a></li>
 {% endif %}
 {% endblock %}

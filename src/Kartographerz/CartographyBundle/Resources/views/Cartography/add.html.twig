@@ -1,52 +1,49 @@
+{% extends "KartographerzCartographyBundle::layout.html.twig" %}
 
-<html>
-    <head>
-        <title>Create a cartography</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    </head>
-    <body>
+{% block title %}{{parent()}} - {{ 'action.add'|trans }}{% endblock %}
+
+{% block body %}
 
 
-        <h3>Create a cartography</h3>
+    <h3>{{ 'cartography.add'|trans }}</h3>
 
-        <div class="well">
+    <div class="well">
 
-            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-            {# Les erreurs générales du formulaire. #}
-            {{ form_errors(form) }}
-            <div class="form-group">
-                {# Génération du label. #}
-                {{ form_label(form.name, "Name", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(form.name, "cartography.name"|trans, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
 
-                {# Affichage des erreurs pour ce champ précis. #}
-                {{ form_errors(form.name) }}
+            {# Affichage des erreurs pour ce champ précis. #}
+            {{ form_errors(form.name) }}
 
-                <div class="col-sm-4">
-                    {# Génération de l'input. #}
-                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                </div>
+            <div class="col-sm-4">
+                {# Génération de l'input. #}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
             </div>
-            <div class="form-group">
-                {# Génération du label. #}
-                {{ form_label(form.typeVisibility, "Visibility type", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-
-                {# Affichage des erreurs pour ce champ précis. #}
-                {{ form_errors(form.typeVisibility) }}
-
-                <div class="col-sm-4">
-                    {# Génération de l'input. #}
-                    {{ form_widget(form.typeVisibility, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-4">
-                    {# Génération de l'input. #}
-                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
-                </div>
-            </div>
-            {{ form_rest(form) }}
-            {{ form_end(form) }}
         </div>
-    </body>
-</html>
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(form.typeVisibility, "cartography.type"|trans, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+
+            {# Affichage des erreurs pour ce champ précis. #}
+            {{ form_errors(form.typeVisibility) }}
+
+            <div class="col-sm-4">
+                {# Génération de l'input. #}
+                {{ form_widget(form.typeVisibility, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4">
+                {# Génération de l'input. #}
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}, 'label': 'submit.text'}) }}
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
