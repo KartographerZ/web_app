@@ -12,13 +12,27 @@
           <table id="elementList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
+                            <th>id</th>
                             <th>Nom</th>
                             <th>type element</th>
                             <th>Choisir</th>
                         </tr>
                     </thead>
        
-                </table>
+            </table>
+
+          <table id="elementList2" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Nom</th>
+                            <th>type element</th>
+                            <th>Choisir</th>
+                        </tr>
+                    </thead>
+       
+            </table>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -34,6 +48,7 @@
         $('#elementList').DataTable({
             "sAjaxSource": "{{ path("kartographerz_element_elementList") }}", 
             "aoColumns": [
+                { "mData": "id" },
                 { "mData": "name" },
                 { "mData": "typeelementlabel" },
                 { "mData":  function ( source, type, val ) {
@@ -43,6 +58,21 @@
             ],
         });
 
+     
+// récupération des éléments de la cartographie courante ________________________________________________________________________________________
+
+
+   $('#elementList2').DataTable({
+            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}", 
+            "aoColumns": [
+                { "mData": "id" }
+            ],
+        });
+
+
+// _________________________________________________________________________________________________________________________________________________
+
+
         $("#addElementToACartography").click(function(){
             $("#elementList tbody tr").each(function(){
                 alert($(this).find("td:eq(2)").html());
@@ -51,4 +81,6 @@
         
             
     });
+
+//alert("test");
 </script>

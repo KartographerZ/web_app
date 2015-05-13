@@ -30,7 +30,7 @@ class ElementController extends Controller {
 
     public function listAction(Request $request) {
         $conn = $this->get('database_connection');
-        $list = $conn->fetchAll('SELECT name, typeElement_id, (select label from type_element where id= typeElement_id) as typeelementlabel '
+        $list = $conn->fetchAll('SELECT id, name, typeElement_id, (select label from type_element where id= typeElement_id) as typeelementlabel '
                 . 'FROM Element');
         return new Response(json_encode(array('data' => $list)));
         
