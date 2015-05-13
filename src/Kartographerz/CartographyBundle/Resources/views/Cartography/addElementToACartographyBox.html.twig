@@ -12,29 +12,108 @@
                 <table id="elementList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
+                            <th>id</th>
                             <th>Nom</th>
+                            <th>type element</th>
+                            <th>Choisir</th>
                         </tr>
                     </thead>
 
-                    <tfoot>
+       
+            </table>
+
+                <!--
+          <table id="elementList2" class="display" cellspacing="0" width="100%">
+                    <thead>
                         <tr>
+                            <th>id</th>
                             <th>Nom</th>
+                            <th>type element</th>
+                            <th>Choisir</th>
                         </tr>
-                    </tfoot>
-                </table>
+                    </thead>
+       
+            </table>
+-->
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary">Ajouter</button>
+                <button type="button" class="btn btn-primary" id="addElementToACartography">Ajouter</button>
             </div>
         </div>
     </div>
 </div>
 
+
 <script>
     $(document).ready(function () {
         $('#elementList').DataTable({
-            "sAjaxSource": path("kartographerz_element_elementList")
+            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
+            "aoColumns": [
+
+                { "mData": "id" },
+                { "mData": "name" },
+                { "mData": "typeelementlabel" },
+                { "mData":  function (row, source, type, val ) {
+
+                        return " <input id="+row.id+" type='checkbox'>";
+                    }
+                }
+            ],
         });
+
+
+     
+// récupération des éléments de la cartographie courante ________________________________________________________________________________________
+
+
+  /* $('#elementList2').DataTable({
+            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}", 
+            "aoColumns": [
+                { "mData": "id" }
+            ],
+        });
+*/
+
+// _________________________________________________________________________________________________________________________________________________
+
+
+
+
+        $("#addElementToACartography").click(function () {
+            var elements = $("#elementList tbody tr");
+            var checkedCheckboxes = getAllCheckedCheckboxes();
+            var elementsId = getCheckboxesId(checkedCheckboxes);
+            console.log(elementsId)
+
+        });
+
+        function getAllCheckedCheckboxes() {
+            var checkboxes = $("#elementList input[type=checkbox]");
+            var checkedCheckboxes = new Array();
+            $(checkboxes).each(function () {
+                var checkbox = $(this);
+                if (isChecked(checkbox)) {
+                    checkedCheckboxes.push(checkbox);
+                }
+            })
+            return checkedCheckboxes;
+        }
+
+        function getCheckboxesId(checkboxes) {
+            var ids = new Array();
+            $(checkboxes).each(function () {
+                ids.push($(this).attr('id'));
+            });
+            return ids;
+        }
+
+        function isChecked(theCheckbox) {
+            return $(theCheckbox).prop('checked');
+        }
+
     });
+
+//alert("test");
 </script>
