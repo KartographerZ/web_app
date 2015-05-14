@@ -20,7 +20,15 @@
         {% include 'footer.html.twig' %}
     </footer>
 
-
+    {% block javascripts %}
+        <script>
+        $.extend($.fn.dataTable.defaults, {
+        "language": {
+        "url": loadDatatablesIntl("{{ app.request.locale }}")
+        },
+        });
+        </script>
+    {% endblock %}
 
 </body>
 
