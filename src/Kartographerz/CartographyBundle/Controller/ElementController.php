@@ -32,9 +32,15 @@ class ElementController extends Controller {
         $conn = $this->get('database_connection');
         $list = $conn->fetchAll('SELECT id, name, typeElement_id, (select label from type_element where id= typeElement_id) as typeelementlabel '
                 . 'FROM Element');
-        return new Response(json_encode(array('data' => $list)));
-        
+        return new Response(json_encode(array('data' => $list)));      
     }
+    
+     public function versionListAction(Request $request) {
+        $conn = $this->get('database_connection');
+        $list = $conn->fetchAll('SELECT * FROM version_element');
+        return new Response(json_encode(array('data' => $list)));      
+    }
+
 
     /**
      * @Security("has_role('ROLE_MODELISATEUR')")

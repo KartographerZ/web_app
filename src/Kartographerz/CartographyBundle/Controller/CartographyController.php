@@ -24,6 +24,12 @@ class CartographyController extends Controller {
         $list = $conn->fetchAll('SELECT * FROM Cartography');
         return new Response(json_encode($list));
     }
+    
+    public function versionListAction(Request $request) {
+        $conn = $this->get('database_connection');
+        $list = $conn->fetchAll('SELECT * FROM version');
+        return new Response(json_encode($list));
+    }
 
     /**
      * @Security("has_role('ROLE_MODELISATEUR')")

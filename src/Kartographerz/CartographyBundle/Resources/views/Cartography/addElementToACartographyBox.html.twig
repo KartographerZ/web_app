@@ -9,6 +9,7 @@
                 <h4 class="modal-title" id="myModalLabel">{{'element_to_carto.add'|trans}}</h4>
             </div>
             <div class="modal-body">
+<div class="iddata" data-videoid={{ app.request.get('id') }}></div>
                 <table id="elementList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -36,6 +37,7 @@
             </table>
 -->
 
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{'submit.close'|trans}}</button>
@@ -48,6 +50,83 @@
 
 <script>
     $(document).ready(function () {
+var idCarto = $(".iddata").data("videoid");
+
+var idVersionCarto = $(".iddata").data("videoid");
+
+
+
+//777777
+/*
+var versionsCarto = []; 
+
+$.ajax({
+        type: "POST",
+        url: "{{ path("kartographerz_cartography_versionCartographyList")}}",
+        dataType: 'json',
+        cache: false,
+        success: function(data){
+
+var dataTab = data.data;
+
+for (var i in dataTab) {
+var idVersionCartoTable = dataTab[i].id;
+console.log(idVersionCartoTable);
+console.log("aa");
+var idCartoTable = dataTab[i].cartography_id;
+console.log(idCartoTable);
+
+var tab = [idVersionCartoTable, idCartoTable];
+
+//versionsCarto.push(tab);
+	}
+ 
+        }
+
+
+   }); 
+ 
+//console.log(versionsCarto[0][0]);
+*/
+//777777
+
+
+
+
+
+// récupération des éléments de la cartographie courante ________________________________________________________________________________________
+
+var elementsCarto = []; 
+$.ajax({
+        type: "POST",
+        url: "{{ path("kartographerz_element_versionElementList")}}",
+        dataType: 'json',
+        cache: false,
+        success: function(data){
+
+var dataTab = data.data;
+
+for (var i in dataTab) {
+var idCartoTable = dataTab[i].version_id;
+var id = dataTab[i].element_id;
+
+if (idCartoTable == idCarto) {
+elementsCarto.push(id);
+console.log(id)
+}
+
+	}
+ 
+        }
+   }); 
+ 
+// _________________________________________________________________________________________________________________________________________________
+
+
+
+
+
+
         $('#elementList').DataTable({
             "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
             "aoColumns": [
@@ -57,7 +136,15 @@
                 { "mData": "typeelementlabel" },
                 { "mData":  function (row, source, type, val ) {
 
+
+if ($.inArray(row.id, elementsCarto) >= 0) {
+                        return " <input id="+row.id+" type='checkbox' checked>";
+}
+else {
                         return " <input id="+row.id+" type='checkbox'>";
+}
+
+
                     }
                 }
             ],
@@ -65,21 +152,14 @@
 
 
      
-// récupération des éléments de la cartographie courante ________________________________________________________________________________________
-
-
-  /* $('#elementList2').DataTable({
-            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}", 
-            "aoColumns": [
-                { "mData": "id" }
-            ],
-        });
-*/
-
-// _________________________________________________________________________________________________________________________________________________
 
 
 
+
+
+
+
+// Partie de Franck
 
         $("#addElementToACartography").click(function () {
             var elements = $("#elementList tbody tr");
