@@ -19,22 +19,28 @@
                         </tr>
                     </thead>
 
-       
-            </table>
 
-                <!--
-          <table id="elementList2" class="display" cellspacing="0" width="100%">
+                </table>
+
+
+                <table id="linkList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>Nom</th>
-                            <th>type element</th>
-                            <th>Choisir</th>
+
+                            <th>Ele1</th>
+                            <th>Ele2</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
-       
-            </table>
--->
+                    <tfoot>
+                        <tr>
+                            <td><button type="button" class="btn btn-default" id="addRow"><i class="fa fa-plus"></i></button></td>
+
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
 
             </div>
             <div class="modal-footer">
@@ -51,33 +57,36 @@
         $('#elementList').DataTable({
             "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
             "aoColumns": [
+                {"mData": "id"},
+                {"mData": "name"},
+                {"mData": "typeelementlabel"},
+                {"mData": function (row, source, type, val) {
 
-                { "mData": "id" },
-                { "mData": "name" },
-                { "mData": "typeelementlabel" },
-                { "mData":  function (row, source, type, val ) {
-
-                        return " <input id="+row.id+" type='checkbox'>";
+                        return " <input id=" + row.id + " type='checkbox'>";
                     }
                 }
             ],
         });
 
-
-     
-// récupération des éléments de la cartographie courante ________________________________________________________________________________________
-
-
-  /* $('#elementList2').DataTable({
-            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}", 
+        var counter = 1;
+        var t = $('#linkList').DataTable({
+            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
             "aoColumns": [
-                { "mData": "id" }
+                {"mData": function () {
+                        return "nom ele1";
+                    }
+                },
+                {"mData": function () {
+                        return "nom ele2";
+                    }
+                },
+                {"mData": function (row) {
+                        return '<button id="delete_' + row.index() + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>';
+                        
+                    }
+                },
             ],
         });
-*/
-
-// _________________________________________________________________________________________________________________________________________________
-
 
 
 
@@ -87,6 +96,10 @@
             var elementsId = getCheckboxesId(checkedCheckboxes);
             console.log(elementsId)
 
+        });
+
+        $("#delete_1").click(function () {
+            console.log("delete")
         });
 
         function getAllCheckedCheckboxes() {
@@ -113,7 +126,17 @@
             return $(theCheckbox).prop('checked');
         }
 
+        $('#addRow').on('click', function () {
+            t.row.add([
+                '.2',
+                '.3',
+                '.4',
+            ]).draw();
+        });
+
+
     });
+
 
 //alert("test");
 </script>
