@@ -26,7 +26,7 @@
                 <table id="linkList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-
+                            <th>id</th>
                             <th>Ele1</th>
                             <th>Ele2</th>
                             <th>Delete</th>
@@ -72,8 +72,21 @@
         var t = $('#linkList').DataTable({
             "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
             "aoColumns": [
-                {"mData": function () {
-                        return "nom ele1";
+                {"mData": function (val) {
+                        var id;
+
+                        if (val.id !== "undefined") {
+                            id = val.id;
+                        }
+                        else {
+                            id = val[0];
+                        }
+                        console.log(id)
+                        return id;
+                    }
+                },
+                {"mData": function (val) {
+                        return "lol"
                     }
                 },
                 {"mData": function () {
@@ -81,8 +94,8 @@
                     }
                 },
                 {"mData": function (row) {
-                        return '<button id="delete_' + row.index() + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>';
-                        
+                        return '<button id="delete_' + row.id + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>';
+
                     }
                 },
             ],
@@ -128,6 +141,7 @@
 
         $('#addRow').on('click', function () {
             t.row.add([
+                'A',
                 '.2',
                 '.3',
                 '.4',
