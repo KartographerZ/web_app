@@ -36,7 +36,7 @@
                     <tfoot>
                         <tr>
                             <td><button type="button" class="btn btn-default" id="addRow"><i class="fa fa-plus"></i></button></td>
-
+                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -118,7 +118,7 @@
 
                     if (idCartoTable == idCarto) {
                         elementsCarto.push(id);
-                        console.log(id)
+                        //console.log(id)
                     }
 
                 }
@@ -148,36 +148,34 @@
                         else {
                             return " <input id=" + row.id + " type='checkbox'>";
                         }
-
-
                     }
                 }
             ],
         });
 
-        var counter = 1;
         var t = $('#linkList').DataTable({
             "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
             "aoColumns": [
                 {"mData": function (val) {
                         var id;
-
+                        console.log(val)
                         if (val.id !== "undefined") {
                             id = val.id;
                         }
                         else {
                             id = val[0];
+                            //console.log(id)
                         }
-                        console.log(id)
+
                         return id;
                     }
                 },
                 {"mData": function (val) {
-                        return "lol"
+                        return "<div data-id=" + val.id + ">" + "val.name1" + "</div>"
                     }
                 },
-                {"mData": function () {
-                        return "nom ele2";
+                {"mData": function (val) {
+                        return "<div data-id=" + (val.id + 1) + ">" + "val.name2" + "</div>";
                     }
                 },
                 {"mData": function (row) {
@@ -189,19 +187,27 @@
         });
 
 
-
-// Partie de Franck
-
         $("#addElementToACartography").click(function () {
             var elements = $("#elementList tbody tr");
             var checkedCheckboxes = getAllCheckedCheckboxes();
             var elementsId = getCheckboxesId(checkedCheckboxes);
-            console.log(elementsId)
+            //console.log(elementsId)
+            console.log(getLinks())
 
         });
 
-        $("#delete_1").click(function () {
-            console.log("delete")
+        $("#linkList").on("click", ".delete", function () {
+            var row = $(this).parents("tr");
+            t.row($(this).parents('tr')).remove().draw();
+        });
+
+        $('#addRow').on('click', function () {
+            t.row.add([
+                'A',
+                '.2',
+                '.3',
+                '.4',
+            ]).draw();
         });
 
         function getAllCheckedCheckboxes() {
@@ -228,16 +234,42 @@
             return $(theCheckbox).prop('checked');
         }
 
-        $('#addRow').on('click', function () {
-            t.row.add([
-                'A',
-                '.2',
-                '.3',
-                '.4',
-            ]).draw();
-        });
+        function getLinks() {
+            var first = getCurrentLinks();
+            var second = getNewLinks();
+            var linksList = $.merge($.merge([], first), second);
 
+            return linksList
 
+        }
+
+        function getCurrentLinks() {
+            var newLinks = new Array();
+            var rows = t.$("tr"); //Get all rows 
+
+            $(rows).each(function () {
+
+                var ele1 = this.cells[1];
+                var ele2 = this.cells[2];
+
+                var ele1_id = $(ele1).find('div').attr('data-id')
+                var ele2_id = $(ele2).find('div').attr('data-id')
+
+                var link = new Array();
+                link.push(ele1_id, ele2_id);
+
+                newLinks.push(link);
+            });
+
+            return newLinks;
+
+        }
+        function getNewLinks() {
+            var newLinks = new Array();
+            var test = ['1', '2']
+            newLinks.push(test);
+            return newLinks
+        }
     });
 
 
