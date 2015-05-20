@@ -25,6 +25,15 @@ kartographerz_cartography_cartographyList:
     path: /cartographyList
     defaults: { _controller: KartographerzCartographyBundle:Cartography:list }
     
+kartographerz_cartography_versionCartographyList:
+    path: /versionCartographyList
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:versionList }
+    
 kartographerz_element_elementList:
     path: /elementList
     defaults: { _controller: KartographerzCartographyBundle:Element:list }
+    
+kartographerz_element_versionElementList:
+    path: /versionElementList
+    defaults: { _controller: KartographerzCartographyBundle:Element:versionList }   
+    
