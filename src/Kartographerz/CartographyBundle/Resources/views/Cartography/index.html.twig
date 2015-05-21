@@ -1,16 +1,53 @@
 {% extends "KartographerzCartographyBundle::layout.html.twig" %}
 
-{% block title %}{{parent()}} - Index{% endblock %}
+{% block title %}{{parent()}} - {{'cartography.list' | trans}}{% endblock %}
 
 {% block body %}
 <h1>Welcome to the Cartography:index page</h1>
 {% if is_granted('ROLE_USER') %}
   Un exemple pour montrer le mode USER
+
+
+ 
+<canvas id="viewport" width="800" height="600"></canvas>
+      <script language="javascript" type="text/javascript">
+            var sys = arbor.ParticleSystem(1000, 400,1);
+            sys.parameters({gravity:true});
+            sys.renderer = Renderer("#viewport") ;
+            var data = {
+               nodes:{
+                 animals:{'color':'red','shape':'dot','label':'Animals'},
+                 dog:{'color':'green','shape':'dot','label':'dog'},
+                 cat:{'color':'blue','shape':'dot','label':'cat'}
+               }, 
+               edges:{
+                 animals:{ dog:{}, cat:{} }
+               }
+             };
+            sys.graft(data);
+            setTimeout(function(){
+                        var postLoadData = {
+                           nodes:{
+                             joe:{'color':'orange','shape':'dot','label':'joe'},
+                             fido:{'color':'green','shape':'dot','label':'fido'},
+                             fluffy:{'color':'blue','shape':'dot','label':'fluffy'}
+                           }, 
+                           edges:{
+                                dog:{ fido:{} },
+                                cat:{ fluffy:{} },
+                                joe:{ fluffy:{},fido:{} }
+                           }
+                         };
+                         sys.graft(postLoadData);
+                    },10000);
+      </script>
+
+
 {% endif %}
 {% if is_granted('ROLE_MODELISATEUR') %}
-  <li><a href="{{ path('kartographerz_cartography_add') }}">Ajouter une cartographie</a></li>
+  <li><a href="{{ path('kartographerz_cartography_add') }}">{{'cartography.add' | trans}}</a></li>
 {% endif %}
 {% if is_granted('ROLE_MODELISATEUR') %}
-  <li><a href="{{ path('kartographerz_cartography_addElement') }}">Ajouter un élément</a></li>
+  <li><a href="{{ path('kartographerz_cartography_addElement') }}">{{'element.add' | trans}}</a></li>
 {% endif %}
 {% endblock %}

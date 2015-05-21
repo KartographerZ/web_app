@@ -32,3 +32,9 @@ php app/console doctrine:schema:update --force
 Insérer les données de test dans la base de données :
 
 php app/console doctrine:fixtures:load --fixtures=src/Kartographerz/UserBundle/DataFixtures/ORM --append
+
+4) Déploiement en environnement de production (en local)
+------
+
+Vider le cache : php app/console cache:clear --env=prod
+Exporter les ressources en environnement de prod : php app/console assetic:dump --env=prod --no-debug

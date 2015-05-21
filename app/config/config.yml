@@ -184,3 +184,9 @@ sonata_block:
         # app/config/config.yml
 imports:
     - { resource: @KartographerzUserBundle/Resources/config/services.xml }
+    
+sonata_intl:
+    timezone:
+        locales:
+            fr:    Europe/Paris
+            en_UK: Europe/London

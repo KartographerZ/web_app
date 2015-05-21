@@ -21,22 +21,19 @@ class AppKernel extends Kernel {
             new FOS\UserBundle\FOSUserBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             // The admin requires some twig functions defined in the security
-      
-
-        // Add your dependencies
-        new Sonata\CoreBundle\SonataCoreBundle(),
-        new Sonata\BlockBundle\SonataBlockBundle(),
-        new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-        //...
-
-        // If you haven't already, add the storage bundle
-        // This example uses SonataDoctrineORMAdmin but
-        // it works the same with the alternatives
-        new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-
-        // Then add SonataAdminBundle
-        new Sonata\AdminBundle\SonataAdminBundle(),//            new Sonata\PageBundle\SonataPageBundle(),
+            // Add your dependencies
+            new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            //...
+            // If you haven't already, add the storage bundle
+            // This example uses SonataDoctrineORMAdmin but
+            // it works the same with the alternatives
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            // Then add SonataAdminBundle
+            new Sonata\AdminBundle\SonataAdminBundle(), //            new Sonata\PageBundle\SonataPageBundle(),
 //            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new Sonata\IntlBundle\SonataIntlBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

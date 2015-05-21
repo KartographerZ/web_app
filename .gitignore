@@ -1,7 +1,7 @@
-/web/bundles/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
+/app/config/config_dev.yml
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
@@ -15,6 +15,5 @@
 /node_modules/
 /app/Resources/lib
 /app/Resources/public
-/web/css
-/web/js
+/web/*
 composer.lock
