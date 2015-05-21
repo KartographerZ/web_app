@@ -17,7 +17,7 @@ class UserAdmin extends Admin{
             ->add('email')
             ->add('password')
             ->add('username')
-            ->add('roles')
+            ->add('roles', "entity" ,array('class' => "KartographerzUserBundle:Group"))
             ->add('enterprise')
         ;
     }
