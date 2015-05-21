@@ -33,12 +33,23 @@
                             <th>Delete</th>
                         </tr>
                     </thead>
+                </table>
+
+                <table id="example" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Element 1</th>
+                            <th>Element 2</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+
                     <tfoot>
                         <tr>
                             <td><button type="button" class="btn btn-default" id="addRow"><i class="fa fa-plus"></i></button></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <th></th>
+                            <th></th>
+                           
                         </tr>
                     </tfoot>
                 </table>
@@ -189,13 +200,23 @@
             t.row($(this).parents('tr')).remove().draw();
         });
 
+        $("#example").on("click", ".delete", function () {
+            var row = $(this).parents("tr");
+            ta.row($(this).parents('tr')).remove().draw();
+        });
+
+        var ta = $('#example').DataTable();
+        var counter = 1;
+
         $('#addRow').on('click', function () {
-            t.row.add([
-                'A',
-                '.2',
-                '.3',
-                '.4',
+            console.log(elementsCarto)
+            ta.row.add([
+                counter + '.2',
+                counter + '.3',
+                '<button id="delete_link_' + counter + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>'
             ]).draw();
+
+            counter++;
         });
 
         function getAllCheckedCheckboxes() {
@@ -259,6 +280,8 @@
             return newLinks
         }
     });
+    
+    
 
 
 //alert("test");
