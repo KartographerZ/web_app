@@ -154,28 +154,16 @@
         });
 
         var t = $('#linkList').DataTable({
-            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
+            "sAjaxSource": "{{ path("kartographerz_version_versionLinkList", {'versionCartography': app.request.get('id') }) }}",
             "aoColumns": [
+                {"mData": "id"},
                 {"mData": function (val) {
-                        var id;
                         console.log(val)
-                        if (val.id !== "undefined") {
-                            id = val.id;
-                        }
-                        else {
-                            id = val[0];
-                            //console.log(id)
-                        }
-
-                        return id;
+                        return "<div data-id=" + val.element_1_id + ">" + val.element_1_label + "</div>"
                     }
                 },
                 {"mData": function (val) {
-                        return "<div data-id=" + val.id + ">" + "val.name1" + "</div>"
-                    }
-                },
-                {"mData": function (val) {
-                        return "<div data-id=" + (val.id + 1) + ">" + "val.name2" + "</div>";
+                        return "<div data-id=" + val.element_2_id + ">" + val.element_2_label + "</div>";
                     }
                 },
                 {"mData": function (row) {

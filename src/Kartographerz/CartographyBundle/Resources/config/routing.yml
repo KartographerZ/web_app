@@ -20,7 +20,6 @@ kartographerz_cartography_addElementType:
     path:     /addElementType
     defaults: { _controller: KartographerzCartographyBundle:Element:addElementType }
 
-
 kartographerz_cartography_cartographyList:
     path: /cartographyList
     defaults: { _controller: KartographerzCartographyBundle:Cartography:list }
@@ -37,3 +36,6 @@ kartographerz_element_versionElementList:
     path: /versionElementList
     defaults: { _controller: KartographerzCartographyBundle:Element:versionList }   
     
+kartographerz_version_versionLinkList:
+    path: /versionLinkList/{versionCartography}
+    defaults: { _controller: KartographerzCartographyBundle:Version:linkList }  
