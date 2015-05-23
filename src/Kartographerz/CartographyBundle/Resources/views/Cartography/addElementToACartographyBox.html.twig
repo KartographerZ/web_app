@@ -210,12 +210,14 @@
 
         $('#addRow').on('click', function () {
             ta.row.add([
-                "<select id=" + "mySelect" + "></select>",
-                "<div data-id=" + "val.element_1_id" + ">" + "val.element_1_label" + "</div>",
+                "<select id=" + "mySelect1_" + counter + "></select>",
+                "<select id=" + "mySelect2_" + counter + "></select>",
                 '<button id="delete_link_' + counter + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>'
             ]).draw();
 
-            createSelect(JSON.stringify(getCurrentElements()));
+            createSelect(getCurrentElements(), "mySelect1_" + counter);
+
+            createSelect(getCurrentElements(), "mySelect2_" + counter);
 
             counter++;
         });
@@ -231,7 +233,9 @@
 
             $(checkedCheckboxes).each(function () {
                 var element = {};
-                element[$(this).attr('id')] = $(this).attr('data-label')
+                element["key"] = $(this).attr('id');
+                element["value"] = $(this).attr('data-label');
+
                 currentElements.push(element);
             });
 
@@ -254,13 +258,13 @@
             return checkedCheckboxes;
         }
 
-        function createSelect(selectValues) {
+        function createSelect(selectValues, selector) {
             console.log(selectValues)
-            $.each(selectValues, function (key, value) {
-                console.log($(this))
-                $('#mySelect')
-                        .append($('<option>', {value: key})
-                                .text(value));
+            $.each(selectValues, function () {
+                var key = this["key"];
+                var value = this["value"];
+
+                $('#' + selector).append($('<option>', {value: key}).text(value));
             });
         }
 
