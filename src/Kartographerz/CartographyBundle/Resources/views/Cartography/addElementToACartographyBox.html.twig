@@ -190,8 +190,8 @@
             var elements = $("#elementList tbody tr");
             var checkedCheckboxes = getAllCheckedCheckboxes();
             var elementsId = getCheckboxesId(checkedCheckboxes);
-            //console.log(elementsId)
-            console.log(getCurrentElements());
+
+            console.log(getLinks())
 
         });
 
@@ -259,7 +259,6 @@
         }
 
         function createSelect(selectValues, selector) {
-            console.log(selectValues)
             $.each(selectValues, function () {
                 var key = this["key"];
                 var value = this["value"];
@@ -290,7 +289,7 @@
         }
 
         function getCurrentLinks() {
-            var newLinks = new Array();
+            var currentLinks = new Array();
             var rows = t.$("tr"); //Get all rows 
 
             $(rows).each(function () {
@@ -304,17 +303,45 @@
                 var link = new Array();
                 link.push(ele1_id, ele2_id);
 
+                currentLinks.push(link);
+            });
+
+            return currentLinks;
+
+        }
+
+        /**
+         * 
+         * @returns {Array}
+         */
+        function getNewLinks() {
+            var newLinks = new Array();
+            var rows = ta.$("tr"); //Get all rows 
+
+            $(rows).each(function () {
+
+                var ele1 = this.cells[0];
+                var ele2 = this.cells[1];
+
+                var select1_id = $(ele1).find('select').attr('id');
+                var select2_id = $(ele2).find('select').attr('id');
+
+                var link = new Array();
+
+                link.push(getSelected(select1_id), getSelected(select2_id));
+
                 newLinks.push(link);
             });
 
-            return newLinks;
 
+            return newLinks;
         }
-        function getNewLinks() {
-            var newLinks = new Array();
-            var test = ['6', '3']
-            newLinks.push(test);
-            return newLinks
+
+        function getSelected(selectId) {
+
+            var selectedElementId = $('#' + selectId).find(":selected").val();
+
+            return selectedElementId;
         }
     });
 
