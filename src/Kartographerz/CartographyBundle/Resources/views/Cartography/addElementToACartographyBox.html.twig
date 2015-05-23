@@ -49,7 +49,7 @@
                             <td><button type="button" class="btn btn-default" id="addRow"><i class="fa fa-plus"></i></button></td>
                             <th></th>
                             <th></th>
-                           
+
                         </tr>
                     </tfoot>
                 </table>
@@ -154,10 +154,10 @@
 
 
                         if ($.inArray(row.id, elementsCarto) >= 0) {
-                            return " <input id=" + row.id + " type='checkbox' checked>";
+                            return " <input id=" + row.id + " data-label=" + row.name + " type='checkbox' checked>";
                         }
                         else {
-                            return " <input id=" + row.id + " type='checkbox'>";
+                            return " <input id=" + row.id + " data-label=" + row.name + " type = 'checkbox' > ";
                         }
                     }
                 }
@@ -169,7 +169,7 @@
             "aoColumns": [
                 {"mData": "id"},
                 {"mData": function (val) {
-                        console.log(val)
+
                         return "<div data-id=" + val.element_1_id + ">" + val.element_1_label + "</div>"
                     }
                 },
@@ -191,7 +191,7 @@
             var checkedCheckboxes = getAllCheckedCheckboxes();
             var elementsId = getCheckboxesId(checkedCheckboxes);
             //console.log(elementsId)
-            console.log(getLinks())
+            console.log(getCurrentElements());
 
         });
 
@@ -209,16 +209,39 @@
         var counter = 1;
 
         $('#addRow').on('click', function () {
-            console.log(elementsCarto)
             ta.row.add([
-                counter + '.2',
-                counter + '.3',
+                "<select id=" + "mySelect" + "></select>",
+                "<div data-id=" + "val.element_1_id" + ">" + "val.element_1_label" + "</div>",
                 '<button id="delete_link_' + counter + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>'
             ]).draw();
+
+            createSelect(JSON.stringify(getCurrentElements()));
 
             counter++;
         });
 
+        /**
+         * From all checked checkboxes, get the list of their element
+         * @returns {Array}
+         */
+        function getCurrentElements() {
+            var currentElements = [];
+
+            var checkedCheckboxes = getAllCheckedCheckboxes();
+
+            $(checkedCheckboxes).each(function () {
+                var element = {};
+                element[$(this).attr('id')] = $(this).attr('data-label')
+                currentElements.push(element);
+            });
+
+            return currentElements;
+        }
+
+        /**
+         * 
+         * @returns {Array}
+         */
         function getAllCheckedCheckboxes() {
             var checkboxes = $("#elementList input[type=checkbox]");
             var checkedCheckboxes = new Array();
@@ -227,8 +250,18 @@
                 if (isChecked(checkbox)) {
                     checkedCheckboxes.push(checkbox);
                 }
-            })
+            });
             return checkedCheckboxes;
+        }
+
+        function createSelect(selectValues) {
+            console.log(selectValues)
+            $.each(selectValues, function (key, value) {
+                console.log($(this))
+                $('#mySelect')
+                        .append($('<option>', {value: key})
+                                .text(value));
+            });
         }
 
         function getCheckboxesId(checkboxes) {
@@ -248,7 +281,7 @@
             var second = getNewLinks();
             var linksList = $.merge($.merge([], first), second);
 
-            return linksList
+            return linksList;
 
         }
 
@@ -275,13 +308,13 @@
         }
         function getNewLinks() {
             var newLinks = new Array();
-            var test = ['1', '2']
+            var test = ['6', '3']
             newLinks.push(test);
             return newLinks
         }
     });
-    
-    
+
+
 
 
 //alert("test");
