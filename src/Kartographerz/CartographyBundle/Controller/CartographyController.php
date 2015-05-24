@@ -54,7 +54,20 @@ class CartographyController extends Controller {
         // Si on n'est pas en POST, alors on affiche le formulaire
         return $this->render('KartographerzCartographyBundle:Cartography:add.html.twig', array("form" => $form->createView()));
     }
+    function updateAction( Request $request)
+    {
+        $elements = $request->get("elements");
+        $links = $request->get("links");
+        $idCart = $request->get("cart");
+        
+        $repositoyCartography = $em->getRepository("KartographerzCartographyBundle:Cartography");
+        $carto = $repositoyCartography->find($idCart);
+        
+        $repositoyElement = $em->getRepository("KartographerzCartographyBundle:Element");
 
+        
+        
+    }
     /**
      * @Security("has_role('ROLE_MODELISATEUR')")
      */

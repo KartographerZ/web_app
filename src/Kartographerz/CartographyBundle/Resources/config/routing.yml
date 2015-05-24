@@ -39,3 +39,5 @@ kartographerz_element_versionElementList:
 kartographerz_version_versionLinkList:
     path: /versionLinkList/{versionCartography}
     defaults: { _controller: KartographerzCartographyBundle:Version:linkList }  
+    options:
+        expose: true

@@ -26,3 +26,6 @@ _admin:
     pattern: /{_locale}/admin
     requirements:
         _locale: en|fr
+        
+fos_js_routing:
+     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
