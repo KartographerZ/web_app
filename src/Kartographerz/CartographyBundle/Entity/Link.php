@@ -29,16 +29,22 @@ class Link {
      *   @ORM\JoinColumn(name="element_1_id", referencedColumnName="id")
      * })
      */
+    
+    /**
+
+   * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\VersionElement")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="element_1_id", referencedColumnName="id")
+     * })
+   */
     private $element1;
 
-    /**
-     * @var \Element
-     *
-     * @ORM\ManyToOne(targetEntity="Element")
+   /**
+   * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\VersionElement")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="element_2_id", referencedColumnName="id")
      * })
-     */
+   */
     private $element2;
 
     /**

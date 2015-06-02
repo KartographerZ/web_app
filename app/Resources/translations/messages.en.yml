@@ -34,6 +34,8 @@ submit:
     click: Submit
     close: Close
     add: Add
+    manageLink: Save and manage links
+    save: save
     
 element_to_carto:
     add: Add an element to the cartography
@@ -43,3 +45,4 @@ element_to_carto:
     
 element:
     add: Add an element
+    manage: manage elements

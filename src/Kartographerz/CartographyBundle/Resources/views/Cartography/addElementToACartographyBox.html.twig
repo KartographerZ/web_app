@@ -19,46 +19,12 @@
                             <th>{{'element_to_carto.choice'|trans}}</th>
                         </tr>
                     </thead>
-
-
                 </table>
-
-
-                <table id="linkList" class="display" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Ele1</th>
-                            <th>Ele2</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                </table>
-
-                <table id="example" class="display" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Element 1</th>
-                            <th>Element 2</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-
-                    <tfoot>
-                        <tr>
-                            <td><button type="button" class="btn btn-default" id="addRow"><i class="fa fa-plus"></i></button></td>
-                            <th></th>
-                            <th></th>
-
-                        </tr>
-                    </tfoot>
-                </table>
-
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{'submit.close'|trans}}</button>
-                <button type="button" class="btn btn-primary" id="addElementToACartography">{{'submit.add'|trans}}</button>
+                <button type="button" class="btn btn-primary" id="addElementToACartography"  >{{'submit.manageLink'|trans}}</button>
+                <button type="button" class="btn btn-primary"  data-dismiss="modal" id="saveElements" >{{'submit.save'|trans}}</button>
             </div>
         </div>
     </div>
@@ -127,9 +93,9 @@
                     var idCartoTable = dataTab[i].version_id;
                     var id = dataTab[i].element_id;
 
-                    if (idCartoTable == idCarto) {
+                    console.log(idCartoTable+" "+"{{ lastVersion }}");
+                    if (idCartoTable == {{ lastVersion}}) {
                         elementsCarto.push(id);
-                        //console.log(id)
                     }
 
                 }
@@ -140,10 +106,6 @@
 // _________________________________________________________________________________________________________________________________________________
 
 
-
-
-
-
         $('#elementList').DataTable({
             "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
             "aoColumns": [
@@ -151,12 +113,11 @@
                 {"mData": "name"},
                 {"mData": "typeelementlabel"},
                 {"mData": function (row, source, type, val) {
-
-
-                        if ($.inArray(row.id, elementsCarto) >= 0) {
+                        if ($.inArray(row.id, elementsCarto) >= 0) {              
                             return " <input id=" + row.id + " data-label=" + row.name + " type='checkbox' checked>";
                         }
-                        else {
+                        else {                     
+
                             return " <input id=" + row.id + " data-label=" + row.name + " type = 'checkbox' > ";
                         }
                     }
@@ -164,89 +125,38 @@
             ],
         });
 
-        var t = $('#linkList').DataTable({
-            "sAjaxSource": "{{ path("kartographerz_version_versionLinkList", {'versionCartography': app.request.get('id') }) }}",
-            "aoColumns": [
-                {"mData": "id"},
-                {"mData": function (val) {
-
-                        return "<div data-id=" + val.element_1_id + ">" + val.element_1_label + "</div>"
-                    }
-                },
-                {"mData": function (val) {
-                        return "<div data-id=" + val.element_2_id + ">" + val.element_2_label + "</div>";
-                    }
-                },
-                {"mData": function (row) {
-                        return '<button id="delete_' + row.id + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>';
-
-                    }
-                },
-            ],
-        });
-
-
+        
         $("#addElementToACartography").click(function () {
             var elements = $("#elementList tbody tr");
             var checkedCheckboxes = getAllCheckedCheckboxes();
             var elementsId = getCheckboxesId(checkedCheckboxes);
-
-            console.log(getLinks())
+            $.post(
+                "{{ path("kartographerz_cartography_updateElements") }}",
+                   {"elements": elementsId , "cart": idVersionCarto   },
+                   function(ret){
+                });
+            $("#addElementToACartographyBox").modal('toggle');
+            $('#LinksListModal').modal('show');
 
         });
-
-        $("#linkList").on("click", ".delete", function () {
-            var row = $(this).parents("tr");
-            t.row($(this).parents('tr')).remove().draw();
-        });
-
-        $("#example").on("click", ".delete", function () {
-            var row = $(this).parents("tr");
-            ta.row($(this).parents('tr')).remove().draw();
-        });
-
-        var ta = $('#example').DataTable();
-        var counter = 1;
-
-        $('#addRow').on('click', function () {
-            ta.row.add([
-                "<select id=" + "mySelect1_" + counter + "></select>",
-                "<select id=" + "mySelect2_" + counter + "></select>",
-                '<button id="delete_link_' + counter + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>'
-            ]).draw();
-
-            createSelect(getCurrentElements(), "mySelect1_" + counter);
-
-            createSelect(getCurrentElements(), "mySelect2_" + counter);
-
-            counter++;
-        });
-
-        /**
-         * From all checked checkboxes, get the list of their element
-         * @returns {Array}
-         */
-        function getCurrentElements() {
-            var currentElements = [];
-
+        
+                
+        $("#saveElements").click(function () {
+            var elements = $("#elementList tbody tr");
             var checkedCheckboxes = getAllCheckedCheckboxes();
+            var elementsId = getCheckboxesId(checkedCheckboxes);
+            $.post(
+                "{{ path("kartographerz_cartography_updateElements") }}",
+                   {"elements": elementsId , "cart": idVersionCarto   },
+                   function(ret){
+                });
+            $("#addElementToACartographyBox").modal('toggle');
+        });
+        
+        
 
-            $(checkedCheckboxes).each(function () {
-                var element = {};
-                element["key"] = $(this).attr('id');
-                element["value"] = $(this).attr('data-label');
-
-                currentElements.push(element);
-            });
-
-            return currentElements;
-        }
-
-        /**
-         * 
-         * @returns {Array}
-         */
-        function getAllCheckedCheckboxes() {
+  });
+      function getAllCheckedCheckboxes() {
             var checkboxes = $("#elementList input[type=checkbox]");
             var checkedCheckboxes = new Array();
             $(checkboxes).each(function () {
@@ -257,16 +167,6 @@
             });
             return checkedCheckboxes;
         }
-
-        function createSelect(selectValues, selector) {
-            $.each(selectValues, function () {
-                var key = this["key"];
-                var value = this["value"];
-
-                $('#' + selector).append($('<option>', {value: key}).text(value));
-            });
-        }
-
         function getCheckboxesId(checkboxes) {
             var ids = new Array();
             $(checkboxes).each(function () {
@@ -274,11 +174,11 @@
             });
             return ids;
         }
-
-        function isChecked(theCheckbox) {
+        
+           function isChecked(theCheckbox) {
             return $(theCheckbox).prop('checked');
         }
-
+        
         function getLinks() {
             var first = getCurrentLinks();
             var second = getNewLinks();
@@ -287,66 +187,12 @@
             return linksList;
 
         }
-
-        function getCurrentLinks() {
-            var currentLinks = new Array();
-            var rows = t.$("tr"); //Get all rows 
-
-            $(rows).each(function () {
-
-                var ele1 = this.cells[1];
-                var ele2 = this.cells[2];
-
-                var ele1_id = $(ele1).find('div').attr('data-id')
-                var ele2_id = $(ele2).find('div').attr('data-id')
-
-                var link = new Array();
-                link.push(ele1_id, ele2_id);
-
-                currentLinks.push(link);
-            });
-
-            return currentLinks;
-
-        }
-
-        /**
-         * 
-         * @returns {Array}
-         */
-        function getNewLinks() {
-            var newLinks = new Array();
-            var rows = ta.$("tr"); //Get all rows 
-
-            $(rows).each(function () {
-
-                var ele1 = this.cells[0];
-                var ele2 = this.cells[1];
-
-                var select1_id = $(ele1).find('select').attr('id');
-                var select2_id = $(ele2).find('select').attr('id');
-
-                var link = new Array();
-
-                link.push(getSelected(select1_id), getSelected(select2_id));
-
-                newLinks.push(link);
-            });
-
-
-            return newLinks;
-        }
-
-        function getSelected(selectId) {
-
-            var selectedElementId = $('#' + selectId).find(":selected").val();
-
-            return selectedElementId;
-        }
-    });
-
-
-
-
-//alert("test");
+        
+        $("#saveElements").click(function(){
+            var elements = $("#elementList tbody tr");
+            var checkedCheckboxes = getAllCheckedCheckboxes();
+            var elementsId = getCheckboxesId(checkedCheckboxes);
+            
+            
+        })
 </script>

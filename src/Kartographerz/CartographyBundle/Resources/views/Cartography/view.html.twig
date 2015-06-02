@@ -5,6 +5,7 @@
 
 {% block body %}
     {% include "KartographerzCartographyBundle::Cartography/addElementToACartographyBox.html.twig" %}
+    {% include "KartographerzCartographyBundle::Cartography/LinksList.html.twig" %}
 
     <h1>Welcome to the Cartography:view page</h1>
     <h2>cartography : {{id}}</h2>
@@ -19,7 +20,7 @@
     </p>
     
     <p>
-        <button class="btn btn-default" data-toggle="modal" data-target="#addElementToACartographyBox">{{'element.add'|trans}}</button>
+        <button class="btn btn-default" data-toggle="modal" data-target="#addElementToACartographyBox">{{'element.manage'|trans}}</button>
     </p>
     
     

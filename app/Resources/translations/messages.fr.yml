@@ -33,6 +33,8 @@ submit:
     click: Cliquez ici
     close: Fermer
     add: Ajouter
+    manageLink: Enregistrer et Gérer les liens 
+    save: Enregistrer
     
 element_to_carto:
     add: Ajouter un élément à la cartographie
@@ -42,3 +44,4 @@ element_to_carto:
     
 element:
     add: Ajouter un élément
+    manage: Gérer les élements

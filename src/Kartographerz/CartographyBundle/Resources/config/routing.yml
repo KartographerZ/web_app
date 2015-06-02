@@ -1,3 +1,7 @@
+kartographerz_cartography_updateElements:
+    path:     /cartography/updateElements
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:updateElements }
+    
 kartographerz_cartography_index:
     path:     /
     defaults: { _controller: KartographerzCartographyBundle:Cartography:index }

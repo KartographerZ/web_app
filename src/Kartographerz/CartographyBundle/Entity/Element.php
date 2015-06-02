@@ -30,7 +30,7 @@ class Element {
 
     /**
      * @var \TypeElement
-     * @ORM\ManyToOne(targetEntity="KartographerZ\CartographyBundle\Entity\TypeElement" ))
+     * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\TypeElement" ))
      */
     private $typeElement;
 
