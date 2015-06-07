@@ -11,10 +11,10 @@
  *
  * @author franckmazzolo
  */
-class LoadGroupData extends \Doctrine\Common\DataFixtures\AbstractFixture implements \Doctrine\Common\DataFixtures\FixtureInterface, \Doctrine\Common\DataFixtures\OrderedFixtureInterface {
+class LoadVersionData extends \Doctrine\Common\DataFixtures\AbstractFixture implements \Doctrine\Common\DataFixtures\FixtureInterface, \Doctrine\Common\DataFixtures\OrderedFixtureInterface {
 
     public function load(\Doctrine\Common\Persistence\ObjectManager $manager) {
-        $adminsGroup = new Kartographerz\UserBundle\Entity\Group('administration');
+        $adminsGroup = new Kartographerz\CartographyBundle\Entity\Version('administration');
         $adminsGroup->addRole('ROLE_ADMIN');
         $manager->persist($adminsGroup);
 

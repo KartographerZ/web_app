@@ -31,11 +31,13 @@
 </div>
 
 
+
 <script>
     $(document).ready(function () {
         var idCarto = $(".iddata").data("videoid");
 
         var idVersionCarto = $(".iddata").data("videoid");
+        var elementsCarto = [];
 
 
 
@@ -77,9 +79,34 @@
 
 
 
+function updateArborJs (tab){
+
+//alert(tab);    
+///////////////////////////////////////////////////
+            var sys = arbor.ParticleSystem(1000, 400, 1);
+            sys.parameters({gravity: true});
+            sys.renderer = Renderer("#viewport");
+ var  link = $("#img").attr("src");
+//alert("link :" + link);
+// a MODIFIER : a charger depuis la bdd en AJAX 
+
+jQuery.each(tab, function(index, value) {
+   
+value = sys.addNode(value,{'color':'red','shape':'dot','label':link});
+   });
+//alert($("#img").attr("src"));
+
+}
+
+
+
+
+
+
 // récupération des éléments de la cartographie courante ________________________________________________________________________________________
 
-        var elementsCarto = [];
+    
+         
         $.ajax({
             type: "POST",
             url: "{{ path("kartographerz_element_versionElementList")}}",
@@ -96,12 +123,17 @@
                     console.log(idCartoTable+" "+"{{ lastVersion }}");
                     if (idCartoTable == {{ lastVersion}}) {
                         elementsCarto.push(id);
+
                     }
 
                 }
-
+//alert(elementsCarto);
+updateArborJs(elementsCarto);
             }
         });
+
+
+
 
 // _________________________________________________________________________________________________________________________________________________
 
@@ -151,6 +183,9 @@
                    function(ret){
                 });
             $("#addElementToACartographyBox").modal('toggle');
+
+location.reload();
+
         });
         
         
@@ -192,7 +227,24 @@
             var elements = $("#elementList tbody tr");
             var checkedCheckboxes = getAllCheckedCheckboxes();
             var elementsId = getCheckboxesId(checkedCheckboxes);
-            
-            
+
         })
+
+
+
+
+
+
+
+
+$("#img").hide();
+
+
+//alert(elementsCarto);
+ //alert("222");
+//updateArborJs(elementsCarto);
+
 </script>
+
+
+
