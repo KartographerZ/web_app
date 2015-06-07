@@ -120,7 +120,7 @@ value = sys.addNode(value,{'color':'red','shape':'dot','label':link});
                     var idCartoTable = dataTab[i].version_id;
                     var id = dataTab[i].element_id;
 
-                    console.log(idCartoTable+" "+"{{ lastVersion }}");
+
                     if (idCartoTable == {{ lastVersion}}) {
                         elementsCarto.push(id);
 
@@ -145,10 +145,10 @@ updateArborJs(elementsCarto);
                 {"mData": "name"},
                 {"mData": "typeelementlabel"},
                 {"mData": function (row, source, type, val) {
-                        if ($.inArray(row.id, elementsCarto) >= 0) {              
+                        if ($.inArray(row.id, elementsCarto) >= 0) {
                             return " <input id=" + row.id + " data-label=" + row.name + " type='checkbox' checked>";
                         }
-                        else {                     
+                        else {
 
                             return " <input id=" + row.id + " data-label=" + row.name + " type = 'checkbox' > ";
                         }
@@ -157,36 +157,40 @@ updateArborJs(elementsCarto);
             ],
         });
 
-        
+
+
+
         $("#addElementToACartography").click(function () {
             var elements = $("#elementList tbody tr");
             var checkedCheckboxes = getAllCheckedCheckboxes();
             var elementsId = getCheckboxesId(checkedCheckboxes);
             $.post(
-                "{{ path("kartographerz_cartography_updateElements") }}",
-                   {"elements": elementsId , "cart": idVersionCarto   },
-                   function(ret){
-                });
+                    "{{ path("kartographerz_cartography_updateElements") }}",
+                    {"elements": elementsId, "cart": idVersionCarto},
+            function (ret) {
+
+            });
             $("#addElementToACartographyBox").modal('toggle');
             $('#LinksListModal').modal('show');
 
         });
-        
-                
+
+
         $("#saveElements").click(function () {
             var elements = $("#elementList tbody tr");
             var checkedCheckboxes = getAllCheckedCheckboxes();
             var elementsId = getCheckboxesId(checkedCheckboxes);
             $.post(
-                "{{ path("kartographerz_cartography_updateElements") }}",
-                   {"elements": elementsId , "cart": idVersionCarto   },
-                   function(ret){
-                });
+                    "{{ path("kartographerz_cartography_updateElements") }}",
+                    {"elements": elementsId, "cart": idVersionCarto},
+            function (ret) {
+            });
             $("#addElementToACartographyBox").modal('toggle');
 
 location.reload();
 
         });
+<<<<<<< HEAD
         
         
 
@@ -248,3 +252,60 @@ $("#img").hide();
 
 
 
+=======
+
+    });
+
+
+    $("#saveElements").click(function () {
+        var elements = $("#elementList tbody tr");
+        var checkedCheckboxes = getAllCheckedCheckboxes();
+        var elementsId = getCheckboxesId(checkedCheckboxes);
+
+
+    })
+
+    /**
+     * 
+     
+     * @returns {Array|getAllCheckedCheckboxes.checkedCheckboxes} */
+    function getAllCheckedCheckboxes() {
+        var checkboxes = $("#elementList input[type=checkbox]");
+        var checkedCheckboxes = new Array();
+        $(checkboxes).each(function () {
+            
+            var checkbox = $(this);
+            if (isChecked(checkbox)) {
+                checkedCheckboxes.push(checkbox);
+            }
+        });
+        return checkedCheckboxes;
+    }
+
+    /**
+     * 
+     
+     * @param {type} checkboxes
+     * @returns {getCheckboxesId.ids|Array}     */
+    function getCheckboxesId(checkboxes) {
+        var ids = new Array();
+        $(checkboxes).each(function () {
+            ids.push($(this).attr('id'));
+        });
+        return ids;
+    }
+
+    /**
+     * 
+     
+     * @param {type} theCheckbox
+     * @returns {jQuery} */
+    function isChecked(theCheckbox) {
+        return $(theCheckbox).prop('checked');
+    }
+
+
+
+
+</script>
+>>>>>>> 7ce1005a6d0046e2d07ac2d28328d081941ee933
