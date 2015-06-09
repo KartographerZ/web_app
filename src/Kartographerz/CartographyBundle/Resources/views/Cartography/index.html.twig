@@ -3,18 +3,15 @@
 {% block title %}{{parent()}} - {{'cartography.list' | trans}}{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Cartography:index page</h1>
-{% if is_granted('ROLE_USER') %}
-  Un exemple pour montrer le mode USER
+    <h1>Welcome to the Cartography:index page</h1>
+    {% if is_granted('ROLE_USER') %}
+        Un exemple pour montrer le mode USER
 
-
-
-
-{% endif %}
-{% if is_granted('ROLE_MODELISATEUR') %}
-  <li><a href="{{ path('kartographerz_cartography_add') }}">{{'cartography.add' | trans}}</a></li>
-{% endif %}
-{% if is_granted('ROLE_MODELISATEUR') %}
-  <li><a href="{{ path('kartographerz_cartography_addElement') }}">{{'element.add' | trans}}</a></li>
-{% endif %}
-{% endblock %}
+    {% endif %}
+    {% if is_granted('ROLE_MODELISATEUR') %}
+        <li><a href="{{ path('kartographerz_cartography_add') }}">{{'cartography.add' | trans}}</a></li>
+        {% endif %}
+        {% if is_granted('ROLE_MODELISATEUR') %}
+        <li><a href="{{ path('kartographerz_cartography_addElement') }}">{{'element.add' | trans}}</a></li>
+        {% endif %}
+    {% endblock %}
