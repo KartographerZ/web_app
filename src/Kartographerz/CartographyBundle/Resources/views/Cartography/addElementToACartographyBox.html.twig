@@ -38,40 +38,8 @@
         var idVersionCarto = $(".iddata").data("videoid");
 
 
+        $("#img").hide();
 
-//777777
-        /*
-         var versionsCarto = []; 
-         
-         $.ajax({
-         type: "POST",
-         url: "{{ path("kartographerz_cartography_versionCartographyList")}}",
-         dataType: 'json',
-         cache: false,
-         success: function(data){
-         
-         var dataTab = data.data;
-         
-         for (var i in dataTab) {
-         var idVersionCartoTable = dataTab[i].id;
-         console.log(idVersionCartoTable);
-         console.log("aa");
-         var idCartoTable = dataTab[i].cartography_id;
-         console.log(idCartoTable);
-         
-         var tab = [idVersionCartoTable, idCartoTable];
-         
-         //versionsCarto.push(tab);
-         }
-         
-         }
-         
-         
-         }); 
-         
-         //console.log(versionsCarto[0][0]);
-         */
-//777777
 
 
 
@@ -99,7 +67,7 @@
                     }
 
                 }
-
+        updateArborJs(elementsCarto);
             }
         });
 
@@ -154,6 +122,7 @@
             function (ret) {
             });
             $("#addElementToACartographyBox").modal('toggle');
+          location.reload();
         });
 
     });
@@ -207,6 +176,24 @@
     }
 
 
+function updateArborJs (tab){
+
+//alert(tab);    
+///////////////////////////////////////////////////
+            var sys = arbor.ParticleSystem(1000, 400, 1);
+            sys.parameters({gravity: true});
+            sys.renderer = Renderer("#viewport");
+ var  link = $("#img").attr("src");
+//alert("link :" + link);
+// a MODIFIER : a charger depuis la bdd en AJAX 
+
+jQuery.each(tab, function(index, value) {
+   
+value = sys.addNode(value,{'color':'red','shape':'dot','label':link});
+   });
+//alert($("#img").attr("src"));
+
+}
 
 
 </script>
