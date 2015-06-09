@@ -16,12 +16,16 @@
         {# On affiche tous les messages flash dont le nom est « info » #}
         {% for message in app.session.flashbag.get('info') %}
         <p>Message flash : {{ message }}</p> 
-        {% endfor %}
-    </p>
-    
-    <p>
-        <button class="btn btn-default" data-toggle="modal" data-target="#addElementToACartographyBox">{{'element.manage'|trans}}</button>
-    </p>
-    
-    
+    {% endfor %}
+</p>
+
+<img style ="display : none" id ='img' src="http://yacouba-djibo.com/cartographie/serveur_1.png" alt="" />
+
+<canvas id="viewport" width="730" height="630" class='modal-content'></canvas>
+
+<p>
+    <button class="btn btn-default" data-toggle="modal" data-target="#addElementToACartographyBox">{{'element.manage'|trans}}</button>
+</p>
+
+
 {% endblock %}
