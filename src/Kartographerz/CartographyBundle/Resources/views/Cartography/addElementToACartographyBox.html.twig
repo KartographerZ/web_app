@@ -38,7 +38,6 @@
         var idVersionCarto = $(".iddata").data("videoid");
 
 
-
 //777777
         /*
          var versionsCarto = []; 
@@ -127,17 +126,16 @@
 
         
         $("#addElementToACartography").click(function () {
-            var elements = $("#elementList tbody tr");
-            var checkedCheckboxes = getAllCheckedCheckboxes();
-            var elementsId = getCheckboxesId(checkedCheckboxes);
-            $.post(
-                "{{ path("kartographerz_cartography_updateElements") }}",
-                   {"elements": elementsId , "cart": idVersionCarto   },
-                   function(ret){
-                });
-            $("#addElementToACartographyBox").modal('toggle');
-            $('#LinksListModal').modal('show');
-
+            
+            if(getAllCheckedCheckboxes().length <= 1 )
+            {
+                alert("Il faut ajouter au moins 2 elements pour pouvoir gérer les liens");
+            }
+            else
+            {
+                $("#addElementToACartographyBox").modal('toggle');
+                $('#LinksListModal').modal('show');
+            }
         });
         
                 
@@ -153,7 +151,7 @@
             $("#addElementToACartographyBox").modal('toggle');
         });
         
-        
+  
 
   });
       function getAllCheckedCheckboxes() {
@@ -179,14 +177,7 @@
             return $(theCheckbox).prop('checked');
         }
         
-        function getLinks() {
-            var first = getCurrentLinks();
-            var second = getNewLinks();
-            var linksList = $.merge($.merge([], first), second);
 
-            return linksList;
-
-        }
         
         $("#saveElements").click(function(){
             var elements = $("#elementList tbody tr");
@@ -194,5 +185,7 @@
             var elementsId = getCheckboxesId(checkedCheckboxes);
             
             
-        })
+        });
+        
+
 </script>

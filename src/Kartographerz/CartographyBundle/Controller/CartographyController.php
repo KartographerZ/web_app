@@ -66,46 +66,8 @@ class CartographyController extends Controller {
     function updateAction( Request $request)
     {
         $New_elements = $request->get("elements");
+        $idCart = $request->get("cart");
         $New_links = $request->get("links");
-        $idCart = $request->get("cart");
-        
-        $em = $this->getDoctrine()->getManager();
-        $repositoyCartography = $em->getRepository("KartographerzCartographyBundle:Cartography");
-        $carto = $repositoyCartography->find($idCart);
-        $repositoyElements = $em->getRepository("KartographerzCartographyBundle:Element");
-        
-        // on ajoute les nouveau maintenant
-        
-        $newVersionCart = new Version();
-        $newVersionCart->setCartography($carto);
-        $newVersionCart->setDate(new \DateTime );
-        
-        foreach ( $New_elements as $ne )
-        {
-            $element =   $repositoyElements->find($ne->getId());
-            $ve =  new VersionElement();
-            $ve->setElement($ne);
-            $ve->setVersion($newVersionCart);
-            $em->persist($ve);
-        }
-        
-        foreach ( $New_links as $nl )
-        {
-            
-            $link =  new Link();
-            $link->setElement1($nl[0]);
-            $link->setElement2($nl[1]);
-            $link->setVersionCartography($newVersionCart);
-            $em->persist($link);
-        }
-        
-        
-    }
-    
-    function updateElementsAction( Request  $request )
-    {
-        $New_elements = $request->get("elements");
-        $idCart = $request->get("cart");
         
         $em = $this->getDoctrine()->getManager();
         $repositoyCartography = $em->getRepository("KartographerzCartographyBundle:Cartography");
@@ -120,7 +82,58 @@ class CartographyController extends Controller {
         $em->persist($newVersionCart);
         if( sizeof($New_elements) != 0)
         {
-                foreach ( $New_elements as $ne )
+            foreach ( $New_elements as $ne )
+            {
+                $element =  $repositoyElements->find($ne);
+                $ve =  new VersionElement();
+                $ve->setElement($element);
+                $ve->setVersion($newVersionCart);
+                $em->persist($ve);
+            }
+        }
+        $inter = 0;
+        if( sizeof($New_links) != 0)
+        {
+            foreach ( $New_links as $nl )
+            {
+                $link =  new Link();
+                $e1 = $repositoyElements->find($nl[0]);
+                $e2 = $repositoyElements->find($nl[1]);
+                $link->setElement1($e1);
+                $link->setElement2($e2);
+
+                $link->setVersionCartography($newVersionCart);
+                $em->persist($link);
+            }
+        }
+        $em->flush();
+        
+        return new Response("ok2");
+        
+    }
+    
+    function updateElementsAction( Request  $request )
+    {
+        $New_elements = $request->get("elements");
+        $idCart = $request->get("cart");
+        
+        $em = $this->getDoctrine()->getManager();
+        $repositoyCartography = $em->getRepository("KartographerzCartographyBundle:Cartography");
+        $carto = $repositoyCartography->find($idCart);
+        $repositoyElements = $em->getRepository("KartographerzCartographyBundle:Element");
+        $repositoryLink = $em->getRepository("KartographerzCartographyBundle:Link");
+        
+        
+     
+        // on ajoute les nouveau maintenant
+        
+        $newVersionCart = new Version();
+        $newVersionCart->setCartography($carto);
+        $newVersionCart->setDate(new \DateTime );
+        $em->persist($newVersionCart);
+        if( sizeof($New_elements) != 0)
+        {
+            foreach ( $New_elements as $ne )
             {
                 $element =  $repositoyElements->find($ne);
                 $ve =  new VersionElement();
@@ -133,6 +146,34 @@ class CartographyController extends Controller {
 //            $all = $repositoryVersion->findBy(array("cartography" => $idCart));
 //            $lastVersion = ($all[0]->getId());
         }
+        $lastVersionCart = $this->lastVersionCart($idCart);
+        
+        $lastlinks = $repositoryLink->findBy(array("versionCartography"=> $lastVersionCart));
+        $newlinks =  array();
+        $pass = 0;
+        foreach ( $lastlinks as $l)
+        {
+            foreach ($New_elements as $ne)
+            {
+                if($ne  == $l->getElement1()->getId())
+                    $pass++;                
+                if($ne == $l->getElement2()->getId())
+                    $pass++;
+            }
+            if( $pass == 2 )
+                $newlinks[] = $l;
+            $pass = 0;
+        }
+        
+        foreach ($newlinks as $l)
+        {
+            $link = new Link();
+            $link->setElement1($l->getElement1());
+            $link->setElement2($l->getElement2());
+            $link->setVersionCartography($newVersionCart);
+            $em->persist($link);
+        }
+        
         $em->flush();
         return new Response("ok");
          

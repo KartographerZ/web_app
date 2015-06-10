@@ -32,7 +32,7 @@ class Link {
     
     /**
 
-   * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\VersionElement")
+   * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Element")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="element_1_id", referencedColumnName="id")
      * })
@@ -40,7 +40,7 @@ class Link {
     private $element1;
 
    /**
-   * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\VersionElement")
+   * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Element")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="element_2_id", referencedColumnName="id")
      * })
@@ -112,7 +112,7 @@ class Link {
         return $this->versionCartography;
     }
 
-    function setVersionCartography(\Version $versionCartography = null) {
+    function setVersionCartography(\Kartographerz\CartographyBundle\Entity\Version $versionCartography = null) {
         $this->versionCartography = $versionCartography;
     }
 

@@ -48,7 +48,6 @@ class ElementController extends Controller {
     public function addAction(Request $request) {
 
         $cartographyId = $request->get("id");
-
         $element = new Element();
         $repositoyElementType = $this->getdoctrine()->getRepository("KartographerzCartographyBundle:TypeElement");
         $elementTypes = $repositoyElementType->findAll();
