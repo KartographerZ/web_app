@@ -17,7 +17,7 @@
                     </thead>
                 </table>
 
-                <table id="example" class="display" cellspacing="0" width="100%">
+                <table id="newLinks" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>Element 1</th>
@@ -48,6 +48,7 @@
 <script>
     var idCarto = $(".iddata").data("videoid");
     var idVersionCarto = $(".iddata").data("videoid");
+
     var t = $('#linkList').DataTable({
         "sAjaxSource": "{{ path("kartographerz_version_versionLinkList", {'versionCartography': lastVersion }) }}",
         "aoColumns": [
@@ -75,12 +76,13 @@
         t.row($(this).parents('tr')).remove().draw();
     });
 
+
     $("#example").on("click", ".delete", function () {
         var row = $(this).parents("tr");
         ta.row($(this).parents('tr')).remove().draw();
     });
 
-    var ta = $('#example').DataTable();
+    var ta = $('#newLinks').DataTable();
     var counter = 1;
 
     $('#addRow').on('click', function () {
@@ -119,10 +121,10 @@
 
     /**
      * 
-     * @returns {Array}
+     * @param {type} selectValues
+     * @param {type} selector
+     * @returns {undefined}
      */
-
-
     function createSelect(selectValues, selector) {
         $.each(selectValues, function () {
             var key = this["key"];
@@ -132,11 +134,10 @@
         });
     }
 
-
-
-
-
-
+    /**
+     * Return the array of all links in the LinksList datatable
+     * @returns {getCurrentLinks.currentLinks|Array}
+     */
     function getCurrentLinks() {
         var currentLinks = new Array();
         var rows = t.$("tr"); //Get all rows 
@@ -146,8 +147,8 @@
             var ele1 = this.cells[1];
             var ele2 = this.cells[2];
 
-            var ele1_id = $(ele1).find('div').attr('data-id')
-            var ele2_id = $(ele2).find('div').attr('data-id')
+            var ele1_id = $(ele1).find('div').attr('data-id');
+            var ele2_id = $(ele2).find('div').attr('data-id');
 
             var link = new Array();
             link.push(ele1_id, ele2_id);
@@ -160,7 +161,7 @@
     }
 
     /**
-     * 
+     * Return the array of the new links added in the newLinks datatable
      * @returns {Array}
      */
     function getNewLinks() {
@@ -186,6 +187,12 @@
         return newLinks;
     }
 
+
+    /**
+     * 
+     * @param {type} selectId
+     * @returns {jQuery}
+     */
     function getSelected(selectId) {
 
         var selectedElementId = $('#' + selectId).find(":selected").val();
@@ -193,12 +200,36 @@
         return selectedElementId;
     }
 
+    /**
+     * 
+     Return the merge of current links and the newly added ones
+     * @returns {Array} */
     function getLinks() {
         var first = getCurrentLinks();
         var second = getNewLinks();
         var linksList = $.merge($.merge([], first), second);
-
         return linksList;
+    }
+
+    /**
+     * Return the array of links for the selected elements of the current version of cartography
+     * @returns {Array}
+     */
+    function getProperLinks() {
+        var currentElements = getCurrentElements();
+        var currentLinks = getCurrentLinks();
+        var properLinks = [];
+
+        currentLinks.each(function (k, v) {
+            var currentLink = v;
+            currentElements.each(function (k, v) {
+                var currentElement = v;
+                if ($.inArray(currentElement, currentLink) !== -1) {
+                    properLinks.push(currentLink);
+                }
+            });
+        });
+        return properLinks;
 
     }
     $("#lastbutton").click(function(){

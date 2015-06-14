@@ -37,40 +37,8 @@
 
         var idVersionCarto = $(".iddata").data("videoid");
 
+        $("#img").hide();
 
-//777777
-        /*
-         var versionsCarto = []; 
-         
-         $.ajax({
-         type: "POST",
-         url: "{{ path("kartographerz_cartography_versionCartographyList")}}",
-         dataType: 'json',
-         cache: false,
-         success: function(data){
-         
-         var dataTab = data.data;
-         
-         for (var i in dataTab) {
-         var idVersionCartoTable = dataTab[i].id;
-         console.log(idVersionCartoTable);
-         console.log("aa");
-         var idCartoTable = dataTab[i].cartography_id;
-         console.log(idCartoTable);
-         
-         var tab = [idVersionCartoTable, idCartoTable];
-         
-         //versionsCarto.push(tab);
-         }
-         
-         }
-         
-         
-         }); 
-         
-         //console.log(versionsCarto[0][0]);
-         */
-//777777
 
 
 
@@ -92,13 +60,13 @@
                     var idCartoTable = dataTab[i].version_id;
                     var id = dataTab[i].element_id;
 
-                    console.log(idCartoTable+" "+"{{ lastVersion }}");
+
                     if (idCartoTable == {{ lastVersion}}) {
                         elementsCarto.push(id);
                     }
 
                 }
-
+        updateArborJs(elementsCarto);
             }
         });
 
@@ -112,10 +80,10 @@
                 {"mData": "name"},
                 {"mData": "typeelementlabel"},
                 {"mData": function (row, source, type, val) {
-                        if ($.inArray(row.id, elementsCarto) >= 0) {              
+                        if ($.inArray(row.id, elementsCarto) >= 0) {
                             return " <input id=" + row.id + " data-label=" + row.name + " type='checkbox' checked>";
                         }
-                        else {                     
+                        else {
 
                             return " <input id=" + row.id + " data-label=" + row.name + " type = 'checkbox' > ";
                         }
@@ -124,7 +92,9 @@
             ],
         });
 
-        
+
+
+
         $("#addElementToACartography").click(function () {
             
             if(getAllCheckedCheckboxes().length <= 1 )
@@ -133,59 +103,99 @@
             }
             else
             {
+                var elements = $("#elementList tbody tr");
+                var checkedCheckboxes = getAllCheckedCheckboxes();
+                var elementsId = getCheckboxesId(checkedCheckboxes);
+                $.post(
+                        "{{ path("kartographerz_cartography_updateElements") }}",
+                        {"elements": elementsId, "cart": idVersionCarto},
+                function (ret) {
+
+                });
                 $("#addElementToACartographyBox").modal('toggle');
                 $('#LinksListModal').modal('show');
             }
+           
+
         });
-        
-                
+
+
         $("#saveElements").click(function () {
             var elements = $("#elementList tbody tr");
             var checkedCheckboxes = getAllCheckedCheckboxes();
             var elementsId = getCheckboxesId(checkedCheckboxes);
             $.post(
-                "{{ path("kartographerz_cartography_updateElements") }}",
-                   {"elements": elementsId , "cart": idVersionCarto   },
-                   function(ret){
-                });
+                    "{{ path("kartographerz_cartography_updateElements") }}",
+                    {"elements": elementsId, "cart": idVersionCarto},
+            function (ret) {
+                 location.reload();
+            });
             $("#addElementToACartographyBox").modal('toggle');
-        });
-        
-  
+      });
 
-  });
-      function getAllCheckedCheckboxes() {
-            var checkboxes = $("#elementList input[type=checkbox]");
-            var checkedCheckboxes = new Array();
-            $(checkboxes).each(function () {
-                var checkbox = $(this);
-                if (isChecked(checkbox)) {
-                    checkedCheckboxes.push(checkbox);
-                }
-            });
-            return checkedCheckboxes;
-        }
-        function getCheckboxesId(checkboxes) {
-            var ids = new Array();
-            $(checkboxes).each(function () {
-                ids.push($(this).attr('id'));
-            });
-            return ids;
-        }
-        
-           function isChecked(theCheckbox) {
-            return $(theCheckbox).prop('checked');
-        }
-        
+    });
 
-        
-        $("#saveElements").click(function(){
-            var elements = $("#elementList tbody tr");
-            var checkedCheckboxes = getAllCheckedCheckboxes();
-            var elementsId = getCheckboxesId(checkedCheckboxes);
+
+ 
+
+    /**
+     * 
+     
+     * @returns {Array|getAllCheckedCheckboxes.checkedCheckboxes} */
+    function getAllCheckedCheckboxes() {
+        var checkboxes = $("#elementList input[type=checkbox]");
+        var checkedCheckboxes = new Array();
+        $(checkboxes).each(function () {
             
-            
+            var checkbox = $(this);
+            if (isChecked(checkbox)) {
+                checkedCheckboxes.push(checkbox);
+            }
         });
-        
+        return checkedCheckboxes;
+    }
+
+    /**
+     * 
+     
+     * @param {type} checkboxes
+     * @returns {getCheckboxesId.ids|Array}     */
+    function getCheckboxesId(checkboxes) {
+        var ids = new Array();
+        $(checkboxes).each(function () {
+            ids.push($(this).attr('id'));
+        });
+        return ids;
+    }
+
+    /**
+     * 
+     
+     * @param {type} theCheckbox
+     * @returns {jQuery} */
+    function isChecked(theCheckbox) {
+        return $(theCheckbox).prop('checked');
+    }
+
+
+function updateArborJs (tab){
+
+//alert(tab);    
+///////////////////////////////////////////////////
+            var sys = arbor.ParticleSystem(1000, 400, 1);
+            sys.parameters({gravity: true});
+            sys.renderer = Renderer("#viewport");
+ var  link = $("#img").attr("src");
+//alert("link :" + link);
+// a MODIFIER : a charger depuis la bdd en AJAX 
+
+jQuery.each(tab, function(index, value) {
+   
+value = sys.addNode(value,{'color':'red','shape':'dot','label':link});
+   });
+//alert($("#img").attr("src"));
+
+}
+
 
 </script>
