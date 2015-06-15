@@ -1,5 +1,6 @@
 {# empty Twig template #}
 
+
 <!-- Modal -->
 <div class="modal fade" id="addElementToACartographyBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -33,6 +34,16 @@
 
 <script>
     $(function () {
+
+
+// _________________________________________Partie Arbor JS ________________________________________________________
+
+   var sys = arbor.ParticleSystem(1000, 400, 1);
+        sys.parameters({gravity: true});
+        sys.renderer = Renderer("#viewport");
+        var link = $("#img").attr("src");
+// __________________________________________________________________________________________________________________
+
         var idCarto = $(".iddata").data("videoid");
         var idVersionCarto = $(".iddata").data("videoid");
 
@@ -47,20 +58,42 @@
             dataType: 'json',
             cache: false,
             success: function (data) {
-
                 var dataTab = data.data;
-
                 for (var i in dataTab) {
                     var idCartoTable = dataTab[i].version_id;
                     var id = dataTab[i].element_id;
 
-
                     if (idCartoTable == {{ lastVersion}}) {
                         elementsCarto.push(id);
                     }
-
                 }
-                updateArborJs(elementsCarto);
+                updateArborJs(elementsCarto, sys, link);
+            }
+        });
+
+ 
+   var liensCarto = [];
+$.ajax({
+            type: "POST",
+            url: "{{ path("kartographerz_version_versionLinkList", {'versionCartography': lastVersion }) }}",
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                var dataTab = data.data;
+                for (var i in dataTab) {
+                    var idCartoTable = dataTab[i].version_id;
+                   // var id = dataTab[i].version_id;
+                    var e1 = dataTab[i].element_1_id;
+                    var e2 = dataTab[i].element_2_id;
+//console.log(idCartoTable);
+//console.log(e1 + " : " + e2);
+var linkCarto = [e1, e2];
+//console.log(id);
+
+                        liensCarto.push(linkCarto);
+  
+                }
+                updateArborJsLink(liensCarto, sys, link);
             }
         });
 
@@ -163,25 +196,26 @@
         return $(theCheckbox).prop('checked');
     }
 
+// _________________________________________Partie Arbor JS ________________________________________________________
 
-    function updateArborJs(tab) {
-
-//alert(tab);    
-///////////////////////////////////////////////////
-        var sys = arbor.ParticleSystem(1000, 400, 1);
-        sys.parameters({gravity: true});
-        sys.renderer = Renderer("#viewport");
-        var link = $("#img").attr("src");
-//alert("link :" + link);
-// a MODIFIER : a charger depuis la bdd en AJAX 
-
-        jQuery.each(tab, function (index, value) {
-
+    function updateArborJs(tab, sys, link) {
+      
+  jQuery.each(tab, function (index, value) {
             value = sys.addNode(value, {'color': 'red', 'shape': 'dot', 'label': link});
         });
-//alert($("#img").attr("src"));
 
     }
 
+    function updateArborJsLink(tab, sys, link) {
+
+        jQuery.each(tab, function (index, value) {
+                var e1 = sys.addNode(value[0], {'color': 'green', 'shape': 'dot', 'label': link});
+                var e2 = sys.addNode(value[1], {'color': 'blue', 'shape': 'dot', 'label': link});
+                sys.addEdge(e1, e2);
+        });
+
+    }
+
+// _________________________________________________________________________________________________________
 
 </script>
