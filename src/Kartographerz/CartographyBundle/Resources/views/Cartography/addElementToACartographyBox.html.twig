@@ -59,15 +59,21 @@
             cache: false,
             success: function (data) {
                 var dataTab = data.data;
+
                 for (var i in dataTab) {
                     var idCartoTable = dataTab[i].version_id;
                     var id = dataTab[i].element_id;
+                    var path = dataTab[i].typeElementImagePath;
+path ="{{ asset('Bundles/Cartography/TypeElementImages/aw8v2xi6fc.png') }}";
+// path = "{{ asset(" + "'" + path + "'" + ")}}";
+//console.log(path);
+                    var line = [id,path];
 
                     if (idCartoTable == {{ lastVersion}}) {
-                        elementsCarto.push(id);
+                        elementsCarto.push(line);
                     }
                 }
-                updateArborJs(elementsCarto, sys, link);
+                updateArborJs(elementsCarto, sys);
             }
         });
 
@@ -198,10 +204,13 @@ var linkCarto = [e1, e2];
 
 // _________________________________________Partie Arbor JS ________________________________________________________
 
-    function updateArborJs(tab, sys, link) {
+    function updateArborJs(tab, sys) {
       
   jQuery.each(tab, function (index, value) {
-            value = sys.addNode(value, {'color': 'red', 'shape': 'dot', 'label': link});
+console.log(value[0]);
+console.log(value[1]);
+
+            value = sys.addNode(value[0], {'color': 'red', 'shape': 'dot', 'label': value[1]});
         });
 
     }
