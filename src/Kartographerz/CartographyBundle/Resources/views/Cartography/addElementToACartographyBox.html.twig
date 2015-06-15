@@ -38,7 +38,7 @@
 
 // _________________________________________Partie Arbor JS ________________________________________________________
 
-   var sys = arbor.ParticleSystem(1000, 400, 1);
+        var sys = arbor.ParticleSystem(1000, 400, 1);
         sys.parameters({gravity: true});
         sys.renderer = Renderer("#viewport");
         var link = $("#img").attr("src");
@@ -71,9 +71,9 @@
             }
         });
 
- 
-   var liensCarto = [];
-$.ajax({
+
+        var liensCarto = [];
+        $.ajax({
             type: "POST",
             url: "{{ path("kartographerz_version_versionLinkList", {'versionCartography': lastVersion }) }}",
             dataType: 'json',
@@ -82,16 +82,16 @@ $.ajax({
                 var dataTab = data.data;
                 for (var i in dataTab) {
                     var idCartoTable = dataTab[i].version_id;
-                   // var id = dataTab[i].version_id;
+                    // var id = dataTab[i].version_id;
                     var e1 = dataTab[i].element_1_id;
                     var e2 = dataTab[i].element_2_id;
 //console.log(idCartoTable);
 //console.log(e1 + " : " + e2);
-var linkCarto = [e1, e2];
+                    var linkCarto = [e1, e2];
 //console.log(id);
 
-                        liensCarto.push(linkCarto);
-  
+                    liensCarto.push(linkCarto);
+
                 }
                 updateArborJsLink(liensCarto, sys, link);
             }
@@ -107,16 +107,16 @@ var linkCarto = [e1, e2];
                 {"mData": "name"},
                 {"mData": "typeelementlabel"},
                 {"mData": function (row, source, type, val) {
-                        if ($.inArray(row.id, elementsCarto) >= 0) {
-                            return " <input id=" + row.id + " data-label=" + row.name + " type='checkbox' checked>";
-                        }
-                        else {
-
-                            return " <input id=" + row.id + " data-label=" + row.name + " type = 'checkbox' > ";
-                        }
+                        return " <input id=" + row.id + " data-label=" + row.name + " type='checkbox'>";
                     }
                 }
             ],
+            "createdRow": function (row, data, index) {
+                if ($.inArray(data['id'], elementsCarto) >= 0) {
+                    $('td', row).eq(3).find('input').prop("checked", true);
+                }
+
+            }
         });
 
         $("#addElementToACartography").click(function () {
@@ -199,8 +199,8 @@ var linkCarto = [e1, e2];
 // _________________________________________Partie Arbor JS ________________________________________________________
 
     function updateArborJs(tab, sys, link) {
-      
-  jQuery.each(tab, function (index, value) {
+
+        jQuery.each(tab, function (index, value) {
             value = sys.addNode(value, {'color': 'red', 'shape': 'dot', 'label': link});
         });
 
@@ -209,9 +209,9 @@ var linkCarto = [e1, e2];
     function updateArborJsLink(tab, sys, link) {
 
         jQuery.each(tab, function (index, value) {
-                var e1 = sys.addNode(value[0], {'color': 'green', 'shape': 'dot', 'label': link});
-                var e2 = sys.addNode(value[1], {'color': 'blue', 'shape': 'dot', 'label': link});
-                sys.addEdge(e1, e2);
+            var e1 = sys.addNode(value[0], {'color': 'green', 'shape': 'dot', 'label': link});
+            var e2 = sys.addNode(value[1], {'color': 'blue', 'shape': 'dot', 'label': link});
+            sys.addEdge(e1, e2);
         });
 
     }
