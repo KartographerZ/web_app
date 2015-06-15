@@ -98,158 +98,160 @@
 
             counter++;
         });
-    });
 
-
-    /**
-     * From all checked checkboxes, get the list of their element
-     * @returns {Array}
-     */
-    function getCurrentElements() {
-        var currentElements = [];
-
-        var checkedCheckboxes = getAllCheckedCheckboxes();
-
-        $(checkedCheckboxes).each(function () {
-            var element = {};
-            element["key"] = $(this).attr('id');
-            element["value"] = $(this).attr('data-label');
-
-            currentElements.push(element);
+        $("#lastbutton").click(function () {
+            $("#LinksListModal").modal('toggle');
+            $("#addElementToACartographyBox").modal('show');
         });
-
-        return currentElements;
-    }
-
-    /**
-     * 
-     * @param {type} selectValues
-     * @param {type} selector
-     * @returns {undefined}
-     */
-    function createSelect(selectValues, selector) {
-        $.each(selectValues, function () {
-            var key = this["key"];
-            var value = this["value"];
-
-            $('#' + selector).append($('<option>', {value: key}).text(value));
-        });
-    }
-
-    /**
-     * Return the array of all links in the LinksList datatable
-     * @returns {getCurrentLinks.currentLinks|Array}
-     */
-    function getCurrentLinks() {
-        var currentLinks = new Array();
-        var rows = t.$("tr"); //Get all rows 
-
-        $(rows).each(function () {
-
-            var ele1 = this.cells[1];
-            var ele2 = this.cells[2];
-
-            var ele1_id = $(ele1).find('div').attr('data-id');
-            var ele2_id = $(ele2).find('div').attr('data-id');
-
-            var link = new Array();
-            link.push(ele1_id, ele2_id);
-
-            currentLinks.push(link);
-        });
-
-        return currentLinks;
-
-    }
-
-    /**
-     * Return the array of the new links added in the newLinks datatable
-     * @returns {Array}
-     */
-    function getNewLinks() {
-        var newLinks = new Array();
-        var rows = ta.$("tr"); //Get all rows 
-
-        $(rows).each(function () {
-
-            var ele1 = this.cells[0];
-            var ele2 = this.cells[1];
-
-            var select1_id = $(ele1).find('select').attr('id');
-            var select2_id = $(ele2).find('select').attr('id');
-
-            var link = new Array();
-
-            link.push(getSelected(select1_id), getSelected(select2_id));
-
-            newLinks.push(link);
-        });
-
-
-        return newLinks;
-    }
-
-
-    /**
-     * 
-     * @param {type} selectId
-     * @returns {jQuery}
-     */
-    function getSelected(selectId) {
-
-        var selectedElementId = $('#' + selectId).find(":selected").val();
-
-        return selectedElementId;
-    }
-
-    /**
-     * 
-     Return the merge of current links and the newly added ones
-     * @returns {Array} */
-    function getLinks() {
-        var first = getCurrentLinks();
-        var second = getNewLinks();
-        var linksList = $.merge($.merge([], first), second);
-        return linksList;
-    }
-
-    /**
-     * Return the array of links for the selected elements of the current version of cartography
-     * @returns {Array}
-     */
-    function getProperLinks() {
-        var currentElements = getCurrentElements();
-        var currentLinks = getCurrentLinks();
-        var properLinks = [];
-
-        currentLinks.each(function (k, v) {
-            var currentLink = v;
-            currentElements.each(function (k, v) {
-                var currentElement = v;
-                if ($.inArray(currentElement, currentLink) !== -1) {
-                    properLinks.push(currentLink);
-                }
+        $("#savesLinksButton").click(function () {
+            var elements = $("#elementList tbody tr");
+            var checkedCheckboxes = getAllCheckedCheckboxes();
+            var elementsId = getCheckboxesId(checkedCheckboxes);
+            $.post(
+                    "{{ path("kartographerz_cartography_updateLinksElements") }}",
+                    {"elements": elementsId, "cart": idVersionCarto, "links": getLinks()},
+            function (ret) {
+                $("#LinksListModal").modal('toggle');
             });
         });
-        return properLinks;
 
-    }
 
-    $("#lastbutton").click(function () {
-        $("#LinksListModal").modal('toggle');
-        $("#addElementToACartographyBox").modal('show');
+
+        /**
+         * From all checked checkboxes, get the list of their element
+         * @returns {Array}
+         */
+        function getCurrentElements() {
+            var currentElements = [];
+
+            var checkedCheckboxes = getAllCheckedCheckboxes();
+
+            $(checkedCheckboxes).each(function () {
+                var element = {};
+                element["key"] = $(this).attr('id');
+                element["value"] = $(this).attr('data-label');
+
+                currentElements.push(element);
+            });
+
+            return currentElements;
+        }
+
+        /**
+         * 
+         * @param {type} selectValues
+         * @param {type} selector
+         * @returns {undefined}
+         */
+        function createSelect(selectValues, selector) {
+            $.each(selectValues, function () {
+                var key = this["key"];
+                var value = this["value"];
+
+                $('#' + selector).append($('<option>', {value: key}).text(value));
+            });
+        }
+
+        /**
+         * Return the array of all links in the LinksList datatable
+         * @returns {getCurrentLinks.currentLinks|Array}
+         */
+        function getCurrentLinks() {
+            var currentLinks = new Array();
+            var rows = t.$("tr"); //Get all rows 
+
+            $(rows).each(function () {
+
+                var ele1 = this.cells[1];
+                var ele2 = this.cells[2];
+
+                var ele1_id = $(ele1).find('div').attr('data-id');
+                var ele2_id = $(ele2).find('div').attr('data-id');
+
+                var link = new Array();
+                link.push(ele1_id, ele2_id);
+
+                currentLinks.push(link);
+            });
+
+            return currentLinks;
+
+        }
+
+        /**
+         * Return the array of the new links added in the newLinks datatable
+         * @returns {Array}
+         */
+        function getNewLinks() {
+            var newLinks = new Array();
+            var rows = ta.$("tr"); //Get all rows 
+
+            $(rows).each(function () {
+
+                var ele1 = this.cells[0];
+                var ele2 = this.cells[1];
+
+                var select1_id = $(ele1).find('select').attr('id');
+                var select2_id = $(ele2).find('select').attr('id');
+
+                var link = new Array();
+
+                link.push(getSelected(select1_id), getSelected(select2_id));
+
+                newLinks.push(link);
+            });
+
+
+            return newLinks;
+        }
+
+
+        /**
+         * 
+         * @param {type} selectId
+         * @returns {jQuery}
+         */
+        function getSelected(selectId) {
+
+            var selectedElementId = $('#' + selectId).find(":selected").val();
+
+            return selectedElementId;
+        }
+
+        /**
+         * 
+         Return the merge of current links and the newly added ones
+         * @returns {Array} */
+        function getLinks() {
+            var first = getCurrentLinks();
+            var second = getNewLinks();
+            var linksList = $.merge($.merge([], first), second);
+            return linksList;
+        }
+
+        /**
+         * Return the array of links for the selected elements of the current version of cartography
+         * @returns {Array}
+         */
+        function getProperLinks() {
+            var currentElements = getCurrentElements();
+            var currentLinks = getCurrentLinks();
+            var properLinks = [];
+
+            currentLinks.each(function (k, v) {
+                var currentLink = v;
+                currentElements.each(function (k, v) {
+                    var currentElement = v;
+                    if ($.inArray(currentElement, currentLink) !== -1) {
+                        properLinks.push(currentLink);
+                    }
+                });
+            });
+            return properLinks;
+
+        }
     });
-    $("#savesLinksButton").click(function () {
-        var elements = $("#elementList tbody tr");
-        var checkedCheckboxes = getAllCheckedCheckboxes();
-        var elementsId = getCheckboxesId(checkedCheckboxes);
-        $.post(
-                "{{ path("kartographerz_cartography_updateLinksElements") }}",
-                {"elements": elementsId, "cart": idVersionCarto, "links": getLinks()},
-        function (ret) {
-            $("#LinksListModal").modal('toggle');
-        });
-    });
+
 
 
 </script>
