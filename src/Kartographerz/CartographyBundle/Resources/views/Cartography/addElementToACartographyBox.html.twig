@@ -32,17 +32,11 @@
 
 
 <script>
-    $(document).ready(function () {
+    $(function () {
         var idCarto = $(".iddata").data("videoid");
-
         var idVersionCarto = $(".iddata").data("videoid");
 
         $("#img").hide();
-
-
-
-
-
 
 // récupération des éléments de la cartographie courante ________________________________________________________________________________________
 
@@ -66,7 +60,7 @@
                     }
 
                 }
-        updateArborJs(elementsCarto);
+                updateArborJs(elementsCarto);
             }
         });
 
@@ -92,12 +86,8 @@
             ],
         });
 
-
-
-
         $("#addElementToACartography").click(function () {
-            
-            if(getAllCheckedCheckboxes().length <= 1 )
+            if (getAllCheckedCheckboxes().length <= 1)
             {
                 alert("Il faut ajouter au moins 2 elements pour pouvoir gérer les liens");
             }
@@ -115,10 +105,9 @@
                 $("#addElementToACartographyBox").modal('toggle');
                 $('#LinksListModal').modal('show');
             }
-           
+
 
         });
-
 
         $("#saveElements").click(function () {
             var elements = $("#elementList tbody tr");
@@ -128,15 +117,12 @@
                     "{{ path("kartographerz_cartography_updateElements") }}",
                     {"elements": elementsId, "cart": idVersionCarto},
             function (ret) {
-                 location.reload();
+                location.reload();
             });
             $("#addElementToACartographyBox").modal('toggle');
-      });
-
+        });
     });
 
-
- 
 
     /**
      * 
@@ -146,7 +132,7 @@
         var checkboxes = $("#elementList input[type=checkbox]");
         var checkedCheckboxes = new Array();
         $(checkboxes).each(function () {
-            
+
             var checkbox = $(this);
             if (isChecked(checkbox)) {
                 checkedCheckboxes.push(checkbox);
@@ -178,24 +164,24 @@
     }
 
 
-function updateArborJs (tab){
+    function updateArborJs(tab) {
 
 //alert(tab);    
 ///////////////////////////////////////////////////
-            var sys = arbor.ParticleSystem(1000, 400, 1);
-            sys.parameters({gravity: true});
-            sys.renderer = Renderer("#viewport");
- var  link = $("#img").attr("src");
+        var sys = arbor.ParticleSystem(1000, 400, 1);
+        sys.parameters({gravity: true});
+        sys.renderer = Renderer("#viewport");
+        var link = $("#img").attr("src");
 //alert("link :" + link);
 // a MODIFIER : a charger depuis la bdd en AJAX 
 
-jQuery.each(tab, function(index, value) {
-   
-value = sys.addNode(value,{'color':'red','shape':'dot','label':link});
-   });
+        jQuery.each(tab, function (index, value) {
+
+            value = sys.addNode(value, {'color': 'red', 'shape': 'dot', 'label': link});
+        });
 //alert($("#img").attr("src"));
 
-}
+    }
 
 
 </script>

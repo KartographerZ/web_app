@@ -46,58 +46,59 @@
 </div><!-- /.modal -->
 
 <script>
-    var idCarto = $(".iddata").data("videoid");
-    var idVersionCarto = $(".iddata").data("videoid");
+    $(function () {
+        var idCarto = $(".iddata").data("videoid");
+        var idVersionCarto = $(".iddata").data("videoid");
 
-    var t = $('#linkList').DataTable({
-        "sAjaxSource": "{{ path("kartographerz_version_versionLinkList", {'versionCartography': lastVersion }) }}",
-        "aoColumns": [
-            {"mData": "id"},
-            {"mData": function (val) {
-                    return "<div data-id=" + val.element_1_id + ">" + val.element_1_label + "</div>"
-                }
-            },
-            {"mData": function (val) {
-                    return "<div data-id=" + val.element_2_id + ">" + val.element_2_label + "</div>";
-                }
-            },
-            {"mData": function (row) {
-                    return '<button id="delete_' + row.id + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>';
+        var t = $('#linkList').DataTable({
+            "sAjaxSource": "{{ path("kartographerz_version_versionLinkList", {'versionCartography': lastVersion }) }}",
+            "aoColumns": [
+                {"mData": "id"},
+                {"mData": function (val) {
+                        return "<div data-id=" + val.element_1_id + ">" + val.element_1_label + "</div>"
+                    }
+                },
+                {"mData": function (val) {
+                        return "<div data-id=" + val.element_2_id + ">" + val.element_2_label + "</div>";
+                    }
+                },
+                {"mData": function (row) {
+                        return '<button id="delete_' + row.id + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>';
 
-                }
-            },
-        ],
+                    }
+                },
+            ],
+        });
+
+        $("#linkList").on("click", ".delete", function () {
+            var row = $(this).parents("tr");
+            t.row($(this).parents('tr')).remove().draw();
+        });
+
+
+        $("#newLinks").on("click", ".delete", function () {
+            var row = $(this).parents("tr");
+            ta.row($(this).parents('tr')).remove().draw();
+        });
+
+        var ta = $('#newLinks').DataTable();
+        var counter = 1;
+
+        $('#addRow').on('click', function () {
+            ta.row.add([
+                "<select id=" + "mySelect1_" + counter + "></select>",
+                "<select id=" + "mySelect2_" + counter + "></select>",
+                '<button id="delete_link_' + counter + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>'
+            ]).draw();
+
+            createSelect(getCurrentElements(), "mySelect1_" + counter);
+
+            createSelect(getCurrentElements(), "mySelect2_" + counter);
+
+            counter++;
+        });
     });
 
-
-
-    $("#linkList").on("click", ".delete", function () {
-        var row = $(this).parents("tr");
-        t.row($(this).parents('tr')).remove().draw();
-    });
-
-
-    $("#newLinks").on("click", ".delete", function () {
-        var row = $(this).parents("tr");
-        ta.row($(this).parents('tr')).remove().draw();
-    });
-
-    var ta = $('#newLinks').DataTable();
-    var counter = 1;
-
-    $('#addRow').on('click', function () {
-        ta.row.add([
-            "<select id=" + "mySelect1_" + counter + "></select>",
-            "<select id=" + "mySelect2_" + counter + "></select>",
-            '<button id="delete_link_' + counter + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>'
-        ]).draw();
-
-        createSelect(getCurrentElements(), "mySelect1_" + counter);
-
-        createSelect(getCurrentElements(), "mySelect2_" + counter);
-
-        counter++;
-    });
 
     /**
      * From all checked checkboxes, get the list of their element
@@ -232,9 +233,9 @@
         return properLinks;
 
     }
-    $("#lastbutton").click(function(){
-            $("#LinksListModal").modal('toggle');
-            $("#addElementToACartographyBox").modal('show');
+    $("#lastbutton").click(function () {
+        $("#LinksListModal").modal('toggle');
+        $("#addElementToACartographyBox").modal('show');
     });
     $("#savesLinksButton").click(function () {
         var elements = $("#elementList tbody tr");
@@ -242,7 +243,7 @@
         var elementsId = getCheckboxesId(checkedCheckboxes);
         $.post(
                 "{{ path("kartographerz_cartography_updateLinksElements") }}",
-                {"elements": elementsId, "cart": idVersionCarto, "links":getLinks()},
+                {"elements": elementsId, "cart": idVersionCarto, "links": getLinks()},
         function (ret) {
             $("#LinksListModal").modal('toggle');
         });
