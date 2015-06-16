@@ -2,7 +2,7 @@
 
 
 <!-- Modal -->
- 
+
 <div class="modal fade" id="addElementToACartographyBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -13,8 +13,8 @@
             <div class="modal-body">
                 <div class="iddata" data-videoid={{ app.request.get('id') }}></div>
                 <div id="path">
-  {{ render(controller('KartographerzCartographyBundle:Element:getWebPath')) }}
-</div>
+                    {{ render(controller('KartographerzCartographyBundle:Element:getWebPath')) }}
+                </div>
                 <table id="elementList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -38,7 +38,7 @@
 
 <script>
     $(function () {
-  var   webPath = $("#path").html();
+        var webPath = $("#path").html();
 //alert($("#path").html());
 //console.log(webPath);
 
@@ -52,9 +52,6 @@
 
         var idCarto = $(".iddata").data("videoid");
         var idVersionCarto = $(".iddata").data("videoid");
-
-        
-
 // récupération des éléments de la cartographie courante ________________________________________________________________________________________
 
 
@@ -66,16 +63,14 @@
             cache: false,
             success: function (data) {
                 var dataTab = data.data;
-
                 for (var i in dataTab) {
                     var idCartoTable = dataTab[i].version_id;
                     var id = dataTab[i].element_id;
                     var path = dataTab[i].typeElementImagePath;
-path = webPath + "/" + path;
+                    path = webPath + "/" + path;
 //console.log (path);
 
-                    var line = [id,path];
-
+                    var line = [id, path];
                     if (idCartoTable == {{ lastVersion}}) {
                         elementsCarto.push(line);
                     }
@@ -83,8 +78,6 @@ path = webPath + "/" + path;
                 updateArborJs(elementsCarto, sys);
             }
         });
-
-
         var liensCarto = [];
         $.ajax({
             type: "POST",
@@ -97,13 +90,11 @@ path = webPath + "/" + path;
                     var e1 = dataTab[i].element_1_id;
                     var e2 = dataTab[i].element_2_id;
                     var linkCarto = [e1, e2];
-
                     liensCarto.push(linkCarto);
                 }
-                updateArborJsLink(liensCarto, sys, elementsCarto,webPath);
+                updateArborJsLink(liensCarto, sys, elementsCarto, webPath);
             }
         });
-
 // _________________________________________________________________________________________________________________________________________________
 
 
@@ -119,13 +110,13 @@ path = webPath + "/" + path;
                 }
             ],
             "createdRow": function (row, data, index) {
-                if ($.inArray(data['id'], elementsCarto) >= 0) {
-                    $('td', row).eq(3).find('input').prop("checked", true);
+                for (var i = 0; i < elementsCarto.length; i++) {
+                    if (data['id'] === elementsCarto[i][0]) {
+                        $('td', row).eq(3).find('input').prop("checked", true);
+                    }
                 }
-
             }
         });
-
         $("#addElementToACartography").click(function () {
             if (getAllCheckedCheckboxes().length <= 1)
             {
@@ -148,7 +139,6 @@ path = webPath + "/" + path;
 
 
         });
-
         $("#saveElements").click(function () {
             var elements = $("#elementList tbody tr");
             var checkedCheckboxes = getAllCheckedCheckboxes();
@@ -162,8 +152,6 @@ path = webPath + "/" + path;
             $("#addElementToACartographyBox").modal('toggle');
         });
     });
-
-
     /**
      * 
      
@@ -207,38 +195,34 @@ path = webPath + "/" + path;
 
 
     function updateArborJs(tab, sys) {
-      
-  jQuery.each(tab, function (index, value) {
+
+        jQuery.each(tab, function (index, value) {
 //console.log(value[0]);
 //console.log(value[1]);
 
             value = sys.addNode(value[0], {'color': 'red', 'shape': 'dot', 'label': value[1]});
-
         });
-
     }
 
     function updateArborJsLink(tab, sys, elementsCarto, webPath) {
 
         jQuery.each(tab, function (index, value) {
-var e1path;
-var e2path;
-
-for (var i in elementsCarto) {
-if (elementsCarto[i][0] == value[0] ) {
-e1path = elementsCarto[i][0];
-e1path = webPath + "/"  + e1path;
-}
-if (elementsCarto[i][0] == value[1] ) {
-e2path = elementsCarto[i][0];
-e2path = webPath + "/"  + e2path;
-}
-}
+            var e1path;
+            var e2path;
+            for (var i in elementsCarto) {
+                if (elementsCarto[i][0] == value[0]) {
+                    e1path = elementsCarto[i][0];
+                    e1path = webPath + "/" + e1path;
+                }
+                if (elementsCarto[i][0] == value[1]) {
+                    e2path = elementsCarto[i][0];
+                    e2path = webPath + "/" + e2path;
+                }
+            }
             var e1 = sys.addNode(value[0], {'color': 'green', 'shape': 'dot', 'label': e1path});
             var e2 = sys.addNode(value[1], {'color': 'blue', 'shape': 'dot', 'label': e2path});
             sys.addEdge(e1, e2);
         });
-
     }
 
 
