@@ -47,7 +47,7 @@
         var idCarto = $(".iddata").data("videoid");
         var idVersionCarto = $(".iddata").data("videoid");
 
-        $("#img").hide();
+      
 
 // récupération des éléments de la cartographie courante ________________________________________________________________________________________
 
@@ -64,9 +64,8 @@
                     var idCartoTable = dataTab[i].version_id;
                     var id = dataTab[i].element_id;
                     var path = dataTab[i].typeElementImagePath;
-//path ="{{ asset('Bundles/Cartography/TypeElementImages/aw8v2xi6fc.png') }}";
-// path = "{{ asset(" + "'" + path + "'" + ")}}";
-//console.log(path);
+path = "http://localhost/cartographie/web/" + path;
+
                     var line = [id,path];
 
                     if (idCartoTable == {{ lastVersion}}) {
@@ -99,7 +98,7 @@
                     liensCarto.push(linkCarto);
 
                 }
-                updateArborJsLink(liensCarto, sys, link);
+                updateArborJsLink(liensCarto, sys, elementsCarto);
             }
         });
 
@@ -217,15 +216,30 @@
 
     }
 
-    function updateArborJsLink(tab, sys, link) {
+    function updateArborJsLink(tab, sys, elementsCarto) {
 
         jQuery.each(tab, function (index, value) {
-            var e1 = sys.addNode(value[0], {'color': 'green', 'shape': 'dot', 'label': link});
-            var e2 = sys.addNode(value[1], {'color': 'blue', 'shape': 'dot', 'label': link});
+var e1path;
+var e2path;
+
+for (var i in elementsCarto) {
+if (elementsCarto[i][0] == value[0] ) {
+e1path = elementsCarto[i][0];
+e1path = "http://localhost/cartographie/web/" + e1path;
+}
+if (elementsCarto[i][0] == value[1] ) {
+e2path = elementsCarto[i][0];
+e2path = "http://localhost/cartographie/web/" + e2path;
+}
+}
+            var e1 = sys.addNode(value[0], {'color': 'green', 'shape': 'dot', 'label': e1path});
+            var e2 = sys.addNode(value[1], {'color': 'blue', 'shape': 'dot', 'label': e2path});
             sys.addEdge(e1, e2);
         });
 
     }
+
+
 
 // _________________________________________________________________________________________________________
 
