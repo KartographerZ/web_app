@@ -38,10 +38,14 @@ class ElementController extends Controller {
 
     public function versionListAction(Request $request) {
         $conn = $this->get('database_connection');
-        $list = $conn->fetchAll('SELECT * FROM version_element');
+        $list = $conn->fetchAll('SELECT id, version_id, element_id'
+              . ',(select typeElement_id from element where id=element_id) as typeElement_id'
+              . ',(select image_id from type_element where id=typeElement_id) as typeElementImageId'
+              . ',(select path from image where id=typeElementImageId) as typeElementImagePath FROM version_element');
         return new Response(json_encode(array('data' => $list)));
     }
 
+   
     /**
      * @Security("has_role('ROLE_MODELISATEUR')")
      */
