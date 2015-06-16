@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,21 +11,19 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        
         {% include 'nav.html.twig' %}
-        <div class="container">
+        <div class="container-fluid">
         {% block body %}{% endblock %}
     </div>
-    <footer>
-        {% include 'footer.html.twig' %}
-    </footer>
 
     {% block javascripts %}
         <script>
-        $.extend($.fn.dataTable.defaults, {
-        "language": {
-        "url": loadDatatablesIntl("{{ app.request.locale }}")
-        },
-        });
+            $.extend($.fn.dataTable.defaults, {
+                "language": {
+                    "url": loadDatatablesIntl("{{ app.request.locale }}")
+                },
+            });
         </script>
     {% endblock %}
 

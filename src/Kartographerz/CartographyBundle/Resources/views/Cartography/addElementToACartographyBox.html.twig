@@ -1,6 +1,8 @@
 {# empty Twig template #}
 
+
 <!-- Modal -->
+
 <div class="modal fade" id="addElementToACartographyBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -9,6 +11,10 @@
                 <h4 class="modal-title" id="myModalLabel">{{'element_to_carto.add'|trans}}</h4>
             </div>
             <div class="modal-body">
+                <div class="iddata" data-videoid={{ app.request.get('id') }}></div>
+                <div id="path">
+                    {{ render(controller('KartographerzCartographyBundle:Element:getWebPath')) }}
+                </div>
                 <table id="elementList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -18,28 +24,12 @@
                             <th>{{'element_to_carto.choice'|trans}}</th>
                         </tr>
                     </thead>
-
-       
-            </table>
-
-                <!--
-          <table id="elementList2" class="display" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Nom</th>
-                            <th>type element</th>
-                            <th>Choisir</th>
-                        </tr>
-                    </thead>
-       
-            </table>
--->
-
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{'submit.close'|trans}}</button>
-                <button type="button" class="btn btn-primary" id="addElementToACartography">{{'submit.add'|trans}}</button>
+                <button type="button" class="btn btn-primary" id="addElementToACartography"  >{{'submit.manageLink'|trans}}</button>
+                <button type="button" class="btn btn-primary"  data-dismiss="modal" id="saveElements" >{{'submit.save'|trans}}</button>
             </div>
         </div>
     </div>
@@ -47,73 +37,196 @@
 
 
 <script>
-    $(document).ready(function () {
-        $('#elementList').DataTable({
-            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
-            "aoColumns": [
+    $(function () {
+        var webPath = $("#path").html();
+//alert($("#path").html());
+//console.log(webPath);
 
-                { "mData": "id" },
-                { "mData": "name" },
-                { "mData": "typeelementlabel" },
-                { "mData":  function (row, source, type, val ) {
+// _________________________________________Partie Arbor JS ________________________________________________________
 
-                        return " <input id="+row.id+" type='checkbox'>";
-                    }
-                }
-            ],
-        });
+        var sys = arbor.ParticleSystem(1000, 400, 1);
+        sys.parameters({gravity: true});
+        sys.renderer = Renderer("#viewport");
+        var link = $("#img").attr("src");
+// __________________________________________________________________________________________________________________
 
-
-     
+        var idCarto = $(".iddata").data("videoid");
+        var idVersionCarto = $(".iddata").data("videoid");
 // récupération des éléments de la cartographie courante ________________________________________________________________________________________
 
 
-  /* $('#elementList2').DataTable({
-            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}", 
-            "aoColumns": [
-                { "mData": "id" }
-            ],
-        });
-*/
+        var elementsCarto = [];
+        $.ajax({
+            type: "POST",
+            url: "{{ path("kartographerz_element_versionElementList")}}",
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                var dataTab = data.data;
+                for (var i in dataTab) {
+                    var idCartoTable = dataTab[i].version_id;
+                    var id = dataTab[i].element_id;
+                    var path = dataTab[i].typeElementImagePath;
+                    path = webPath + "/" + path;
+//console.log (path);
 
+                    var line = [id, path];
+                    if (idCartoTable == {{ lastVersion}}) {
+                        elementsCarto.push(line);
+                    }
+                }
+                updateArborJs(elementsCarto, sys);
+            }
+        });
+        var liensCarto = [];
+        $.ajax({
+            type: "POST",
+            url: "{{ path("kartographerz_version_versionLinkList", {'versionCartography': lastVersion }) }}",
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                var dataTab = data.data;
+                for (var i in dataTab) {
+                    var e1 = dataTab[i].element_1_id;
+                    var e2 = dataTab[i].element_2_id;
+                    var linkCarto = [e1, e2];
+                    liensCarto.push(linkCarto);
+                }
+                updateArborJsLink(liensCarto, sys, elementsCarto, webPath);
+            }
+        });
 // _________________________________________________________________________________________________________________________________________________
 
 
-
-
+        $('#elementList').DataTable({
+            "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
+            "aoColumns": [
+                {"mData": "id"},
+                {"mData": "name"},
+                {"mData": "typeelementlabel"},
+                {"mData": function (row, source, type, val) {
+                        return " <input id=" + row.id + " data-label=" + row.name + " type='checkbox'>";
+                    }
+                }
+            ],
+            "createdRow": function (row, data, index) {
+                for (var i = 0; i < elementsCarto.length; i++) {
+                    if (data['id'] === elementsCarto[i][0]) {
+                        $('td', row).eq(3).find('input').prop("checked", true);
+                    }
+                }
+            }
+        });
         $("#addElementToACartography").click(function () {
+            if (getAllCheckedCheckboxes().length <= 1)
+            {
+                alert("Il faut ajouter au moins 2 elements pour pouvoir gérer les liens");
+            }
+            else
+            {
+                var elements = $("#elementList tbody tr");
+                var checkedCheckboxes = getAllCheckedCheckboxes();
+                var elementsId = getCheckboxesId(checkedCheckboxes);
+                $.post(
+                        "{{ path("kartographerz_cartography_updateElements") }}",
+                        {"elements": elementsId, "cart": idVersionCarto},
+                function (ret) {
+
+                });
+                $("#addElementToACartographyBox").modal('toggle');
+                $('#LinksListModal').modal('show');
+            }
+
+
+        });
+        $("#saveElements").click(function () {
             var elements = $("#elementList tbody tr");
             var checkedCheckboxes = getAllCheckedCheckboxes();
             var elementsId = getCheckboxesId(checkedCheckboxes);
-            console.log(elementsId)
-
-        });
-
-        function getAllCheckedCheckboxes() {
-            var checkboxes = $("#elementList input[type=checkbox]");
-            var checkedCheckboxes = new Array();
-            $(checkboxes).each(function () {
-                var checkbox = $(this);
-                if (isChecked(checkbox)) {
-                    checkedCheckboxes.push(checkbox);
-                }
-            })
-            return checkedCheckboxes;
-        }
-
-        function getCheckboxesId(checkboxes) {
-            var ids = new Array();
-            $(checkboxes).each(function () {
-                ids.push($(this).attr('id'));
+            $.post(
+                    "{{ path("kartographerz_cartography_updateElements") }}",
+                    {"elements": elementsId, "cart": idVersionCarto},
+            function (ret) {
+                location.reload();
             });
-            return ids;
-        }
-
-        function isChecked(theCheckbox) {
-            return $(theCheckbox).prop('checked');
-        }
-
+            $("#addElementToACartographyBox").modal('toggle');
+        });
     });
+    /**
+     * 
+     
+     * @returns {Array|getAllCheckedCheckboxes.checkedCheckboxes} */
+    function getAllCheckedCheckboxes() {
+        var checkboxes = $("#elementList input[type=checkbox]");
+        var checkedCheckboxes = new Array();
+        $(checkboxes).each(function () {
 
-//alert("test");
+            var checkbox = $(this);
+            if (isChecked(checkbox)) {
+                checkedCheckboxes.push(checkbox);
+            }
+        });
+        return checkedCheckboxes;
+    }
+
+    /**
+     * 
+     
+     * @param {type} checkboxes
+     * @returns {getCheckboxesId.ids|Array}     */
+    function getCheckboxesId(checkboxes) {
+        var ids = new Array();
+        $(checkboxes).each(function () {
+            ids.push($(this).attr('id'));
+        });
+        return ids;
+    }
+
+    /**
+     * 
+     
+     * @param {type} theCheckbox
+     * @returns {jQuery} */
+    function isChecked(theCheckbox) {
+        return $(theCheckbox).prop('checked');
+    }
+
+// _________________________________________Partie Arbor JS ________________________________________________________
+
+
+    function updateArborJs(tab, sys) {
+
+        jQuery.each(tab, function (index, value) {
+//console.log(value[0]);
+//console.log(value[1]);
+
+            value = sys.addNode(value[0], {'color': 'red', 'shape': 'dot', 'label': value[1]});
+        });
+    }
+
+    function updateArborJsLink(tab, sys, elementsCarto, webPath) {
+
+        jQuery.each(tab, function (index, value) {
+            var e1path;
+            var e2path;
+            for (var i in elementsCarto) {
+                if (elementsCarto[i][0] == value[0]) {
+                    e1path = elementsCarto[i][0];
+                    e1path = webPath + "/" + e1path;
+                }
+                if (elementsCarto[i][0] == value[1]) {
+                    e2path = elementsCarto[i][0];
+                    e2path = webPath + "/" + e2path;
+                }
+            }
+            var e1 = sys.addNode(value[0], {'color': 'green', 'shape': 'dot', 'label': e1path});
+            var e2 = sys.addNode(value[1], {'color': 'blue', 'shape': 'dot', 'label': e2path});
+            sys.addEdge(e1, e2);
+        });
+    }
+
+
+
+// _________________________________________________________________________________________________________
+
 </script>

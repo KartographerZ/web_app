@@ -19,7 +19,9 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "dev-master",
-        "doctrine/doctrine-fixtures-bundle": "dev-master"
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "friendsofsymfony/jsrouting-bundle": "1.5.4",
+        "symfony/var-dumper": "^2.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

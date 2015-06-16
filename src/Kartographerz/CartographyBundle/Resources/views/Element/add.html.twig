@@ -1,49 +1,46 @@
+{% extends "KartographerzCartographyBundle::layout.html.twig" %}
 
-<html>
-    <head>
-        <title>Create a element </title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    </head>
-    <body>
+{% block title %}{{parent()}} - {{ 'action.add'|trans }}{% endblock %}
 
-        <h3>Create a Element</h3>
-        {% if element is defined %} 
-            <p class="alert alert-success">Vous avez bien ajouté un element</p>
-        {% endif %}
-        <div class="well">
-            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-            {# Les erreurs générales du formulaire. #}
-            {{ form_errors(form) }}
-            <div class="form-group">
-                {# Génération du label. #}
-                {{ form_label(form.name, "Name", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+{% block body %}
 
-                {# Affichage des erreurs pour ce champ précis. #}
-                {{ form_errors(form.name) }}
+    <h3>Create a Element</h3>
+    {% if element is defined %} 
+        <p class="alert alert-success">Vous avez bien ajouté un element</p>
+    {% endif %}
+    <div class="well">
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(form.name, "Name", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
 
-                <div class="col-sm-4">
-                    {# Génération de l'input. #}
-                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                </div>
+            {# Affichage des erreurs pour ce champ précis. #}
+            {{ form_errors(form.name) }}
+
+            <div class="col-sm-4">
+                {# Génération de l'input. #}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
             </div>
-
-            <div class="form-group">
-                {# Génération du label. #}
-                {{ form_label(form.typeElement, "Type element", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                <div class="col-sm-4">
-                    {{ form_widget(form.typeElement, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
-            <div class="form-group">
-
-
-                <div class="col-sm-4">
-                    {# Génération de l'input. #}
-                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
-                </div>
-            </div>
-            {{ form_rest(form) }}
-            {{ form_end(form) }}
         </div>
-    </body>
-</html>
+
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(form.typeElement, "Type element", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            <div class="col-sm-4">
+                {{ form_widget(form.typeElement, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+
+
+            <div class="col-sm-4">
+                {# Génération de l'input. #}
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

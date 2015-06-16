@@ -51,6 +51,15 @@ assetic:
         font-awesome-woff:
             inputs: '%kernel.root_dir%/Resources/public/fontawesome/fonts/fontawesome-webfont.woff'
             output: 'fonts/fontawesome-webfont.woff'
+        images-datatables-sort-asc:
+            inputs: '%kernel.root_dir%/Resources/public/datatables/media/images/sort_asc.png'
+            output: 'images/sort_asc.png'
+        images-datatables-sort-desc:
+            inputs: '%kernel.root_dir%/Resources/public/datatables/media/images/sort_desc.png'
+            output: 'images/sort_desc.png'
+        images-datatables-sort-both:
+            inputs: '%kernel.root_dir%/Resources/public/datatables/media/images/sort_both.png'
+            output: 'images/sort_both.png'
         filters:
             cssrewrite: ~
     

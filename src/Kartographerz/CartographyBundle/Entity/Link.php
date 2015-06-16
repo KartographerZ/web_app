@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="link", indexes={@ORM\Index(name="element_1_id", columns={"element_1_id"}), @ORM\Index(name="element_2_id", columns={"element_2_id"})})
  * @ORM\Entity
  */
-class Link
-{
+class Link {
+
     /**
      * @var integer
      *
@@ -29,27 +29,40 @@ class Link
      *   @ORM\JoinColumn(name="element_1_id", referencedColumnName="id")
      * })
      */
+    
+    /**
+
+   * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Element")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="element_1_id", referencedColumnName="id")
+     * })
+   */
     private $element1;
 
-    /**
-     * @var \Element
-     *
-     * @ORM\ManyToOne(targetEntity="Element")
+   /**
+   * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Element")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="element_2_id", referencedColumnName="id")
      * })
-     */
+   */
     private $element2;
 
-
+    /**
+     * @var \Version
+     *
+     * @ORM\ManyToOne(targetEntity="Version")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="version_id", referencedColumnName="id")
+     * })
+     */
+    private $versionCartography;
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -59,8 +72,7 @@ class Link
      * @param \Kartographerz\CartographyBundle\Entity\Element $element1
      * @return Link
      */
-    public function setElement1(\Kartographerz\CartographyBundle\Entity\Element $element1 = null)
-    {
+    public function setElement1(\Kartographerz\CartographyBundle\Entity\Element $element1 = null) {
         $this->element1 = $element1;
 
         return $this;
@@ -71,8 +83,7 @@ class Link
      *
      * @return \Kartographerz\CartographyBundle\Entity\Element 
      */
-    public function getElement1()
-    {
+    public function getElement1() {
         return $this->element1;
     }
 
@@ -82,8 +93,7 @@ class Link
      * @param \Kartographerz\CartographyBundle\Entity\Element $element2
      * @return Link
      */
-    public function setElement2(\Kartographerz\CartographyBundle\Entity\Element $element2 = null)
-    {
+    public function setElement2(\Kartographerz\CartographyBundle\Entity\Element $element2 = null) {
         $this->element2 = $element2;
 
         return $this;
@@ -94,8 +104,16 @@ class Link
      *
      * @return \Kartographerz\CartographyBundle\Entity\Element 
      */
-    public function getElement2()
-    {
+    public function getElement2() {
         return $this->element2;
     }
+
+    function getVersionCartography() {
+        return $this->versionCartography;
+    }
+
+    function setVersionCartography(\Kartographerz\CartographyBundle\Entity\Version $versionCartography = null) {
+        $this->versionCartography = $versionCartography;
+    }
+
 }
