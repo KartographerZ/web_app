@@ -9,6 +9,7 @@ nav:
     account: "Votre compte : "
     change_pwd: Changez votre mot de passe
     admin: Administration
+    elements: Eléments
     
 footer:
     joinus: Rejoignez-nous !
@@ -18,13 +19,14 @@ footer:
     
 home:
     title: Bienvenue
-    
+
 cartography:
     add: Ajouter une cartographie
     create : Création d'une cartographie
     name: Nom
     type: Visibilité
     list: Liste
+    show : Affichage de la cartographie
     
 action:
     add: Création
@@ -45,3 +47,8 @@ element_to_carto:
 element:
     add: Ajouter un élément
     manage: Gérer les élements
+    addType: Ajouter un type d'éléments
+    
+title:
+    view: Vue
+    
