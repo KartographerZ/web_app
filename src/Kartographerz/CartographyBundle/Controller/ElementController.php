@@ -35,6 +35,12 @@ class ElementController extends Controller {
                 . 'FROM Element');
         return new Response(json_encode(array('data' => $list)));
     }
+     public function getWebPathAction(Request $request) {
+           $rep =$this->get('request')->getBasePath();
+   return new Response($rep);
+
+    }
+
 
     public function versionListAction(Request $request) {
         $conn = $this->get('database_connection');
@@ -44,7 +50,6 @@ class ElementController extends Controller {
               . ',(select path from image where id=typeElementImageId) as typeElementImagePath FROM version_element');
         return new Response(json_encode(array('data' => $list)));
     }
-
    
     /**
      * @Security("has_role('ROLE_MODELISATEUR')")

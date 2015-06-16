@@ -2,6 +2,7 @@
 
 
 <!-- Modal -->
+ 
 <div class="modal fade" id="addElementToACartographyBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -11,6 +12,9 @@
             </div>
             <div class="modal-body">
                 <div class="iddata" data-videoid={{ app.request.get('id') }}></div>
+                <div id="path">
+  {{ render(controller('KartographerzCartographyBundle:Element:getWebPath')) }}
+</div>
                 <table id="elementList" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -34,7 +38,9 @@
 
 <script>
     $(function () {
-
+  var   webPath = $("#path").html();
+//alert($("#path").html());
+//console.log(webPath);
 
 // _________________________________________Partie Arbor JS ________________________________________________________
 
@@ -47,9 +53,10 @@
         var idCarto = $(".iddata").data("videoid");
         var idVersionCarto = $(".iddata").data("videoid");
 
-      
+        
 
 // récupération des éléments de la cartographie courante ________________________________________________________________________________________
+
 
         var elementsCarto = [];
         $.ajax({
@@ -64,7 +71,8 @@
                     var idCartoTable = dataTab[i].version_id;
                     var id = dataTab[i].element_id;
                     var path = dataTab[i].typeElementImagePath;
-path = "http://localhost/cartographie/web/" + path;
+path = webPath + "/" + path;
+//console.log (path);
 
                     var line = [id,path];
 
@@ -98,7 +106,7 @@ path = "http://localhost/cartographie/web/" + path;
                     liensCarto.push(linkCarto);
 
                 }
-                updateArborJsLink(liensCarto, sys, elementsCarto);
+                updateArborJsLink(liensCarto, sys, elementsCarto,webPath);
             }
         });
 
@@ -216,7 +224,7 @@ path = "http://localhost/cartographie/web/" + path;
 
     }
 
-    function updateArborJsLink(tab, sys, elementsCarto) {
+    function updateArborJsLink(tab, sys, elementsCarto, webPath) {
 
         jQuery.each(tab, function (index, value) {
 var e1path;
@@ -225,11 +233,11 @@ var e2path;
 for (var i in elementsCarto) {
 if (elementsCarto[i][0] == value[0] ) {
 e1path = elementsCarto[i][0];
-e1path = "http://localhost/cartographie/web/" + e1path;
+e1path = webPath + "/"  + e1path;
 }
 if (elementsCarto[i][0] == value[1] ) {
 e2path = elementsCarto[i][0];
-e2path = "http://localhost/cartographie/web/" + e2path;
+e2path = webPath + "/"  + e2path;
 }
 }
             var e1 = sys.addNode(value[0], {'color': 'green', 'shape': 'dot', 'label': e1path});

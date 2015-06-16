@@ -41,6 +41,10 @@ kartographerz_element_elementList:
     path: /elementList
     defaults: { _controller: KartographerzCartographyBundle:Element:list }
     
+kartographerz_element_elementgetWebPath:
+    path: /elementgetWebPath
+    defaults: { _controller: KartographerzCartographyBundle:Element:getWebPath }
+    
 kartographerz_element_versionElementList:
     path: /versionElementList
     defaults: { _controller: KartographerzCartographyBundle:Element:versionList }   
