@@ -94,17 +94,11 @@ path = webPath + "/" + path;
             success: function (data) {
                 var dataTab = data.data;
                 for (var i in dataTab) {
-                    var idCartoTable = dataTab[i].version_id;
-                    // var id = dataTab[i].version_id;
                     var e1 = dataTab[i].element_1_id;
                     var e2 = dataTab[i].element_2_id;
-//console.log(idCartoTable);
-//console.log(e1 + " : " + e2);
                     var linkCarto = [e1, e2];
-//console.log(id);
 
                     liensCarto.push(linkCarto);
-
                 }
                 updateArborJsLink(liensCarto, sys, elementsCarto,webPath);
             }

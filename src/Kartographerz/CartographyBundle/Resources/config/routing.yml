@@ -24,10 +24,14 @@ kartographerz_cartography_add:
 kartographerz_cartography_addElement:
     path:     /addElement
     defaults: { _controller: KartographerzCartographyBundle:Element:add }
+    options:
+        expose: true
     
 kartographerz_cartography_addElementType:
     path:     /addElementType
     defaults: { _controller: KartographerzCartographyBundle:Element:addElementType }
+    options:
+        expose: true
 
 kartographerz_cartography_cartographyList:
     path: /cartographyList
