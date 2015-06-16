@@ -16,7 +16,7 @@
             </ul>
 
             <li  data-toggle="collapse" data-target="#elements" class="collapsed">
-                <a href="#"><i class="fa fa-gift fa-lg"></i> {{'nav.elements'|trans}}<span class="arrow"></span></a>
+                <a href="#"><i class="fa fa-cube fa-lg"></i> {{'nav.elements'|trans}}<span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="elements">
                 <li><a href="{{path('kartographerz_cartography_addElement')}}">{{'element.add'|trans}}</a></li>
@@ -26,15 +26,15 @@
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
                 {% if is_granted("ROLE_ADMIN") %}
-                    <li><a href="{{ path('_admin')}}"><i class="fa fa-suitcase"></i> {{ 'nav.admin'|trans }}</a></li>
+                    <li><a href="{{ path('_admin')}}"><i class="fa fa-suitcase fa-lg"></i> {{ 'nav.admin'|trans }}</a></li>
                     {% endif %}
-                <li><a href="{{ path('fos_user_profile_show')}}"><i class="fa fa-user"></i> {{ 'nav.account'|trans }}{{ app.user.username }}</a></li>
-                <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'nav.logout'|trans }}</a></li>
+                <li><a href="{{ path('fos_user_profile_show')}}"><i class="fa fa-user fa-lg"></i> {{ 'nav.account'|trans }}{{ app.user.username }}</a></li>
+                <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-lg"></i> {{ 'nav.logout'|trans }}</a></li>
 
             {% else %}
 
-                <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'nav.login'|trans }}</a></li>
-                <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-unlock"></i> {{ 'nav.register'|trans }}</a></li>
+                <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in fa-lg"></i> {{ 'nav.login'|trans }}</a></li>
+                <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-unlock fa-lg"></i> {{ 'nav.register'|trans }}</a></li>
                 {% endif %}
         </ul>
     </div>
