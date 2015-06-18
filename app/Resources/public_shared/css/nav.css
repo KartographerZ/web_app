@@ -149,11 +149,7 @@ and open the template in the editor.
         display: block;
     }
     .container, .container-fluid{
-        margin-left: 300px;
-    }
-    footer{
-        margin-left: 150px;
-        margin-right: 150px; 
+        margin-left: 220px;
     }
 }
 body {
