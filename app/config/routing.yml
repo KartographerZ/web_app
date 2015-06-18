@@ -7,7 +7,7 @@ kartographerz_cartography:
 app:
     resource: @AppBundle/Controller/
     type:     annotation
-    
+
 fos_user:
     resource: "@KartographerzUserBundle/Resources/config/routing/all.xml"
 
@@ -16,14 +16,12 @@ fos_user_group:
     prefix: /{_locale}/admin/group
     requirements:
         _locale: en|fr
-    
+
 _login:
     pattern: /{_locale}/login
     requirements:
         _locale: en|fr
-        
 
-        
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /{_locale}/administration
@@ -33,3 +31,5 @@ _sonata_admin:
     type: sonata_admin
     prefix: /{_locale}/administration
 
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

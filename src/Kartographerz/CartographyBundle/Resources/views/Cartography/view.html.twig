@@ -1,26 +1,26 @@
 {% extends "KartographerzCartographyBundle::layout.html.twig" %}
 
 
-{% block title %}{{parent()}} - View{% endblock %}
+{% block title %}{{parent()}} - {{'title.view'|trans}}{% endblock %}
 
 {% block body %}
     {% include "KartographerzCartographyBundle::Cartography/addElementToACartographyBox.html.twig" %}
+    {% include "KartographerzCartographyBundle::Cartography/LinksList.html.twig" %}
 
-    <h1>Welcome to the Cartography:view page</h1>
-    <h2>cartography : {{id}}</h2>
-
-    <h1>Affichage d'une cartographie</h1>
-
+    <h1>{{'cartography.show'|trans}} {{id}}</h1>
     <p>
         {# On affiche tous les messages flash dont le nom est « info » #}
         {% for message in app.session.flashbag.get('info') %}
         <p>Message flash : {{ message }}</p> 
-        {% endfor %}
-    </p>
-    
-    <p>
-        <button class="btn btn-default" data-toggle="modal" data-target="#addElementToACartographyBox">{{'element.add'|trans}}</button>
-    </p>
-    
-    
+    {% endfor %}
+</p>
+
+
+<canvas id="viewport" width="730" height="630" class='modal-content'></canvas>
+
+<p>
+    <button class="btn btn-default" data-toggle="modal" data-target="#addElementToACartographyBox">{{'element.manage'|trans}}</button>
+</p>
+
+
 {% endblock %}

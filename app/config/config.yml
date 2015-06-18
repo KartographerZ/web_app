@@ -51,6 +51,15 @@ assetic:
         font-awesome-woff:
             inputs: '%kernel.root_dir%/Resources/public/fontawesome/fonts/fontawesome-webfont.woff'
             output: 'fonts/fontawesome-webfont.woff'
+        images-datatables-sort-asc:
+            inputs: '%kernel.root_dir%/Resources/public/datatables/media/images/sort_asc.png'
+            output: 'images/sort_asc.png'
+        images-datatables-sort-desc:
+            inputs: '%kernel.root_dir%/Resources/public/datatables/media/images/sort_desc.png'
+            output: 'images/sort_desc.png'
+        images-datatables-sort-both:
+            inputs: '%kernel.root_dir%/Resources/public/datatables/media/images/sort_both.png'
+            output: 'images/sort_both.png'
         filters:
             cssrewrite: ~
     
@@ -58,10 +67,10 @@ assetic:
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
-        #closure:
-        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
-        #yui_css:
-        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+        yui_css:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor.jar"
+        yui_js:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor.jar"
         
 
 # Doctrine Configuration

@@ -1,38 +1,41 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ path('homepage')}}">KartographerZ</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('homepage')}}">{% trans %}nav.home{% endtrans %}</a></li>
-                <li><a href="{{ path('kartographerz_cartography_index')}}">{% trans %}nav.cartography{% endtrans %}</a></li>
+<div class="nav-side-menu">
+    <div class="brand">KartographerZ</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+    <div class="menu-list">
+
+        <ul id="menu-content" class="menu-content collapse out">
+            <li><a href="{{ path('homepage')}}"><i class="fa fa-home fa-lg"></i> {{'nav.home'|trans}}</a></li>
+
+            <li  data-toggle="collapse" data-target="#cartographies" class="collapsed">
+                <a href="#"><i class="fa fa-globe fa-lg"></i> {{'nav.cartography'|trans}}<span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="cartographies">
+                <li><a href="{{path('kartographerz_cartography_index')}}">{{'cartography.list'|trans}}</a></li>
+                <li><a href="{{path('kartographerz_cartography_add')}}">{{'cartography.create'|trans}}</a></li>
+            </ul>
+
+            <li  data-toggle="collapse" data-target="#elements" class="collapsed">
+                <a href="#"><i class="fa fa-cube fa-lg"></i> {{'nav.elements'|trans}}<span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="elements">
+                <li><a href="{{path('kartographerz_cartography_addElement')}}">{{'element.add'|trans}}</a></li>
+                <li><a href="{{path('kartographerz_cartography_addElementType')}}">{{'element.addType'|trans}}</a></li>
             </ul>
 
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <ul class="nav navbar-nav navbar-right">
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <li><a href="{{ path('sonata_admin_dashboard')}}"><i class="fa fa-suitcase"></i> {{ 'nav.admin'|trans }}</a></li>
-                        {% endif %}
-                    <li><a href="{{ path('fos_user_profile_show')}}"><i class="fa fa-user"></i> {{ 'nav.account'|trans }}{{ app.user.username }}</a></li>
-                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'nav.logout'|trans }}</a></li>
-                </ul>
+
+                {% if is_granted("ROLE_ADMIN") %}
+                    <li><a href="{{ path('sonata_admin_dashboard')}}"><i class="fa fa-suitcase fa-lg"></i> {{ 'nav.admin'|trans }}</a></li>
+                    {% endif %}
+                <li><a href="{{ path('fos_user_profile_show')}}"><i class="fa fa-user fa-lg"></i> {{ 'nav.account'|trans }}{{ app.user.username }}</a></li>
+                <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-lg"></i> {{ 'nav.logout'|trans }}</a></li>
+
             {% else %}
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'nav.login'|trans }}</a></li>
-                    <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-unlock"></i> {{ 'nav.register'|trans }}</a></li>
-                </ul>
 
-            {% endif %}
-
-
-        </div><!--/.nav-collapse -->
-
+                <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in fa-lg"></i> {{ 'nav.login'|trans }}</a></li>
+                <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-unlock fa-lg"></i> {{ 'nav.register'|trans }}</a></li>
+                {% endif %}
+        </ul>
     </div>
-</nav>
+</div>

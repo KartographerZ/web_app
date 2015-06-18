@@ -1,3 +1,12 @@
+kartographerz_cartography_updateLinksElements:
+    path:     /cartography/updateLinksElements
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:update }
+
+kartographerz_cartography_updateElements:
+    path:     /cartography/updateElements
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:updateElements }
+    
+    
 kartographerz_cartography_index:
     path:     /
     defaults: { _controller: KartographerzCartographyBundle:Cartography:index }
@@ -15,16 +24,38 @@ kartographerz_cartography_add:
 kartographerz_cartography_addElement:
     path:     /addElement
     defaults: { _controller: KartographerzCartographyBundle:Element:add }
+    options:
+        expose: true
     
 kartographerz_cartography_addElementType:
     path:     /addElementType
     defaults: { _controller: KartographerzCartographyBundle:Element:addElementType }
-
+    options:
+        expose: true
 
 kartographerz_cartography_cartographyList:
     path: /cartographyList
     defaults: { _controller: KartographerzCartographyBundle:Cartography:list }
     
+kartographerz_cartography_versionCartographyList:
+    path: /versionCartographyList
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:versionList }
+    
 kartographerz_element_elementList:
     path: /elementList
     defaults: { _controller: KartographerzCartographyBundle:Element:list }
+    
+kartographerz_element_elementgetWebPath:
+    path: /elementgetWebPath
+    defaults: { _controller: KartographerzCartographyBundle:Element:getWebPath }
+    
+kartographerz_element_versionElementList:
+    path: /versionElementList
+    defaults: { _controller: KartographerzCartographyBundle:Element:versionList }   
+    
+kartographerz_version_versionLinkList:
+    path: /versionLinkList/{versionCartography}
+    defaults: { _controller: KartographerzCartographyBundle:Version:linkList }  
+    
+
+    
