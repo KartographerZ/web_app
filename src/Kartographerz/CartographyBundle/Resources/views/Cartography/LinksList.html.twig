@@ -37,9 +37,9 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-default" id="lastbutton">Last</button>
-                <button type="button" class="btn btn-primary" id="savesLinksButton">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{'elements_to_carto.close'|trans}}</button>
+                <button type="button" class="btn btn-default" id="lastbutton">{{'elements_to_carto.previous'|trans}}</button>
+                <button type="button" class="btn btn-primary" id="savesLinksButton">{{'elements_to_carto.save'|trans}}</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -47,10 +47,9 @@
 
 <script>
     $(function () {
-
-        var idCarto = $(".iddata").data("videoid");
-        var idVersionCarto = $(".iddata").data("videoid");
-
+        var lastVersion = "{{lastVersion}}";
+        var idCarto = "{{id}}";
+        console.log(idCarto)
         var t = $('#linkList').DataTable({
             "sAjaxSource": "{{ path("kartographerz_version_versionLinkList", {'versionCartography': lastVersion }) }}",
             "aoColumns": [
@@ -72,13 +71,11 @@
         });
 
         $("#linkList").on("click", ".delete", function () {
-            var row = $(this).parents("tr");
             t.row($(this).parents('tr')).remove().draw();
         });
 
 
         $("#newLinks").on("click", ".delete", function () {
-            var row = $(this).parents("tr");
             ta.row($(this).parents('tr')).remove().draw();
         });
 
@@ -91,11 +88,11 @@
                 "<select id=" + "mySelect2_" + counter + "></select>",
                 '<button id="delete_link_' + counter + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>'
             ]).draw();
+            console.log(getCurrentElements());
+            var currentElements = getCurrentElements();
 
-            createSelect(getCurrentElements(), "mySelect1_" + counter);
-
-            createSelect(getCurrentElements(), "mySelect2_" + counter);
-
+            createSelect(currentElements, "mySelect1_" + counter);
+            createSelect(currentElements, "mySelect2_" + counter);
             counter++;
         });
 
@@ -109,9 +106,10 @@
             var elementsId = getCheckboxesId(checkedCheckboxes);
             $.post(
                     "{{ path("kartographerz_cartography_updateLinksElements") }}",
-                    {"elements": elementsId, "cart": idVersionCarto, "links": getLinks()},
+                    {"elements": elementsId, "cart": idCarto, "links": getLinks()},
             function (ret) {
                 $("#LinksListModal").modal('toggle');
+                location.reload();
             });
         });
 
@@ -144,9 +142,11 @@
          * @returns {undefined}
          */
         function createSelect(selectValues, selector) {
+            //console.log(selectValues)
             $.each(selectValues, function () {
                 var key = this["key"];
                 var value = this["value"];
+                //console.log(value)
 
                 $('#' + selector).append($('<option>', {value: key}).text(value));
             });
