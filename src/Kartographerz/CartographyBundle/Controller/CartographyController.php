@@ -58,7 +58,8 @@ class CartographyController extends Controller {
             $em->persist($Firstversion);
             $em->flush();
             $lastVersion = $this->lastVersionCart($cartography->getId());
-            return $this->render('KartographerzCartographyBundle:Cartography:view.html.twig', array("lastVersion" => $lastVersion, "id" => $cartography->getId(), "webPath" => $webPath));
+
+            return $this->redirect($this->generateUrl('kartographerz_cartography_view', array("id" => $cartography->getId())));
         }
         // Si on n'est pas en POST, alors on affiche le formulaire
         return $this->render('KartographerzCartographyBundle:Cartography:add.html.twig', array("form" => $form->createView()));
