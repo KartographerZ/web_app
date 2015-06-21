@@ -38,7 +38,7 @@ class CartographyController extends Controller {
      * @Security("has_role('ROLE_MODELISATEUR')")
      */
     public function addAction(Request $request) {
-
+        $webPath = $this->get('request')->getBasePath();
         $cartography = new Cartography();
         $form = $this->get('form.factory')->create(new CartographyType(), $cartography);
         $usr = $this->get('security.context')->getToken()->getUser();
@@ -58,7 +58,7 @@ class CartographyController extends Controller {
             $em->persist($Firstversion);
             $em->flush();
             $lastVersion = $this->lastVersionCart($cartography->getId());
-            return $this->render('KartographerzCartographyBundle:Cartography:view.html.twig', array("lastVersion" => $lastVersion, "id" => $cartography->getId()));
+            return $this->render('KartographerzCartographyBundle:Cartography:view.html.twig', array("lastVersion" => $lastVersion, "id" => $cartography->getId(), "webPath" => $webPath));
         }
         // Si on n'est pas en POST, alors on affiche le formulaire
         return $this->render('KartographerzCartographyBundle:Cartography:add.html.twig', array("form" => $form->createView()));
@@ -81,7 +81,7 @@ class CartographyController extends Controller {
         $newVersionCart->setDate(new \DateTime);
         $newVersionCart->setCurrentId(1);
         $em->persist($newVersionCart);
-          $this->currentVersionCart($idCart,$newVersionCart->getId());
+        $this->currentVersionCart($idCart, $newVersionCart->getId());
         if (sizeof($New_elements) != 0) {
             foreach ($New_elements as $ne) {
                 $element = $repositoyElements->find($ne);
@@ -125,12 +125,12 @@ class CartographyController extends Controller {
 
         $newVersionCart = new Version();
         $newVersionCart->setCartography($carto);
-        
+
         $newVersionCart->setCurrentId(1);
-        $this->currentVersionCart($idCart,$newVersionCart->getId());
+        $this->currentVersionCart($idCart, $newVersionCart->getId());
         $newVersionCart->setDate(new \DateTime);
         $em->persist($newVersionCart);
-          $this->currentVersionCart($idCart,$newVersionCart->getId());
+        $this->currentVersionCart($idCart, $newVersionCart->getId());
         if (sizeof($New_elements) != 0) {
             foreach ($New_elements as $ne) {
                 $element = $repositoyElements->find($ne);
@@ -236,13 +236,13 @@ class CartographyController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $repositoryVersion = $em->getRepository("KartographerzCartographyBundle:Version");
         $all = $repositoryVersion->findBy(array("cartography" => $cartId));
-        
-         foreach ($all as $line) {
-             if ($line->getCurrentId() == 1) {
-                $lastVersion =  $line->getId();
+
+        foreach ($all as $line) {
+            if ($line->getCurrentId() == 1) {
+                $lastVersion = $line->getId();
             }
         }
-      
+
         return $lastVersion;
     }
 
@@ -263,7 +263,5 @@ class CartographyController extends Controller {
             $em->flush();
         }
     }
-
-
 
 }
