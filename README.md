@@ -41,7 +41,7 @@ Exporter les ressources en environnement de prod : php app/console assetic:dump 
 
 Architecture du projet
 ========================
-Le projet étant basé sur Symfony 2, l'architeture est celle du framework :
+Le projet étant basé sur Symfony 2, l'architecture est celle du framework :
 * app/: La configuration de l'application,
 * src/: Le code PHP du projet,
 * vendor/: Les bibliothèques tierces (notamment FOsUserBundle et SonataAdmin),
