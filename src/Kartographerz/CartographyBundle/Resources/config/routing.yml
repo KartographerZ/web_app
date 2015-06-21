@@ -16,6 +16,8 @@ kartographerz_cartography_view:
     defaults: { _controller: KartographerzCartographyBundle:Cartography:view }
     requirements:
         id : ^[1-9]\d*
+    options:
+        expose: true
 
 kartographerz_cartography_add:
     path:     /add
@@ -36,6 +38,10 @@ kartographerz_cartography_addElementType:
 kartographerz_cartography_cartographyList:
     path: /cartographyList
     defaults: { _controller: KartographerzCartographyBundle:Cartography:list }
+
+kartographerz_cartography_cartographyListDataTable:
+    path: /cartographyListDataTable
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:listDataTable }
     
 kartographerz_cartography_versionCartographyList:
     path: /versionCartographyList

@@ -20,13 +20,22 @@ class CartographyController extends Controller {
      * @Security("has_role('ROLE_USER')")
      */
     public function indexAction() {
-        return $this->render('KartographerzCartographyBundle:Cartography:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $repositoyCartography = $em->getRepository("KartographerzCartographyBundle:Cartography");
+        $list = $repositoyCartography->findAll();
+        return $this->render('KartographerzCartographyBundle:Cartography:index.html.twig',array("listCarto"=>$list));
     }
 
     public function listAction(Request $request) {
         $conn = $this->get('database_connection');
         $list = $conn->fetchAll('SELECT * FROM Cartography');
         return new Response(json_encode($list));
+    }
+    
+    public function listDataTableAction(Request $request) {
+        $conn = $this->get('database_connection');
+        $list = $conn->fetchAll('SELECT *,author_id,(select name from user where  id = author_id ) as nameAuthor FROM Cartography');
+        return new Response(json_encode( array("data" => $list)));
     }
     
     public function versionListAction(Request $request) {
@@ -221,7 +230,7 @@ class CartographyController extends Controller {
 
         return $this->render('KartographerzCartographyBundle:Cartography:view.html.twig', array("lastVersion" => $lastVersion , "id" => $id));
     }
-    
+  
     function lastVersionCart($cartId)
     {
         $em = $this->getDoctrine()->getManager();
