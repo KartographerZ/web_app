@@ -199,7 +199,7 @@ class CartographyController extends Controller {
         $linksDelete = array();
         foreach($LinkAll as $l )
         {
-            if(in_array($l->getVersion(),$versionDelete))
+            if(in_array($l->getVersionCartography(),$versionDelete))
                     $linksDelete[] = $l;
         }
         

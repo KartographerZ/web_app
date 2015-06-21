@@ -48,7 +48,7 @@
                 $.post( "{{ path("kartographerz_cartography_delete") }}",
                 { id: idCart},
                 function(data){
-                    alert(data);
+                    $("#listCarto").DataTable().ajax.reload();
                 });
             }
         </script>
