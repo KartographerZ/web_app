@@ -38,3 +38,16 @@ php app/console doctrine:fixtures:load --fixtures=src/Kartographerz/UserBundle/D
 
 Vider le cache : php app/console cache:clear --env=prod
 Exporter les ressources en environnement de prod : php app/console assetic:dump --env=prod --no-debug
+
+Architecture du projet
+========================
+Le projet étant basé sur Symfony 2, l'architeture est celle du framework :
+* app/: La configuration de l'application,
+* src/: Le code PHP du projet,
+* vendor/: Les bibliothèques tierces (notamment FOsUserBundle et SonataAdmin),
+* web/: Le répertoire Web racine (contient les js / css / images déployés par Assetic).
+
+Nous avons créé deux bundles pour notre application :
+* CartographyBundle : La gestion des cartographies,
+* UserBundle : La gestion de l'authentification des utilisateurs.
+
