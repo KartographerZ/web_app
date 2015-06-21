@@ -1,12 +1,10 @@
 {% extends "KartographerzCartographyBundle::layout.html.twig" %}
 
-{% block title %}{{parent()}} - {{'cartography.list' | trans}}{% endblock %}
+{% block title %}{{'title.list' | trans}}{% endblock %}
 
 {% block body %}
-    <h1>Welcome to the Cartography:index page</h1>
+    <h1>{{'cartography.list' | trans}}</h1>
     {% if is_granted('ROLE_USER') %}
-        Un exemple pour montrer le mode USER
-
     {% endif %}
     {% if is_granted('ROLE_MODELISATEUR') %}
         <li><a href="{{ path('kartographerz_cartography_add') }}">{{'cartography.add' | trans}}</a></li>

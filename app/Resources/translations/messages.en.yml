@@ -25,7 +25,7 @@ cartography:
     create : Create a cartography
     name: Name
     type: Visibility
-    list: List
+    list: List of the cartographies
     show : Display cartography
     
 action:
@@ -51,3 +51,9 @@ element:
     
 title:
     view: View
+    list: List
+        
+elements_to_carto:
+    close: Close
+    previous: Previous
+    save: Save

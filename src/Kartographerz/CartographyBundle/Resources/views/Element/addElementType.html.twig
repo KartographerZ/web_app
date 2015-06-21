@@ -1,14 +1,14 @@
 {% extends "KartographerzCartographyBundle::layout.html.twig" %}
 
-{% block title %}{{parent()}} - {{ 'action.add'|trans }}{% endblock %}
+{% block title %}{{ 'title.addElementType'|trans }}{% endblock %}
 
 {% block body %}
 
 
-    <h3>Create a Element type</h3>
+    <h3>{{ 'element_type.add'|trans }}</h3>
 
     {% if typeElement is defined  %}
-        <p class="alert alert-success">Vous avez bien ajouté un type element</p>
+        <p class="alert alert-success"></p>
     {% endif %}
 
     <div class="well">
@@ -18,7 +18,7 @@
         {{ form_errors(form) }}
         <div class="form-group">
             {# Génération du label. #}
-            {{ form_label(form.label, "Name", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {{ form_label(form.label, 'form.name'|trans, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
 
             {# Affichage des erreurs pour ce champ précis. #}
             {{ form_errors(form.label) }}
@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             {# Génération du label. #}
-            {{ form_label(form.image, "Image", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {{ form_label(form.image, 'form.image'|trans, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
 
             {# Affichage des erreurs pour ce champ précis. #}
             {{ form_errors(form.image) }}
@@ -44,7 +44,7 @@
         <div class="form-group">
             <div class="col-sm-4">
                 {# Génération de l'input. #}
-                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}, 'label': 'form.submit'}) }}
             </div>
         </div>
         {{ form_rest(form) }}
