@@ -27,6 +27,7 @@ cartography:
     type: Visibilité
     list: Liste
     show : Affichage de la cartographie
+    version: "Version : "
     
 action:
     add: Création

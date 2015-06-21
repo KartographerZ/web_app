@@ -27,6 +27,7 @@ cartography:
     type: Visibility
     list: List
     show : Display cartography
+    version: "Version : "
     
 action:
     add: Create

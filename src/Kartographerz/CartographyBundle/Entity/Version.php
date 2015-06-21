@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="version", indexes={@ORM\Index(name="cartography_id", columns={"cartography_id"})})
  * @ORM\Entity
  */
-class Version
-{
+class Version {
+
     /**
      * @var integer
      *
@@ -20,6 +20,13 @@ class Version
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="current_id", type="integer", nullable=false)
+     */
+    private $currentId;
 
     /**
      * @var \DateTime
@@ -38,17 +45,17 @@ class Version
      */
     private $cartography;
 
-
-
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
+
+   
+  
 
     /**
      * Set date
@@ -56,8 +63,7 @@ class Version
      * @param \DateTime $date
      * @return Version
      */
-    public function setDate($date)
-    {
+    public function setDate($date) {
         $this->date = $date;
 
         return $this;
@@ -68,8 +74,7 @@ class Version
      *
      * @return \DateTime 
      */
-    public function getDate()
-    {
+    public function getDate() {
         return $this->date;
     }
 
@@ -79,8 +84,7 @@ class Version
      * @param \Kartographerz\CartographyBundle\Entity\Cartography $cartography
      * @return Version
      */
-    public function setCartography(\Kartographerz\CartographyBundle\Entity\Cartography $cartography = null)
-    {
+    public function setCartography(\Kartographerz\CartographyBundle\Entity\Cartography $cartography = null) {
         $this->cartography = $cartography;
 
         return $this;
@@ -91,9 +95,32 @@ class Version
      *
      * @return \Kartographerz\CartographyBundle\Entity\Cartography 
      */
-    public function getCartography()
-    {
+    public function getCartography() {
         return $this->cartography;
     }
-    
+
+
+    /**
+     * Set currentId
+     *
+     * @param integer $currentId
+     *
+     * @return Version
+     */
+    public function setCurrentId($currentId)
+    {
+        $this->currentId = $currentId;
+
+        return $this;
+    }
+
+    /**
+     * Get currentId
+     *
+     * @return integer
+     */
+    public function getCurrentId()
+    {
+        return $this->currentId;
+    }
 }

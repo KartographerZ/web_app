@@ -35,13 +35,7 @@ class ElementController extends Controller {
                 . 'FROM Element');
         return new Response(json_encode(array('data' => $list)));
     }
-     public function getWebPathAction(Request $request) {
-           $rep =$this->get('request')->getBasePath();
-   return new Response($rep);
-
-    }
-
-
+  
     public function versionListAction(Request $request) {
         $conn = $this->get('database_connection');
         $list = $conn->fetchAll('SELECT id, version_id, element_id'
