@@ -38,7 +38,7 @@ class Version {
     /**
      * @var \Cartography
      *
-     * @ORM\ManyToOne(targetEntity="Cartography")
+     * @ORM\ManyToOne(targetEntity="Cartography" )
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="cartography_id", referencedColumnName="id")
      * })

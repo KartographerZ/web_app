@@ -37,6 +37,10 @@ kartographerz_cartography_addElementType:
     defaults: { _controller: KartographerzCartographyBundle:Element:addElementType }
     options:
         expose: true
+        
+kartographerz_cartography_delete:
+    path:     /delete
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:delete }
 
 kartographerz_cartography_cartographyList:
     path: /cartographyList

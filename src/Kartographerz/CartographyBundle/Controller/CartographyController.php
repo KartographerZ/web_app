@@ -181,9 +181,43 @@ class CartographyController extends Controller {
         $id = $request->get("id");
         $em = $this->getDoctrine()->getManager();
         $repositoyCartography = $em->getRepository("KartographerzCartographyBundle:Cartography");
+        $repositoyVersion = $em->getRepository("KartographerzCartographyBundle:Version");
+        $repositoyVersionElement = $em->getRepository("KartographerzCartographyBundle:VersionElement");
+        $repositoyLink = $em->getRepository("KartographerzCartographyBundle:Link");
         $carto = $repositoyCartography->find($id);
+        
+        $versionDelete = $repositoyVersion->findBy(array("cartography" => $carto));
+        $versionElementAll = $repositoyVersionElement->findAll();
+        $elementDelete = array();
+        foreach($versionElementAll as $ve )
+        {
+            if(in_array($ve->getVersion(),$versionDelete))
+                    $elementDelete[] = $ve;
+        }
+        
+        $LinkAll = $repositoyLink->findAll();
+        $linksDelete = array();
+        foreach($LinkAll as $l )
+        {
+            if(in_array($l->getVersion(),$versionDelete))
+                    $linksDelete[] = $l;
+        }
+        
+        foreach ($linksDelete as $todel)
+        {
+            $em->remove($todel);
+        }
+        foreach ($elementDelete as $todel)
+        {
+            $em->remove($todel);
+        }
+        foreach ($versionDelete as $todel)
+        {
+            $em->remove($todel);
+        }
         $em->remove($carto);
-        return $this->render('KartographerzCartographyBundle:Cartography:delete.html.twig', array("name" => $carto->getName()));
+        $em->flush();
+        return new Response("ok");
     }
 
     /**
@@ -246,7 +280,11 @@ class CartographyController extends Controller {
 
         return $lastVersion;
     }
-
+    public function listDataTableAction(Request $request) {
+        $conn = $this->get('database_connection');
+        $list = $conn->fetchAll('SELECT *,author_id,(select name from user where  id = author_id ) as nameAuthor FROM Cartography');
+        return new Response(json_encode( array("data" => $list)));
+    }
     public function currentVersionCart($cartId, $currentCartId) {
         // On insère la version actuelle de cartographie à afficher (1 = true et 0 = false : donc une seule version à 1 et toutes les autres à 0)
         $em = $this->getDoctrine()->getManager();
