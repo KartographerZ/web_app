@@ -22,15 +22,11 @@ home:
 
 cartography:
     add: Ajouter une cartographie
-    create : Création d'une cartographie
     name: Nom
     type: Visibilité
-    list: Liste
+    list: Liste des cartographies
     show : Affichage de la cartographie
     version: "Version : "
-    
-action:
-    add: Création
     
 submit:
     click: Cliquez ici
@@ -49,7 +45,27 @@ element:
     add: Ajouter un élément
     manage: Gérer les élements
     addType: Ajouter un type d'éléments
+    addSuccess: Vous avez bien ajouté un element
     
 title:
     view: Vue
+    list : Liste
+    addCarto: Ajout d'une cartographie
+    addElement: Ajout d'un élément
+    addElementType: Ajout d'un type d'éléments
+        
+elements_to_carto:
+    close: Fermer
+    previous: Précédent
+    save: Sauvegarder
     
+element_type:
+    add: Ajouter un type d'éléments
+    addSuccess: Vous avez bien ajouté un type d'élements
+    
+form:
+    name: Nom
+    image: Image
+    typeElement: Type
+    submit: Soumettre
+        
