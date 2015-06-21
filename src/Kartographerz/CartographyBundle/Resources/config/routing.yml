@@ -1,11 +1,10 @@
 kartographerz_cartography_updateLinksElements:
-    path:     /cartography/updateLinksElements
+    path:     /updateLinksElements
     defaults: { _controller: KartographerzCartographyBundle:Cartography:update }
 
 kartographerz_cartography_updateElements:
-    path:     /cartography/updateElements
+    path:     /updateElements
     defaults: { _controller: KartographerzCartographyBundle:Cartography:updateElements }
-    
     
 kartographerz_cartography_index:
     path:     /
@@ -22,6 +21,10 @@ kartographerz_cartography_view:
 kartographerz_cartography_add:
     path:     /add
     defaults: { _controller: KartographerzCartographyBundle:Cartography:add }
+    
+kartographerz_cartography_updateVersionId:
+    path: /updateVersionId
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:updateVersionId }    
     
 kartographerz_cartography_addElement:
     path:     /addElement

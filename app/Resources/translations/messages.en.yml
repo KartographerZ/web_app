@@ -22,21 +22,18 @@ home:
     
 cartography:
     add: Add a cartography
-    create : Create a cartography
     name: Name
     type: Visibility
-    list: List
+    list: List of the cartographies
     show : Display cartography
-    
-action:
-    add: Create
+    version: "Version : "
     
 submit:
     click: Submit
     close: Close
     add: Add
     manageLink: Save and manage links
-    save: save
+    save: Save
     
 element_to_carto:
     add: Add an element to the cartography
@@ -48,6 +45,27 @@ element:
     add: Add an element
     manage: manage elements
     addType: Add an element type
+    addSuccess: You have successfuly added an element
     
 title:
     view: View
+    list: List
+    addCarto: Adding a cartography
+    addElement: Adding an element
+    addElementType: Adding an elements type
+        
+elements_to_carto:
+    close: Close
+    previous: Previous
+    save: Save
+    
+element_type:
+    add: Add an elements type
+    addSuccess: You have successfuly added an elements type
+    
+form:
+    name: Name
+    image: Image
+    typeElement: Type
+    submit: Submit
+        

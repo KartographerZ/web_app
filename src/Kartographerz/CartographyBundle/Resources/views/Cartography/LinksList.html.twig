@@ -49,7 +49,7 @@
     $(function () {
         var lastVersion = "{{lastVersion}}";
         var idCarto = "{{id}}";
-        console.log(idCarto)
+       // console.log(idCarto)
         var t = $('#linkList').DataTable({
             "sAjaxSource": "{{ path("kartographerz_version_versionLinkList", {'versionCartography': lastVersion }) }}",
             "aoColumns": [
@@ -88,7 +88,7 @@
                 "<select id=" + "mySelect2_" + counter + "></select>",
                 '<button id="delete_link_' + counter + '" type="button" class="btn btn-danger delete"><i class="fa fa-trash delete"></i></button>'
             ]).draw();
-            console.log(getCurrentElements());
+            //console.log(getCurrentElements());
             var currentElements = getCurrentElements();
 
             createSelect(currentElements, "mySelect1_" + counter);
