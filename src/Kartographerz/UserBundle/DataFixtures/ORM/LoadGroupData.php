@@ -18,9 +18,11 @@ class LoadGroupData extends \Doctrine\Common\DataFixtures\AbstractFixture implem
         $adminsGroup->addRole('ROLE_ADMIN');
         $manager->persist($adminsGroup);
 
-        $manager->flush();
+        $modelisateurGroup = new Kartographerz\UserBundle\Entity\Group('modelisateur');
+        $modelisateurGroup->addRole('ROLE_MODELISATEUR');
+        $manager->persist($modelisateurGroup);
 
-        $this->addReference('admin-group', $adminsGroup);
+        $manager->flush();
     }
 
     public function getOrder() {
