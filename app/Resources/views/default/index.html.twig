@@ -2,36 +2,40 @@
 
 {% block body %}
 
-    <h1>{{'home.title'|trans}}</h1>
-    <div class="pull-right clearfix">
-        {{'home.language'|trans}}
-        <a href="{{english_flag}}">
-            {% image '%kernel.root_dir%/Resources/public_shared/images/EN.jpg' %}
-            <img src="{{ asset_url }}" alt="English flag" width="40"/>
-            {% endimage %}
-        </a>
-        <a href="{{french_flag}}">
-            {% image '%kernel.root_dir%/Resources/public_shared/images/FR.jpg' %}
-            <img src="{{ asset_url }}" alt="French flag" width="40"/>
-            {% endimage %}
-        </a>
+    <div class="row-fluid">
+        <div class="col-sm-5"><h1 class="">{{'home.title'|trans}}</h1></div>
+        <div class="col-sm-7">
+            {{'home.language'|trans}}
+            <a href="{{english_flag}}">
+                {% image '%kernel.root_dir%/Resources/public_shared/images/EN.jpg' %}
+                <img src="{{ asset_url }}" alt="English flag" width="40"/>
+                {% endimage %}
+            </a>
+            <a href="{{french_flag}}">
+                {% image '%kernel.root_dir%/Resources/public_shared/images/FR.jpg' %}
+                <img src="{{ asset_url }}" alt="French flag" width="40"/>
+                {% endimage %}
+            </a>
+        </div>
+
     </div>
+
     <div class="clearfix"></div>
     <div class="content">
-       
-   <p>
-L'application X est l'outil idéal pour visualiser votre système d'information. Elle vous offre les fonctionnalités suivantes :
 
-<ul>
-    <li>gestion de cartographies (gestion d''éléments et de liens entre éléments)</li>
-    <li>gestion de versions de cartographies</li>
-    <li>gestion de type d'éléments et d'éléments</li>
-    <li>gestion de droits des utilisateurs</li>
-</ul>
+        <p>
+            L'application X est l'outil idéal pour visualiser votre système d'information. Elle vous offre les fonctionnalités suivantes :
 
-</p>
+        <ul>
+            <li>gestion de cartographies (gestion d''éléments et de liens entre éléments)</li>
+            <li>gestion de versions de cartographies</li>
+            <li>gestion de type d'éléments et d'éléments</li>
+            <li>gestion de droits des utilisateurs</li>
+        </ul>
 
- </div>
+    </p>
+
+</div>
 
 
 
