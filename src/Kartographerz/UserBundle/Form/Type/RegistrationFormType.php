@@ -12,11 +12,11 @@ class RegistrationFormType extends AbstractType {
         $builder->add('name', null, array('label' => 'form.name', 'translation_domain' => 'FOSUserBundle'));
         $builder->add('firstname', null, array('label' => 'form.firstname', 'translation_domain' => 'FOSUserBundle'));
 
-        $builder->add('groups', 'entity', array('class' => 'KartographerzUserBundle:Group',
+        /*$builder->add('groups', 'entity', array('class' => 'KartographerzUserBundle:Group',
             'multiple' => true,
-            'label' => 'form.groups', 
+            'label' => 'form.groups',
             'translation_domain' => 'FOSUserBundle'
-        ));
+        ));*/
 
         $builder->add('enterprise', 'entity', array(
             'class' => 'KartographerzCartographyBundle:Enterprise',
