@@ -31,10 +31,10 @@ home:
         </ul>
         </p>
         
-    message2 : <a href="https://drive.google.com/drive/folders/0ByA0BaRLrmBffk9SOUxPUDdEZU9vSmg2cHJyT3JLNFFrZDh3dVpPdEo0MXhrNTFKWVN2Q0U">&nbsp;Démonstration vidéo</a>
+    message2 : <a href="https://drive.google.com/drive/folders/0ByA0BaRLrmBffk9SOUxPUDdEZU9vSmg2cHJyT3JLNFFrZDh3dVpPdEo0MXhrNTFKWVN2Q0U" target="_blank">&nbsp;Démonstration vidéo</a>
     message3 : " Membres du projet : Franck MAZZOLO, Yacouba DJIBO, Walid BOUSSAADIA"
     message4 : " Projet Open Source"
-    message5 : " Projet GitHub : https://github.com/KartographerZ/web_app"
+    message5 : <a href="https://github.com/KartographerZ/web_app" target="_blank">&nbsp;Projet GitHub</a>
         
         
 
