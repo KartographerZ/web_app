@@ -19,6 +19,7 @@ footer:
     
 home:
     title: Bienvenue
+    language: "Choisissez votre langue : "
 
 cartography:
     add: Ajouter une cartographie
