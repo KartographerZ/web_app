@@ -7,15 +7,15 @@
     {% include "KartographerzCartographyBundle::Cartography/addElementToACartographyBox.html.twig" %}
     {% include "KartographerzCartographyBundle::Cartography/LinksList.html.twig" %}
 
-<form role="form" id="pageForm" action="{{ path('kartographerz_cartography_updateVersionId') }}" method="POST" style="display:none">
-    <input id="currentCarographyVersion" name ="currentCarographyVersion" type="text" value="" />
-    <input id="currentCarographyId" name ="currentCarographyId" type="text" value={{id}} />
-    <input type="submit" value="Ok" />
-</form>
+    <form role="form" id="pageForm" action="{{ path('kartographerz_cartography_updateVersionId') }}" method="POST" style="display:none">
+        <input id="currentCarographyVersion" name ="currentCarographyVersion" type="text" value="" />
+        <input id="currentCarographyId" name ="currentCarographyId" type="text" value={{id}} />
+        <input type="submit" value="Ok" />
+    </form>
 
-     <div id="getAllCartographyVersion" style="display:none">
-         {{ render(controller('KartographerzCartographyBundle:Cartography:versionList')) }}
-     </div>
+    <div id="getAllCartographyVersion" style="display:none">
+        {{ render(controller('KartographerzCartographyBundle:Cartography:versionList')) }}
+    </div>
 
 
     <h1>{{'cartography.show'|trans}} {{id}}</h1>
@@ -33,48 +33,50 @@
     <button class="btn btn-default" data-toggle="modal" data-target="#addElementToACartographyBox">{{'element.manage'|trans}}</button>
 </p>
 <p>
-    <button class="btn btn-default"> <a href="{{ path('kartographerz_cartography_addElement') }}" >{{'element.add'|trans}}</a> </button>
+    <a href="{{ path('kartographerz_cartography_addElement') }}"  role="button">{{'element.add'|trans}}</a> 
 </p>
 
 <p>
-{{'cartography.version'|trans}}
-<select id="cartographyVersion"  onmousedown="if(this.options.length>8){this.size=8;}"  onchange='this.size=0;' onblur="this.size=0;" >
-</select>
+    {{'cartography.version'|trans}}
+    <select id="cartographyVersion"  onmousedown="if (this.options.length > 8) {
+            this.size = 8;
+        }"  onchange='this.size = 0;' onblur="this.size = 0;" >
+    </select>
 </p>
 
 <script>
- $(function () {
-var idCarto = "{{id}}";
-var allCartographyVersion = jQuery.parseJSON($("#getAllCartographyVersion").html());
+    $(function () {
+        var idCarto = "{{id}}";
+        var allCartographyVersion = jQuery.parseJSON($("#getAllCartographyVersion").html());
 
-var cptVersion = 0;
-$.each(allCartographyVersion, function (i, item) {
-if(item.cartography_id == idCarto) {
-cptVersion = cptVersion + 1;
+        var cptVersion = 0;
+        $.each(allCartographyVersion, function (i, item) {
+            if (item.cartography_id == idCarto) {
+                cptVersion = cptVersion + 1;
 
-if (item.current_id != 1){
-    $('#cartographyVersion').append($('<option>', { 
-        value: item.id,
-        text : cptVersion + "  ["+ item.date + "]"
-    }));
-}
-else {
-   $('#cartographyVersion').append($('<option>', { 
-        value: item.id,
-        text : cptVersion + "  ["+ item.date + "]"
-    }).attr("selected","selected"));
-}
+                if (item.current_id != 1) {
+                    $('#cartographyVersion').append($('<option>', {
+                        value: item.id,
+                        text: cptVersion + "  [" + item.date + "]"
+                    }));
+                }
+                else {
+                    $('#cartographyVersion').append($('<option>', {
+                        value: item.id,
+                        text: cptVersion + "  [" + item.date + "]"
+                    }).attr("selected", "selected"));
+                }
 
-} 
-});
+            }
+        });
 
-   $("#cartographyVersion").change(function () {
-var data = $(this).val();
-$("#currentCarographyVersion").val(data);
-$("#pageForm").submit();
-});
+        $("#cartographyVersion").change(function () {
+            var data = $(this).val();
+            $("#currentCarographyVersion").val(data);
+            $("#pageForm").submit();
+        });
 
-});
+    });
 
 
 
