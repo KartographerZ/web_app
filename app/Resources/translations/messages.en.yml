@@ -19,6 +19,7 @@ footer:
     
 home:
     title: Welcome
+    language: "Choose your language: "
     
 cartography:
     add: Add a cartography
@@ -26,7 +27,7 @@ cartography:
     type: Visibility
     list: List of the cartographies
     show : Display cartography
-    version: "Version : "
+    version: "Version: "
     
 submit:
     click: Submit
