@@ -1,16 +1,16 @@
 {% extends "KartographerzCartographyBundle::layout.html.twig" %}
 
-{% block title %}{{parent()}} - {{'cartography.list' | trans}}{% endblock %}
+{% block title %}{{parent()}}{{'cartography.list' | trans}}{% endblock %}
 
 {% block body %}
-    <h1>Welcome to the Cartography:index page</h1>
+    <h1>{{'cartography.index'|trans}}</h1>
     {% if is_granted('ROLE_USER') %}
         {% if is_granted('ROLE_MODELISATEUR') %}
-            <button type="button" class="btn btn-default"style="margin-bottom: 10px;" onclick='location.href="{{ path('kartographerz_cartography_add')}}"'>{{'cartography.add' | trans}}</button>
-            {% endif %}
-            {% if is_granted('ROLE_MODELISATEUR') %}
-            <button type="button" style="margin-bottom: 10px;" class="btn btn-default" onclick='location.href="{{ path('kartographerz_cartography_addElement')}}"'>{{'element.add' | trans}}</button>
-            {% endif %}
+            <button type="button" class="btn btn-default"style="margin-bottom: 10px;" onclick='location.href = "{{ path('kartographerz_cartography_add')}}"'>{{'cartography.add' | trans}}</button>
+        {% endif %}
+        {% if is_granted('ROLE_MODELISATEUR') %}
+            <button type="button" style="margin-bottom: 10px;" class="btn btn-default" onclick='location.href = "{{ path('kartographerz_cartography_addElement')}}"'>{{'element.add' | trans}}</button>
+        {% endif %}
 
         <table id="listCarto" class="display" cellspacing="0" width="100%">
             <thead>
@@ -35,19 +35,19 @@
                     {"mData": "date"},
                     {"mData": "typeVisibility"},
                     {"mData": function (row) {
-                            return "<button  class='btn btn-default' onclick='location.href=\""+Routing.generate("kartographerz_cartography_view",{"id": row.id ,"_locale": "en"})+"\"'>Voir</a>";
+                            return "<button  class='btn btn-default' onclick='location.href=\"" + Routing.generate("kartographerz_cartography_view", {"id": row.id, "_locale": "en"}) + "\"'>Voir</a>";
                         }
                     },
                     {"mData": function (row) {
-                            return "<button  class='btn btn-default' onclick='deleteCart("+row.id+")' >Supprimer</a>";
+                            return "<button  class='btn btn-default' onclick='deleteCart(" + row.id + ")' >Supprimer</a>";
                         }
                     }]
             });
-            
-            function deleteCart(idCart){
-                $.post( "{{ path("kartographerz_cartography_delete") }}",
-                { id: idCart},
-                function(data){
+
+            function deleteCart(idCart) {
+                $.post("{{ path("kartographerz_cartography_delete") }}",
+                        {id: idCart},
+                function (data) {
                     $("#listCarto").DataTable().ajax.reload();
                 });
             }
