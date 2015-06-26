@@ -18,18 +18,25 @@
     </div>
     <div class="clearfix"></div>
     <div class="content">
-       
-   <p>
-L'application X est l'outil idéal pour visualiser votre système d'information. Elle vous offre les fonctionnalités suivantes :
 
-<ul>
-    <li>gestion de cartographies (gestion d''éléments et de liens entre éléments)</li>
-    <li>gestion de versions de cartographies</li>
-    <li>gestion de type d'éléments et d'éléments</li>
-    <li>gestion de droits des utilisateurs</li>
-</ul>
-
+{{'home.message1'|trans |raw}}
+<br>
+<p>
+ <a>
+         {% image '%kernel.root_dir%/Resources/public_shared/images/home_image.jpg' %}
+            <img src="{{ asset_url }}" alt="home presentation" />
+         {% endimage %}
+ </a>
 </p>
+<br>
+
+<p><i class="fa fa-video-camera"></i>{{'home.message2'|trans|raw}}</p>
+<p><i class="fa fa-users"></i>{{'home.message3'|trans}}</p>
+<p><i class="fa fa-folder-open"></i>{{'home.message4'|trans}}</p>
+<p><i class="fa fa-github"></i>{{'home.message5'|trans}}</p>
+
+
+
 
  </div>
 
