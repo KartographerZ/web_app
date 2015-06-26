@@ -43,7 +43,7 @@ element_to_carto:
     
 element:
     add: Add an element
-    manage: manage elements
+    manage: manage elements of this cartography
     addType: Add an element type
     addSuccess: You have successfuly added an element
     
