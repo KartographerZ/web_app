@@ -8,6 +8,12 @@ and open the template in the editor.
     Author     : franckmazzolo
 */
 
+.navTitle {
+    color: CornflowerBlue;
+    font-size: 50px;
+    font-weight: bold;
+}
+
 .nav-side-menu {
     overflow: auto;
     font-family: verdana;
