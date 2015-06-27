@@ -18,7 +18,7 @@ footer:
     contact: Contact
     
 home:
-    title: Bienvenue
+    title: Bienvenue sur IS Architect
     language: "Choisissez votre langue : "
     message1 : >
         <p>
@@ -73,6 +73,7 @@ title:
     addElement: Ajout d'un élément
     addElementType: Ajout d'un type d'éléments
     listElement: Liste des éléments
+    welcome: Bienvenue sur IS Architect
     
 elements_to_carto:
     close: Fermer
