@@ -64,7 +64,7 @@ element:
     manage: manage elements of this cartography
     addType: Add an element type
     addSuccess: You have successfuly added an element
-    list: List of elements
+    list: List of the elements
     
 title:
     view: View

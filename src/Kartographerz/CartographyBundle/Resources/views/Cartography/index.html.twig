@@ -3,7 +3,7 @@
 {% block title %}{{parent()}}{{'cartography.list' | trans}}{% endblock %}
 
 {% block body %}
-    <h1>{{'cartography.index'|trans}}</h1>
+    <h1>{{'cartography.list'|trans}}</h1>
     {% if is_granted('ROLE_USER') %}
         {% if is_granted('ROLE_MODELISATEUR') %}
             <button type="button" class="btn btn-default"style="margin-bottom: 10px;" onclick='location.href = "{{ path('kartographerz_cartography_add')}}"'>{{'cartography.add' | trans}}</button>
