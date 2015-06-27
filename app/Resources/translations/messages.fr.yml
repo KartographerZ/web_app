@@ -64,6 +64,7 @@ element:
     manage: Gérer les éléments de cette cartographie
     addType: Ajouter un type d'éléments
     addSuccess: Vous avez bien ajouté un element
+    list: Liste des elements
     
 title:
     view: Vue
@@ -71,7 +72,8 @@ title:
     addCarto: Ajout d'une cartographie
     addElement: Ajout d'un élément
     addElementType: Ajout d'un type d'éléments
-        
+    listElement: Liste des elements
+    
 elements_to_carto:
     close: Fermer
     previous: Précédent

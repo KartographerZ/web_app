@@ -1,3 +1,8 @@
+kartographerz_element_list:
+    path:     /elementsList
+    defaults: { _controller: KartographerzCartographyBundle:Element:afficheList }
+    
+    
 kartographerz_cartography_updateLinksElements:
     path:     /updateLinksElements
     defaults: { _controller: KartographerzCartographyBundle:Cartography:update }
@@ -41,6 +46,10 @@ kartographerz_cartography_addElementType:
 kartographerz_cartography_delete:
     path:     /delete
     defaults: { _controller: KartographerzCartographyBundle:Cartography:delete }
+    
+kartographerz_element_delete:
+    path:     /deleteElement
+    defaults: { _controller: KartographerzCartographyBundle:Element:delete }
 
 kartographerz_cartography_cartographyList:
     path: /cartographyList
@@ -57,6 +66,7 @@ kartographerz_cartography_versionCartographyList:
 kartographerz_element_elementList:
     path: /elementList
     defaults: { _controller: KartographerzCartographyBundle:Element:list }
+
     
 kartographerz_element_elementgetWebPath:
     path: /elementgetWebPath

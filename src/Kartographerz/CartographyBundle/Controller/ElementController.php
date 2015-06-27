@@ -35,6 +35,12 @@ class ElementController extends Controller {
                 . 'FROM Element');
         return new Response(json_encode(array('data' => $list)));
     }
+    
+     
+    
+    public function afficheListAction(Request $request) {
+            return $this->render('KartographerzCartographyBundle:Element:list.html.twig');
+    }
   
     public function versionListAction(Request $request) {
         $conn = $this->get('database_connection');
@@ -45,6 +51,24 @@ class ElementController extends Controller {
         return new Response(json_encode(array('data' => $list)));
     }
    
+    function deleteAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repositoyVersionElement = $this->getdoctrine()->getRepository("KartographerzCartographyBundle:VersionElement");
+        $repositoyElement = $this->getdoctrine()->getRepository("KartographerzCartographyBundle:Element");
+        $idElement = $request->get("id");
+        $element = $repositoyElement->find($idElement);
+        if(sizeof($repositoyVersionElement->findBy(array("element"=>$element))) == 0)
+        {
+            $em->remove($element);
+            $em->flush();
+            return new Response("true");
+        }
+        else
+        {
+            return new Response("false");
+        }
+    }
     /**
      * @Security("has_role('ROLE_MODELISATEUR')")
      */
