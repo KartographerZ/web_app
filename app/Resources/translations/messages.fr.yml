@@ -19,17 +19,32 @@ footer:
     
 home:
     title: Bienvenue
+    language: "Choisissez votre langue : "
+    message1 : >
+        <p>
+        L'application "IS Architect" est l'outil idéal pour visualiser votre système d'information. Elle vous offre les fonctionnalités suivantes :
+        <ul>
+        <li> &#x2714 gestion de type d'éléments et d'éléments</li>
+        <li> &#x2714 gestion de cartographies (gestion d'éléments et de liens entre éléments)</li>
+        <li> &#x2714 gestion de versions de cartographies</li>
+        <li> &#x2714 gestion de droits des utilisateurs</li>
+        </ul>
+        </p>
+        
+    message2 : <a href="https://drive.google.com/drive/folders/0ByA0BaRLrmBffk9SOUxPUDdEZU9vSmg2cHJyT3JLNFFrZDh3dVpPdEo0MXhrNTFKWVN2Q0U" target="_blank">&nbsp;Démonstration vidéo</a>
+    message3 : " Membres du projet : Franck MAZZOLO, Yacouba DJIBO, Walid BOUSSAADIA"
+    message4 : " Projet Open Source"
+    message5 : <a href="https://github.com/KartographerZ/web_app" target="_blank">&nbsp;Projet GitHub</a>
+        
+        
 
 cartography:
     add: Ajouter une cartographie
-    create : Création d'une cartographie
     name: Nom
     type: Visibilité
-    list: Liste
+    list: Liste des cartographies
     show : Affichage de la cartographie
-    
-action:
-    add: Création
+    version: "Version : "
     
 submit:
     click: Cliquez ici
@@ -46,9 +61,31 @@ element_to_carto:
     
 element:
     add: Ajouter un élément
-    manage: Gérer les élements
+    manage: Gérer les éléments de cette cartographie
     addType: Ajouter un type d'éléments
+    addSuccess: Vous avez bien ajouté un element
+    list: Liste des éléments
     
 title:
     view: Vue
+    list : Liste
+    addCarto: Ajout d'une cartographie
+    addElement: Ajout d'un élément
+    addElementType: Ajout d'un type d'éléments
+    listElement: Liste des éléments
     
+elements_to_carto:
+    close: Fermer
+    previous: Précédent
+    save: Sauvegarder
+    
+element_type:
+    add: Ajouter un type d'éléments
+    addSuccess: Vous avez bien ajouté un type d'élements
+    
+form:
+    name: Nom
+    image: Image
+    typeElement: Type
+    submit: Soumettre
+        

@@ -1,5 +1,5 @@
 <div class="nav-side-menu">
-    <div class="brand">KartographerZ</div>
+    <div class="brand">IS Architect</div>
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
     <div class="menu-list">
@@ -12,13 +12,14 @@
             </li>
             <ul class="sub-menu collapse" id="cartographies">
                 <li><a href="{{path('kartographerz_cartography_index')}}">{{'cartography.list'|trans}}</a></li>
-                <li><a href="{{path('kartographerz_cartography_add')}}">{{'cartography.create'|trans}}</a></li>
+                <li><a href="{{path('kartographerz_cartography_add')}}">{{'cartography.add'|trans}}</a></li>
             </ul>
 
             <li  data-toggle="collapse" data-target="#elements" class="collapsed">
                 <a href="#"><i class="fa fa-cube fa-lg"></i> {{'nav.elements'|trans}}<span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="elements">
+                <li><a href="{{path('kartographerz_element_list')}}">{{'element.list'|trans}}</a></li>
                 <li><a href="{{path('kartographerz_cartography_addElement')}}">{{'element.add'|trans}}</a></li>
                 <li><a href="{{path('kartographerz_cartography_addElementType')}}">{{'element.addType'|trans}}</a></li>
             </ul>

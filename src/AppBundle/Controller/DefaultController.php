@@ -18,8 +18,9 @@ class DefaultController extends Controller {
      * @Route("/{_locale}/", name="homepage")
      */
     public function indexLocalAction() {
-
-        return $this->render('default/index.html.twig');
+        $french = $this->generateUrl('homepage', array("_locale" => 'fr'));
+        $english = $this->generateUrl('homepage', array("_locale" => 'en'));
+        return $this->render('default/index.html.twig', array("french_flag" => $french, "english_flag" => $english));
     }
 
 }

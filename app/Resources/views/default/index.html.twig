@@ -1,12 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{'home.title'|trans}}</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque blandit sem diam, quis mattis sapien volutpat quis. Suspendisse iaculis ac elit at rhoncus. Nullam posuere venenatis nulla id pretium. Praesent commodo, ligula at pretium vehicula, augue magna mollis orci, vel sagittis mi sem sit amet nulla. Suspendisse potenti. Phasellus mauris tortor, euismod at malesuada in, euismod ut nunc. Vivamus sit amet libero sed leo volutpat dapibus. Donec id nisi rutrum, iaculis sem sit amet, finibus nunc.
 
-Morbi nec sagittis quam, at pellentesque velit. Mauris eget felis sit amet est tempus laoreet pharetra eu justo. Nunc volutpat, dui ac ultricies sagittis, lorem nibh euismod tortor, id pellentesque neque est volutpat ante. Vestibulum egestas eget ex non mattis. Praesent pharetra ac risus in blandit. Donec gravida velit eleifend, dignissim lacus ac, tempus neque. Nullam vitae ex lacus. In hac habitasse platea dictumst. Praesent eget ante dignissim arcu tincidunt efficitur. Sed eu tincidunt nibh, at pulvinar dolor. Etiam blandit magna non libero ultrices, et tincidunt orci iaculis. Mauris dictum nec ante in vestibulum.
+    <div class="row-fluid">
+        <div class="col-sm-5"><h1 class="">{{'home.title'|trans}}</h1></div>
+        <div class="col-sm-7">
+            {{'home.language'|trans}}
+            <a href="{{english_flag}}">
+                {% image '%kernel.root_dir%/Resources/public_shared/images/EN.jpg' %}
+                <img src="{{ asset_url }}" alt="English flag" width="40"/>
+                {% endimage %}
+            </a>
+            <a href="{{french_flag}}">
+                {% image '%kernel.root_dir%/Resources/public_shared/images/FR.jpg' %}
+                <img src="{{ asset_url }}" alt="French flag" width="40"/>
+                {% endimage %}
+            </a>
+        </div>
 
-Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla cursus, erat dictum elementum congue, odio tortor eleifend leo, at laoreet tortor ex luctus ipsum. Nunc vitae risus dolor. Quisque finibus mauris quis erat semper dignissim. Curabitur ornare mi id vehicula molestie. Aliquam ut congue ex, vitae sagittis diam. Proin non mi sodales, porttitor nisi nec, pellentesque libero. Etiam molestie vitae eros eu laoreet. Suspendisse facilisis at est in scelerisque. Aliquam ut aliquam risus. Fusce venenatis, purus nec ultrices interdum, dolor ligula vulputate sem, eget porttitor ex lorem a lacus. Donec a purus efficitur, molestie tellus at, facilisis dui. Integer dignissim venenatis aliquam. Pellentesque eleifend iaculis nunc, tristique egestas eros dignissim non.</p>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="content">
+
+{{'home.message1'|trans |raw}}
+<br>
+<p>
+ <a>
+         {% image '%kernel.root_dir%/Resources/public_shared/images/home_image.jpg' %}
+            <img src="{{ asset_url }}" alt="home presentation" />
+         {% endimage %}
+ </a>
+</p>
+<br>
+
+<p><i class="fa fa-video-camera"></i>{{'home.message2'|trans|raw}}</p>
+<p><i class="fa fa-users"></i>{{'home.message3'|trans}}</p>
+<p><i class="fa fa-folder-open"></i>{{'home.message4'|trans}}</p>
+<p><i class="fa fa-github"></i>{{'home.message5'|trans|raw}}</p>
+
+
+
+</div>
+
 
 
 {% endblock %}

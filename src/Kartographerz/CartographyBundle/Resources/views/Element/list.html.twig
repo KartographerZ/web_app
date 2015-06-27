@@ -1,0 +1,46 @@
+{% extends "KartographerzCartographyBundle::layout.html.twig" %}
+
+{% block title %}{{ 'title.listElement'|trans }}{% endblock %}
+
+{% block body %}
+        <h1>{{'element.list'|trans}}</h1>
+
+    <table id="listElement" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>type</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+        </table>
+        
+        <script>
+            var t = $('#listElement').DataTable({
+                "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
+                "aoColumns": [
+                    {"mData": "id"},
+                    {"mData": "name"},
+                    {"mData": "typeelementlabel"},
+                    {"mData": function (row) {
+                            return "<button  class='btn btn-default' onclick='deleteE("+row.id+")'>Supprimer</button>";
+                        }
+                    }
+                ]
+                });
+          
+          function deleteE(id)
+          {
+              $.post(
+                "{{ path("kartographerz_element_delete") }}",
+                { "id": id}, 
+                function(ret){
+                    if( ret == "false")
+                        alert("element non supprimé, element lié à des cartographies");
+                    else
+                        $('#listElement').DataTable().ajax.reload();
+                });
+          }
+        </script>
+{% endblock %}

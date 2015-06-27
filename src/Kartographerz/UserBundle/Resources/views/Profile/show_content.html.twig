@@ -1,0 +1,29 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="fos_user_user_show table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <th>Champs</th>
+        <th>Valeur</th>
+        <tr>
+            <td>{{ 'profile.show.username'|trans }}:</td>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'profile.show.email'|trans }}:</td>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'profile.show.name'|trans }}:</td>
+            <td>{{ user.name }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'profile.show.firstname'|trans }}:</td>
+            <td>{{ user.firstname }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'profile.show.enterprise'|trans }}:</td>
+            <td>{{ user.enterprise }}</td>
+        </tr>
+    </table>
+
+</div>

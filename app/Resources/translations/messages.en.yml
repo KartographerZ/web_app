@@ -19,24 +19,39 @@ footer:
     
 home:
     title: Welcome
+    language: "Choose your language: "
+    message1 : >
+        <p>
+        The application "IS Architect" is a good tool to view your information system. It has the following functionnalities :
+        <ul>
+        <li> &#x2714 manage elements type and elements</li>
+        <li> &#x2714 manage cartographies (elements and links between elements)</li>
+        <li> &#x2714 manage versionning of cartographies</li>
+        <li> &#x2714 manage user rights</li>
+        </ul>
+        </p>
+        
+    message2 : <a href="https://drive.google.com/drive/folders/0ByA0BaRLrmBffk9SOUxPUDdEZU9vSmg2cHJyT3JLNFFrZDh3dVpPdEo0MXhrNTFKWVN2Q0U" target="_blank">&nbsp;Video demonstration</a>
+    message3 : " Project members : Franck MAZZOLO, Yacouba DJIBO, Walid BOUSSAADIA"
+    message4 : " Open Source Project"
+    message5 : <a href="https://github.com/KartographerZ/web_app" target="_blank">&nbsp;GitHub Project</a>
+    
+    
     
 cartography:
     add: Add a cartography
-    create : Create a cartography
     name: Name
     type: Visibility
-    list: List
+    list: List of the cartographies
     show : Display cartography
-    
-action:
-    add: Create
+    version: "Version: "
     
 submit:
     click: Submit
     close: Close
     add: Add
     manageLink: Save and manage links
-    save: save
+    save: Save
     
 element_to_carto:
     add: Add an element to the cartography
@@ -46,8 +61,31 @@ element_to_carto:
     
 element:
     add: Add an element
-    manage: manage elements
+    manage: manage elements of this cartography
     addType: Add an element type
+    addSuccess: You have successfuly added an element
+    list: List of the elements
     
 title:
     view: View
+    list: List
+    addCarto: Adding a cartography
+    addElement: Adding an element
+    addElementType: Adding an elements type
+    listElement: Element list 
+        
+elements_to_carto:
+    close: Close
+    previous: Previous
+    save: Save
+    
+element_type:
+    add: Add an elements type
+    addSuccess: You have successfuly added an elements type
+    
+form:
+    name: Name
+    image: Image
+    typeElement: Type
+    submit: Submit
+        

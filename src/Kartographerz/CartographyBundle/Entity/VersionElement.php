@@ -24,7 +24,7 @@ class VersionElement
     /**
      * @var \Version
      *
-     * @ORM\ManyToOne(targetEntity="Version")
+     * @ORM\ManyToOne(targetEntity="Version" )
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="version_id", referencedColumnName="id")
      * })
