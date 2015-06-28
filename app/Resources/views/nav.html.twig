@@ -27,8 +27,8 @@
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
                 {% if is_granted("ROLE_ADMIN") %}
-                    <li><a href="{{ path('sonata_admin_dashboard')}}"><i class="fa fa-suitcase fa-lg"></i> {{ 'nav.admin'|trans }}</a></li>
-                    {% endif %}
+                    <li><a href="{{ path('sonata_admin_dashboard')}}" target="_blank"><i class="fa fa-suitcase fa-lg"></i> {{ 'nav.admin'|trans }}</a></li>
+                {% endif %}
                 <li><a href="{{ path('fos_user_profile_show')}}"><i class="fa fa-user fa-lg"></i> {{ 'nav.account'|trans }}{{ app.user.username }}</a></li>
                 <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-lg"></i> {{ 'nav.logout'|trans }}</a></li>
 
