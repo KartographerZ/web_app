@@ -35,13 +35,10 @@ class User extends BaseUser {
      */
     private $firstname;
 
-    /**
-     * @var \Enterprise
+/**
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Enterprise")
-     * @ORM\JoinColumns({
-     *      @ORM\JoinColumn(name="enterprise_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="enterprise", type="string", length=255, nullable=true)
      */
     private $enterprise;
 
@@ -74,7 +71,7 @@ class User extends BaseUser {
         $this->firstname = $firstname;
     }
 
-    function setEnterprise(\Kartographerz\CartographyBundle\Entity\Enterprise $enterprise) {
+    function setEnterprise($enterprise) {
         $this->enterprise = $enterprise;
     }
 

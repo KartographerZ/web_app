@@ -24,12 +24,7 @@ class ProfileFormType extends AbstractType {
         $builder
                 ->add('name', null, array('label' => 'form.name', 'translation_domain' => 'FOSUserBundle'))
                 ->add('firstname', null, array('label' => 'form.firstname', 'translation_domain' => 'FOSUserBundle'))
-                ->add('enterprise', 'entity', array(
-                    'class' => 'KartographerzCartographyBundle:Enterprise',
-                    'property' => 'name',
-                    'placeholder' => 'Choose an option',
-                    'label' => 'form.enterprise', 'translation_domain' => 'FOSUserBundle'
-        ));
+                ->add('enterprise', null, array('label' => 'form.enterprise', 'translation_domain' => 'FOSUserBundle'));
     }
 
     public function getParent() {
