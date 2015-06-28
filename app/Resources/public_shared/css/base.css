@@ -14,3 +14,9 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
+
+#main{
+    display:block;
+    width:100%;
+    height:500px;
+} 

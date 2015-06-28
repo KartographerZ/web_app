@@ -19,30 +19,31 @@
     <script>
         $(function () {
             var t = $('#listElement').DataTable({
-                    "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
+                "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
                 "aoColumns": [
                     {"mData": "id"},
                     {"mData": "name"},
                     {"mData": "typeelementlabel"},
                     {"mData": function (row) {
-                                return "<button  class='btn btn-danger' onclick='deleteE(" + row.id + ")'>{{'element.button.delete'|trans}}</button>";
+                            return "<button  class='btn btn-danger' onclick='deleteE(" + row.id + ")'>{{'element.button.delete'|trans}}</button>";
                         }
                     }
                 ]
             });
 
-            function deleteE(id)
-            {
-                $.post(
-                        "{{ path("kartographerz_element_delete") }}",
-                        {"id": id},
-                function (ret) {
-                    if (ret == "false")
-                            alert("{{'element.error'|trans}}");
-                    else
-                        $('#listElement').DataTable().ajax.reload();
-                });
-            }
+
         });
+        function deleteE(id)
+        {
+            $.post(
+                    "{{ path("kartographerz_element_delete") }}",
+                    {"id": id},
+            function (ret) {
+                if (ret == "false")
+                    alert("{{'element.error'|trans}}");
+                else
+                    $('#listElement').DataTable().ajax.reload();
+            });
+        }
     </script>
 {% endblock %}

@@ -24,7 +24,7 @@
             </tr>
         </thead>
     </table>
-    {% if is_granted('ROLE_MODELISATEUR') %}
+    {% if not is_granted('ROLE_ADMIN') %}
         <button type="button" id="seePrivateCarto" style="margin-bottom: 10px;" class="btn btn-primary">{{'cartography.allVisibility' | trans}}</button>
     {% endif %}
     <script>
