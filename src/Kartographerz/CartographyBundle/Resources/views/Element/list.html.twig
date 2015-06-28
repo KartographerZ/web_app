@@ -3,44 +3,46 @@
 {% block title %}{{ 'title.listElement'|trans }}{% endblock %}
 
 {% block body %}
-        <h1>{{'element.list'|trans}}</h1>
+    <h1>{{'element.list'|trans}}</h1>
 
     <table id="listElement" class="table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>{{'element.tablelist.id'|trans}}</th>
-                    <th>{{'element.tablelist.name'|trans}}</th>
-                    <th>{{'element.tablelist.type'|trans}}</th>
-                    <th>{{'element.tablelist.delete'|trans}}</th>
-                </tr>
-            </thead>
-        </table>
-        
-        <script>
+        <thead>
+            <tr>
+                <th>{{'element.tablelist.id'|trans}}</th>
+                <th>{{'element.tablelist.name'|trans}}</th>
+                <th>{{'element.tablelist.type'|trans}}</th>
+                <th>{{'element.tablelist.delete'|trans}}</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script>
+        $(function () {
             var t = $('#listElement').DataTable({
-                "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
+                    "sAjaxSource": "{{ path("kartographerz_element_elementList") }}",
                 "aoColumns": [
                     {"mData": "id"},
                     {"mData": "name"},
                     {"mData": "typeelementlabel"},
                     {"mData": function (row) {
-                            return "<button  class='btn btn-danger' onclick='deleteE("+row.id+")'>{{'element.button.delete'|trans}}</button>";
+                                return "<button  class='btn btn-danger' onclick='deleteE(" + row.id + ")'>{{'element.button.delete'|trans}}</button>";
                         }
                     }
                 ]
-                });
-          
-          function deleteE(id)
-          {
-              $.post(
-                "{{ path("kartographerz_element_delete") }}",
-                { "id": id}, 
-                function(ret){
-                    if( ret == "false")
-                        alert("{{'element.error'|trans}}");
+            });
+
+            function deleteE(id)
+            {
+                $.post(
+                        "{{ path("kartographerz_element_delete") }}",
+                        {"id": id},
+                function (ret) {
+                    if (ret == "false")
+                            alert("{{'element.error'|trans}}");
                     else
                         $('#listElement').DataTable().ajax.reload();
                 });
-          }
-        </script>
+            }
+        });
+    </script>
 {% endblock %}

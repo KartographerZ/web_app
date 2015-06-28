@@ -11,7 +11,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        
+
         {% include 'nav.html.twig' %}
         <div class="container-fluid">
         {% block body %}{% endblock %}
@@ -22,7 +22,7 @@
             $.extend($.fn.dataTable.defaults, {
                 "language": {
                     "url": loadDatatablesIntl("{{ app.request.locale }}")
-                },
+                }
             });
         </script>
     {% endblock %}
