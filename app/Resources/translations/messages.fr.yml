@@ -47,6 +47,17 @@ cartography:
     version: "Version : "
     allVisibility: Voir les cartographies privées
     allVisibilityAlert: Une demande de droits d administrateur nécéssaire à la consultation des cartographies privées a été envoyée
+    tablelist:
+        id: id
+        author: auteur
+        name: nom
+        date: date
+        visibility: visibilité
+        view: voir
+        delete: supprimer
+    button:
+        see: voir
+        delete: supprimer
     
 submit:
     click: Cliquez ici
@@ -67,6 +78,14 @@ element:
     addType: Ajouter un type d'éléments
     addSuccess: Vous avez bien ajouté un element
     list: Liste des éléments
+    tablelist:
+        id: id
+        name: nom
+        type: type
+        delete: supprimer
+    button:
+        delete: supprimer
+    error: Eléments non supprimés, car ils sont liés à des cartographies
     
 title:
     view: Vue
@@ -92,3 +111,13 @@ form:
     typeElement: Type
     submit: Soumettre
         
+link:
+    tableview:
+        id: id
+        ele1: élément 1
+        ele2: élément 2
+        delete: supprimer
+    tableviewnew:
+        ele1: élément 1
+        ele2: élément 2
+        delete: supprimer

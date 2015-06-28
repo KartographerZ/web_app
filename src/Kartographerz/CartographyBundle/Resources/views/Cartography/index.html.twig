@@ -7,21 +7,20 @@
     {% if is_granted('ROLE_USER') %}
         {% if is_granted('ROLE_MODELISATEUR') %}
             <button type="button" class="btn btn-default"style="margin-bottom: 10px;" onclick='location.href = "{{ path('kartographerz_cartography_add')}}"'>{{'cartography.add' | trans}}</button>
-        {% endif %}
-        {% if is_granted('ROLE_MODELISATEUR') %}
+     
             <button type="button" style="margin-bottom: 10px;" class="btn btn-default" onclick='location.href = "{{ path('kartographerz_cartography_addElement')}}"'>{{'element.add' | trans}}</button>
         {% endif %}
 
-        <table id="listCarto" class="display" cellspacing="0" width="100%">
+        <table id="listCarto" class="table table-striped table-bordered" cellspacing="0" width="100%" >
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Author</th>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Visibility</th>
-                    <th>View</th>
-                    <th>Delete</th>
+                    <th>{{'cartography.tablelist.id'|trans}}</th>
+                    <th>{{'cartography.tablelist.author'|trans}}</th>
+                    <th>{{'cartography.tablelist.name'|trans}}</th>
+                    <th>{{'cartography.tablelist.date'|trans}}</th>
+                    <th>{{'cartography.tablelist.visibility'|trans}}</th>
+                    <th>{{'cartography.tablelist.view'|trans}}</th>
+                    <th>{{'cartography.tablelist.delete'|trans}}</th>
                 </tr>
             </thead>
         </table>
@@ -30,10 +29,11 @@
         {% endif %}
         <script>
 
-$('#seePrivateCarto').click(function() {
-  $.post("{{ path("kartographerz_cartography_seePrivateCarto") }}",  function (data) { });
- alert("{{'cartography.allVisibilityAlert' | trans}}");
-});
+            $('#seePrivateCarto').click(function () {
+                $.post("{{ path("kartographerz_cartography_seePrivateCarto") }}", function (data) {
+                });
+                alert("{{'cartography.allVisibilityAlert' | trans}}");
+            });
 
             var t = $('#listCarto').DataTable({
                 "sAjaxSource": "{{ path("kartographerz_cartography_cartographyListDataTable") }}",
@@ -44,11 +44,11 @@ $('#seePrivateCarto').click(function() {
                     {"mData": "date"},
                     {"mData": "typeVisibility"},
                     {"mData": function (row) {
-                            return "<button  class='btn btn-default' onclick='location.href=\"" + Routing.generate("kartographerz_cartography_view", {"id": row.id, "_locale": "en"}) + "\"'>Voir</a>";
+                            return "<button  class='btn btn-default' onclick='location.href=\"" + Routing.generate("kartographerz_cartography_view", {"id": row.id, "_locale": '{{app.request.locale}}'}) + "\"'>{{'cartography.button.see'|trans}}</a>";
                         }
                     },
                     {"mData": function (row) {
-                            return "<button  class='btn btn-danger' onclick='deleteCart(" + row.id + ")' >Supprimer</a>";
+                            return "<button  class='btn btn-danger' onclick='deleteCart(" + row.id + ")' >{{'cartography.button.delete'|trans}}</a>";
                         }
                     }]
             });

@@ -47,6 +47,17 @@ cartography:
     version: "Version: "
     allVisibility: See private cartographies
     allVisibilityAlert: A necessary administrator rights to private cartographies consultation has been sent
+    tablelist:
+        id: id
+        author: author
+        name: name
+        date: date
+        visibility: visibility
+        view: view
+        delete: delete
+    button:
+        see: view
+        delete: delete
     
 submit:
     click: Submit
@@ -67,6 +78,14 @@ element:
     addType: Add an element type
     addSuccess: You have successfuly added an element
     list: List of the elements
+    tablelist:
+        id: id
+        name: name
+        type: type
+        delete: delete
+    button:
+        delete: delete
+    error: Elements not deleted, because they are linked to cartograhies
     
 title:
     view: View
@@ -91,4 +110,15 @@ form:
     image: Image
     typeElement: Type
     submit: Submit
+        
+link:
+    tableview:
+        id: id
+        ele1: element 1
+        ele2: element 2
+        delete: delete
+    tableviewnew:
+        ele1: element 1
+        ele2: element 2
+        delete: delete
         

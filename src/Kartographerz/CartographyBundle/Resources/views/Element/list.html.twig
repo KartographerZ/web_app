@@ -5,13 +5,13 @@
 {% block body %}
         <h1>{{'element.list'|trans}}</h1>
 
-    <table id="listElement" class="display" cellspacing="0" width="100%">
+    <table id="listElement" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>type</th>
-                    <th>Supprimer</th>
+                    <th>{{'element.tablelist.id'|trans}}</th>
+                    <th>{{'element.tablelist.name'|trans}}</th>
+                    <th>{{'element.tablelist.type'|trans}}</th>
+                    <th>{{'element.tablelist.delete'|trans}}</th>
                 </tr>
             </thead>
         </table>
@@ -24,7 +24,7 @@
                     {"mData": "name"},
                     {"mData": "typeelementlabel"},
                     {"mData": function (row) {
-                            return "<button  class='btn btn-danger' onclick='deleteE("+row.id+")'>Supprimer</button>";
+                            return "<button  class='btn btn-danger' onclick='deleteE("+row.id+")'>{{'element.button.delete'|trans}}</button>";
                         }
                     }
                 ]
@@ -37,7 +37,7 @@
                 { "id": id}, 
                 function(ret){
                     if( ret == "false")
-                        alert("element non supprimé, element lié à des cartographies");
+                        alert("{{'element.error'|trans}}");
                     else
                         $('#listElement').DataTable().ajax.reload();
                 });
