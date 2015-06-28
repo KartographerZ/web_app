@@ -25,7 +25,16 @@
                 </tr>
             </thead>
         </table>
+        {% if is_granted('ROLE_MODELISATEUR') %}
+            <button type="button" id="seePrivateCarto" style="margin-bottom: 10px;" class="btn btn-primary">{{'cartography.allVisibility' | trans}}</button>
+        {% endif %}
         <script>
+
+$('#seePrivateCarto').click(function() {
+  $.post("{{ path("kartographerz_cartography_seePrivateCarto") }}",  function (data) { });
+ alert("{{'cartography.allVisibilityAlert' | trans}}");
+});
+
             var t = $('#listCarto').DataTable({
                 "sAjaxSource": "{{ path("kartographerz_cartography_cartographyListDataTable") }}",
                 "aoColumns": [
@@ -39,7 +48,7 @@
                         }
                     },
                     {"mData": function (row) {
-                            return "<button  class='btn btn-default' onclick='deleteCart(" + row.id + ")' >Supprimer</a>";
+                            return "<button  class='btn btn-danger' onclick='deleteCart(" + row.id + ")' >Supprimer</a>";
                         }
                     }]
             });

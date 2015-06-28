@@ -185,34 +185,29 @@ class CartographyController extends Controller {
         $repositoyVersionElement = $em->getRepository("KartographerzCartographyBundle:VersionElement");
         $repositoyLink = $em->getRepository("KartographerzCartographyBundle:Link");
         $carto = $repositoyCartography->find($id);
-        
+
         $versionDelete = $repositoyVersion->findBy(array("cartography" => $carto));
         $versionElementAll = $repositoyVersionElement->findAll();
         $elementDelete = array();
-        foreach($versionElementAll as $ve )
-        {
-            if(in_array($ve->getVersion(),$versionDelete))
-                    $elementDelete[] = $ve;
+        foreach ($versionElementAll as $ve) {
+            if (in_array($ve->getVersion(), $versionDelete))
+                $elementDelete[] = $ve;
         }
-        
+
         $LinkAll = $repositoyLink->findAll();
         $linksDelete = array();
-        foreach($LinkAll as $l )
-        {
-            if(in_array($l->getVersionCartography(),$versionDelete))
-                    $linksDelete[] = $l;
+        foreach ($LinkAll as $l) {
+            if (in_array($l->getVersionCartography(), $versionDelete))
+                $linksDelete[] = $l;
         }
-        
-        foreach ($linksDelete as $todel)
-        {
+
+        foreach ($linksDelete as $todel) {
             $em->remove($todel);
         }
-        foreach ($elementDelete as $todel)
-        {
+        foreach ($elementDelete as $todel) {
             $em->remove($todel);
         }
-        foreach ($versionDelete as $todel)
-        {
+        foreach ($versionDelete as $todel) {
             $em->remove($todel);
         }
         $em->remove($carto);
@@ -230,10 +225,37 @@ class CartographyController extends Controller {
         //currentVersionCart("5");
         $this->currentVersionCart($currentCarographyId, $currentCarographyVersion);
 
-        //   return new Response($x);
-        //  return $currentCarographyVersion;
-
         return $this->redirect($request->headers->get('referer'));
+    }
+      /**
+     * @Security("has_role('ROLE_MODELISATEUR')")
+     */
+    public function seePrivateCartoAction(Request $request) {
+        
+        // ENVOIE DE MAIL ________________________________________________________________________________
+
+        $msg = \Swift_Message::newInstance();
+        $msg->setSubject("[IS Architect] Mise à jour des habilitations");
+        $mail_corps = "Bonjour, une demande de statut d'administrateur a été enregistrée par l'utilisateur ";
+        $mail_corps .= $this->getUser();
+        $mail_corps .= " (id :" .$this->getUser()->getId().").";
+      
+        $mail_corps .= " Ceci est un message automatique, veuillez ne pas répondre directement à ce message.";
+        $msg->setBody($mail_corps);
+        $msg->setContentType("text/html");
+        $msg->setCharset("utf-8");
+        $msg->setFrom($this->container->getParameter('mailer_user'));
+        $msg->setTo($this->container->getParameter('mailer_user'));
+
+        $transport = \Swift_SmtpTransport::newInstance("smtp.gmail.com", 465, "ssl")
+                ->setUsername($this->container->getParameter('mailer_user'))
+                ->setPassword($this->container->getParameter('mailer_password'));
+
+        $mailer = \Swift_Mailer::newInstance($transport);
+        $mailer->send($msg);
+        
+        return $this->redirect($request->headers->get('referer'));
+        
     }
 
     /**
@@ -280,11 +302,13 @@ class CartographyController extends Controller {
 
         return $lastVersion;
     }
+
     public function listDataTableAction(Request $request) {
         $conn = $this->get('database_connection');
         $list = $conn->fetchAll('SELECT *,author_id,(select name from user where  id = author_id ) as nameAuthor FROM Cartography');
-        return new Response(json_encode( array("data" => $list)));
+        return new Response(json_encode(array("data" => $list)));
     }
+
     public function currentVersionCart($cartId, $currentCartId) {
         // On insère la version actuelle de cartographie à afficher (1 = true et 0 = false : donc une seule version à 1 et toutes les autres à 0)
         $em = $this->getDoctrine()->getManager();

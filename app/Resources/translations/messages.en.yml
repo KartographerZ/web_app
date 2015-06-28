@@ -45,6 +45,8 @@ cartography:
     list: List of the cartographies
     show : Display cartography
     version: "Version: "
+    allVisibility: See private cartographies
+    allVisibilityAlert: A necessary administrator rights to private cartographies consultation has been sent
     
 submit:
     click: Submit
