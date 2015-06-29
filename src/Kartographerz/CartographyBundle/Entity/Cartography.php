@@ -3,9 +3,6 @@
 namespace Kartographerz\CartographyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use DateTime;
-use Kartographerz\CartographyBundle\Entity\Enterprise;
-use Kartographerz\UserBundle\Entity\User;
 
 /**
  * Cartography
@@ -41,7 +38,7 @@ class Cartography {
     /**
      *
      * @ORM\Column(name="typeVisibility", type="string", length=255, nullable=false)
-     * })
+     * 
      */
     private $typeVisibility;
 

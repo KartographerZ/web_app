@@ -127,7 +127,7 @@
         $("#addElementToACartography").click(function () {
             if (getAllCheckedCheckboxes().length <= 1)
             {
-                alert("Il faut ajouter au moins 2 elements pour pouvoir gérer les liens");
+                alert("{{'cartography.link_error'|trans}}");
             }
             else
             {

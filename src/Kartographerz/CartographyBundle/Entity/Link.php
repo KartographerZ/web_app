@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Link
  *
- * @ORM\Table(name="link", indexes={@ORM\Index(name="element_1_id", columns={"element_1_id"}), @ORM\Index(name="element_2_id", columns={"element_2_id"})})
+ * @ORM\Table(name="link")
  * @ORM\Entity
  */
 class Link {
@@ -22,29 +22,20 @@ class Link {
     private $id;
 
     /**
-     * @var \Element
-     *
-     * @ORM\ManyToOne(targetEntity="Element")
+
+     * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Element")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="element_1_id", referencedColumnName="id")
      * })
      */
-    
-    /**
-
-   * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Element")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="element_1_id", referencedColumnName="id")
-     * })
-   */
     private $element1;
 
-   /**
-   * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Element")
+    /**
+     * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Element")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="element_2_id", referencedColumnName="id")
      * })
-   */
+     */
     private $element2;
 
     /**

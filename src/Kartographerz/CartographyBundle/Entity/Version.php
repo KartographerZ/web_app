@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Version
  *
- * @ORM\Table(name="version", indexes={@ORM\Index(name="cartography_id", columns={"cartography_id"})})
+ * @ORM\Table(name="version")
  * @ORM\Entity
  */
 class Version {
@@ -54,9 +54,6 @@ class Version {
         return $this->id;
     }
 
-   
-  
-
     /**
      * Set date
      *
@@ -99,7 +96,6 @@ class Version {
         return $this->cartography;
     }
 
-
     /**
      * Set currentId
      *
@@ -107,8 +103,7 @@ class Version {
      *
      * @return Version
      */
-    public function setCurrentId($currentId)
-    {
+    public function setCurrentId($currentId) {
         $this->currentId = $currentId;
 
         return $this;
@@ -119,8 +114,8 @@ class Version {
      *
      * @return integer
      */
-    public function getCurrentId()
-    {
+    public function getCurrentId() {
         return $this->currentId;
     }
+
 }

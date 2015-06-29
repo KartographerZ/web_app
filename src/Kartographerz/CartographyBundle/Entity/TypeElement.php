@@ -29,7 +29,7 @@ class TypeElement {
     private $label;
 
     /**
-     * @var \Image
+     * @var \image
      *
      * @ORM\OneToOne(targetEntity="Kartographerz\CartographyBundle\Entity\Image" ,  cascade={"persist"}))
      */
