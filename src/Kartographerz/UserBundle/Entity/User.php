@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use FOS\UserBundle\Model\GroupInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Kartographerz\UserBundle\Entity\Group;
 
 /**
  * User
@@ -99,7 +100,7 @@ class User extends BaseUser {
 
     function __construct() {
         parent::__construct();
-        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
 }
