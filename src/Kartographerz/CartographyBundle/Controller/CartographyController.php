@@ -342,7 +342,7 @@ class CartographyController extends Controller {
 
     public function listDataTableAction(Request $request) {
         $conn = $this->get('database_connection');
-        $list = $conn->fetchAll('SELECT *,author_id,(select name from user where  id = author_id ) as nameAuthor FROM Cartography');
+        $list = $conn->fetchAll('SELECT *,author_id,(select username from user where  id = author_id ) as usernameAuthor FROM Cartography');
         return new Response(json_encode(array("data" => $list)));
     }
 

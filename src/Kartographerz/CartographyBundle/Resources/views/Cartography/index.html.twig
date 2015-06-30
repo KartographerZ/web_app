@@ -39,13 +39,13 @@
                 "sAjaxSource": "{{ path("kartographerz_cartography_cartographyListDataTable") }}",
                 "aoColumns": [
                     {"mData": "id"},
-                    {"mData": "nameAuthor"},
+                    {"mData": "usernameAuthor"},
                     {"mData": "name"},
                     {"mData": "date"},
                     {"mData": "typeVisibility"},
                     {"mData": function (row) {
-                           if ( "ROLE_ADMIN" == "{{ app.user.roles[0] }}" || row.typeVisibility == "Public"  )
-                            return "<button  class='btn btn-default' onclick='location.href=\"" + Routing.generate("kartographerz_cartography_view", {"id": row.id, "_locale": '{{app.request.locale}}'}) + "\"'>{{'cartography.button.see'|trans}}</a>";
+                            if ("administration" === "{{ app.user.groups[0] }}" || row.typeVisibility === "Public" || isAuthor("{{app.user.username}}", row.usernameAuthor))
+                                return "<button  class='btn btn-default' onclick='location.href=\"" + Routing.generate("kartographerz_cartography_view", {"id": row.id, "_locale": '{{app.request.locale}}'}) + "\"'>{{'cartography.button.see'|trans}}</a>";
                             else
                                 return "";
                         }
@@ -64,6 +64,10 @@
                 });
             }
         });
+
+        function isAuthor(username, cartoAuthor) {
+            return username === cartoAuthor;
+        }
     </script>
 
 {% endblock %}
