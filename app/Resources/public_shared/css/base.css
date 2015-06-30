@@ -8,11 +8,11 @@ and open the template in the editor.
     Author     : franckmazzolo
 */
 body {
-  padding-top: 50px;
+    padding-top: 50px;
 }
 .starter-template {
-  padding: 40px 15px;
-  text-align: center;
+    padding: 40px 15px;
+    text-align: center;
 }
 
 #main{
@@ -23,4 +23,9 @@ body {
 
 .container-fluid{
     margin-top: 10px;
+}
+
+.modal{
+    max-height: 600px;
+    overflow: scroll;
 }
