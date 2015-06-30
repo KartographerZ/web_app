@@ -17,7 +17,7 @@ class UserAdmin extends Admin {
                 ->add('email')
                 ->add('password')
                 ->add('username')
-                ->add('roles', "entity", array('class' => "KartographerzUserBundle:Group"))
+                ->add('groups', "entity", array('class' => "KartographerzUserBundle:Group"))
                 ->add('enterprise')
         ;
     }
@@ -26,14 +26,18 @@ class UserAdmin extends Admin {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
         $datagridMapper
                 ->add('name')
-                ->add('roles')
+                ->add('enterprise')
+                ->add('groups')
         ;
     }
 
     // Fields to be shown on lists
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
+                ->addIdentifier('email')
                 ->addIdentifier('name')
+                ->addIdentifier('firstname')
+                ->addIdentifier('enterprise')
         ;
     }
 
