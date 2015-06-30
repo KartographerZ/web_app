@@ -44,7 +44,10 @@
                     {"mData": "date"},
                     {"mData": "typeVisibility"},
                     {"mData": function (row) {
+                           if ( "ROLE_ADMIN" == "{{ app.user.roles[0] }}" || row.typeVisibility == "Public"  )
                             return "<button  class='btn btn-default' onclick='location.href=\"" + Routing.generate("kartographerz_cartography_view", {"id": row.id, "_locale": '{{app.request.locale}}'}) + "\"'>{{'cartography.button.see'|trans}}</a>";
+                            else
+                                return "";
                         }
                     },
                     {"mData": function (row) {

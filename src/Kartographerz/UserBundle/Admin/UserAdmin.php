@@ -17,7 +17,6 @@ class UserAdmin extends Admin{
             ->add('email')
             ->add('password')
             ->add('username')
-            ->add('roles', "entity" ,array('class' => "KartographerzUserBundle:Group"))
             ->add('enterprise')
         ;
     }
@@ -27,8 +26,7 @@ class UserAdmin extends Admin{
     {
         $datagridMapper
             ->add('name')
-            ->add('roles')
-        ;
+            ->add('roles');
     }
 
     // Fields to be shown on lists

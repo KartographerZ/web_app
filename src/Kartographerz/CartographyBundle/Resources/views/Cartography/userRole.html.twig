@@ -1,0 +1,12 @@
+{# empty Twig template #}
+{% extends "KartographerzCartographyBundle::layout.html.twig" %}
+
+{% block title %}Role user{% endblock %}
+
+{% block body %}
+    <select></select>
+   {% for g in groups %}
+       {{ g  }}
+   {% endfor %}
+       
+{% endblock %}  

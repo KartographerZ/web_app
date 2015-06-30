@@ -1,0 +1,80 @@
+{# empty Twig template #}
+{% extends "KartographerzCartographyBundle::layout.html.twig" %}
+
+{% block title %}Liste user{% endblock %}
+
+{% block body %}
+    <table id="listUserRole" class="table table-striped table-bordered" cellspacing="0" width="100%" >
+        <thead>
+            <tr>
+                <th>LastName</th>
+                <th>firstName</th>
+                <th>user</th>
+                <th>role</th>
+                <th>change role</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script>
+        var cpt = 0;
+        $('#listUserRole').DataTable({
+            "sAjaxSource": "{{ path("kartographerz_admin_listroleDatatable") }}",
+            "aoColumns": [
+                {"mData": "name"},
+                {"mData": "firstname"},
+                {"mData": "username"},
+                {"mData": function (row) {
+                        var tab = ["ROLE_ADMIN", "ROLE_MODELISATEUR"];
+                        cpt++;
+                        var retour = "<select id='cpt" + cpt + "'>";
+                        var i = 0;
+                        var group;
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ path("kartographerz_admin_getrole") }}",
+                            data: {"id": row.id},
+                            success: function (ret) {
+                                group = jQuery.parseJSON(ret.replace("[", "").replace("]", "")).na;
+                                if (group == "modelisateur")
+                                    group = "ROLE_MODELISATEUR";
+                                else
+                                    group = "ROLE_ADMIN";
+                                if (group == "ROLE_MODELISATEUR")
+                                {
+                                    retour += "<option select='selected'>ROLE_MODELISATEUR</option>";
+                                    retour += "<option>ROLE_ADMIN</option>";
+                                }
+                                else
+                                {
+                                    retour += "<option select='selected'>ROLE_ADMIN</option>";
+                                    retour += "<option >ROLE_MODELISATEUR</option>";
+                                }
+                                retour += "</select>";
+
+                            },
+                            async: false
+                        });
+                        return retour;
+                    }}, {"mData": function (row) {
+        {#                            var cptval = $("#cpt"+cpt).html();
+#}                            return "<button  class='btn btn-default' onclick='change(" + row.id + "," + cpt + ")' >Change role</button>";
+                    }
+                }]
+        });
+        function change(id, e)
+        {
+            console.log($("#cpt" + e).val());
+            var droittrans = $("#cpt" + e).val();
+            if (droittrans == "ROLE_ADMIN")
+                droittrans = "administration";
+            else
+                droittrans = "modelisateur";
+            $.post("{{ path("kartographerz_admin_changerole")}}" , { "id":id, "val": droittrans});
+                   }
+
+
+
+
+    </script>
+{% endblock %}

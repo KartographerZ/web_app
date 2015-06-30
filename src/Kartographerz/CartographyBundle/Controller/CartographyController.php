@@ -109,7 +109,15 @@ class CartographyController extends Controller {
 
         return new Response("ok2");
     }
-
+    function userRoleAction( Request $request )
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repositoryUser = $em->getRepository("KartographerzUserBundle:User");
+        $user = $repositoryUser->find($request->get("id"));
+        $groupes = $user->getGroups();
+        return $this->render('KartographerzCartographyBundle:Cartography:userRole.html.twig' , array("groups" => $groupes));
+    }
+    
     function updateElementsAction(Request $request) {
         $New_elements = $request->get("elements");
         $idCart = $request->get("cart");
@@ -288,7 +296,36 @@ class CartographyController extends Controller {
 
         return $this->render('KartographerzCartographyBundle:Cartography:view.html.twig', array("lastVersion" => $lastVersion, "id" => $id, "webPath" => $webPath));
     }
+    
+    function listUserRoleAction( Request $request)
+    {
+        return $this->render('KartographerzCartographyBundle:Cartography:listUser.html.twig');
+  
+    }    
+    function listUserRoleDataTableAction( Request $request)
+    {
+        $conn = $this->get('database_connection');
+        $list = $conn->fetchAll('SELECT * FROM User');
+        return new Response(json_encode(array("data" => $list)));
+        
+    }
+    function changeRoleAction(Request $request)
+    {
+        $id = $request->get("id");
+        $val = $request->get("val");
+        $conn = $this->get('database_connection');
+        $conn->executeUpdate("UPDATE `fos_user_user_group` SET `group_id`=(SELECT id from fos_group WHERE name = '".$val."' ) WHERE user_id = '".$id."' ");
+        return new  Response("ok");
+        
+    }
+    function getRoleAction(Request $request)
+    {
+        $id = $request->get("id");
+        $conn = $this->get('database_connection');
+        $role = $conn->fetchAll('SELECT *,(select name from fos_group where id = group_id) as na FROM fos_user_user_group where user_id = "'.$id.'"');
+        return new Response(json_encode($role));
 
+    }
     function lastVersionCart($cartId) {
         $em = $this->getDoctrine()->getManager();
         $repositoryVersion = $em->getRepository("KartographerzCartographyBundle:Version");

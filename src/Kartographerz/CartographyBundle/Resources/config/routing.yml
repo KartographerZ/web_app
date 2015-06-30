@@ -84,5 +84,39 @@ kartographerz_version_versionLinkList:
     path: /versionLinkList/{versionCartography}
     defaults: { _controller: KartographerzCartographyBundle:Version:linkList }  
     
-
-    
+kartographerz_admin_listrole:
+    path: /listuserrole
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:listUserRole }  
+    options:
+        expose: true
+        
+kartographerz_admin_listroleDatatable:
+    path: /listuserroleDatatable
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:listUserRoleDataTable }  
+    options:
+        expose: true 
+        
+kartographerz_admin_listgroups:
+    path: /listgroups
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:listgroups }  
+    options:
+        expose: true 
+        
+kartographerz_admin_userrole:
+    path: /userrole
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:userRole }  
+    options:
+        expose: true
+        
+kartographerz_admin_changerole:
+    path: /changerole
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:changeRole }  
+    options:
+        expose: true
+        
+        
+kartographerz_admin_getrole:
+    path: /getrole
+    defaults: { _controller: KartographerzCartographyBundle:Cartography:getRole }  
+    options:
+        expose: true
