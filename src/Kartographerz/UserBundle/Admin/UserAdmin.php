@@ -38,6 +38,7 @@ class UserAdmin extends Admin {
                 ->addIdentifier('name')
                 ->addIdentifier('firstname')
                 ->addIdentifier('enterprise')
+                ->addIdentifier('groups')
         ;
     }
 
