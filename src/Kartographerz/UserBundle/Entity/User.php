@@ -5,6 +5,8 @@ namespace Kartographerz\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use FOS\UserBundle\Model\GroupInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Kartographerz\UserBundle\Entity\Group;
 
 /**
  * User
@@ -17,7 +19,7 @@ class User extends BaseUser {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
 
@@ -35,7 +37,7 @@ class User extends BaseUser {
      */
     private $firstname;
 
-/**
+    /**
      * @var string
      *
      * @ORM\Column(name="enterprise", type="string", length=255, nullable=true)
@@ -43,7 +45,7 @@ class User extends BaseUser {
     private $enterprise;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Kartographerz\UserBundle\Entity\Group")
+     * @ORM\ManyToMany(targetEntity="Kartographerz\UserBundle\Entity\Group",cascade={"persist"})
      * @ORM\JoinTable(name="fos_user_user_group",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
@@ -81,7 +83,7 @@ class User extends BaseUser {
 
     function setGroups($groups) {
         $groups2 = new ArrayCollection();
-        $groups2.add();
+        $groups2->add($groups);
         $this->groups = $groups2;
     }
 
@@ -98,7 +100,7 @@ class User extends BaseUser {
 
     function __construct() {
         parent::__construct();
-        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
 }

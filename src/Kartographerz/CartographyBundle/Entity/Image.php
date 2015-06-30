@@ -93,15 +93,15 @@ class Image {
     public function getUploadName() {
         $char = 'abcdefghijklmnopqrstuvwxyz0123456789';
         $rand = str_shuffle($char);
-        $rand = substr( $rand , 0 , 10);
-        return  $rand.".png";
+        $rand = substr($rand, 0, 10);
+        return $rand . ".png";
     }
 
     public function upload() {
         $n = $this->getUploadName();
         $this->name = $n;
         $this->path->move($this->getUploadDir(), $n);
-        $this->path = $this->getUploadDir() . $n ;
+        $this->path = $this->getUploadDir() . $n;
     }
 
 }

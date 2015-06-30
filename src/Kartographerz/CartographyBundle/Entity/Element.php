@@ -30,7 +30,8 @@ class Element {
 
     /**
      * @var \TypeElement
-     * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\TypeElement" ))
+     * @ORM\ManyToOne(targetEntity="Kartographerz\CartographyBundle\Entity\TypeElement")
+     * @ORM\JoinColumn(name="typeElement_id", referencedColumnName="id")
      */
     private $typeElement;
 

@@ -52,7 +52,7 @@
 // _________________________________________Partie Arbor JS ________________________________________________________
 
         var sys = arbor.ParticleSystem();
-        sys.parameters({stiffness:900, repulsion:2000, gravity:true, dt:0.015})
+        sys.parameters({gravity:true});
         sys.renderer = Renderer("#viewport");
 // __________________________________________________________________________________________________________________
 
@@ -127,7 +127,7 @@
         $("#addElementToACartography").click(function () {
             if (getAllCheckedCheckboxes().length <= 1)
             {
-                alert("Il faut ajouter au moins 2 elements pour pouvoir gérer les liens");
+                alert("{{'cartography.link_error'|trans}}");
             }
             else
             {

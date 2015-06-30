@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Right
  *
- * @ORM\Table(name="right", indexes={@ORM\Index(name="type_right_id", columns={"type_right_id"}), @ORM\Index(name="cartography_id", columns={"cartography_id"}), @ORM\Index(name="user_id", columns={"user_id"})})
+ * @ORM\Table(name="right")
  * @ORM\Entity
  */
 class Right {
@@ -24,7 +24,7 @@ class Right {
     /**
      * @var \TypeRight
      *
-     * @ORM\ManyToOne(targetEntity="TypeRight")
+     * @ORM\ManyToOne(targetEntity="TypeRight", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="type_right_id", referencedColumnName="id")
      * })
@@ -34,7 +34,7 @@ class Right {
     /**
      * @var \Cartography
      *
-     * @ORM\ManyToOne(targetEntity="Cartography")
+     * @ORM\ManyToOne(targetEntity="Cartography", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="cartography_id", referencedColumnName="id")
      * })
@@ -44,7 +44,7 @@ class Right {
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="\Kartographerz\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="\Kartographerz\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })

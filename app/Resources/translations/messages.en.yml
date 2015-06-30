@@ -45,6 +45,7 @@ cartography:
     list: List of the cartographies
     show : Display cartography
     version: "Version: "
+    link_error: "You must add at least two elements to manage the links"
     allVisibility: See private cartographies
     allVisibilityAlert: A necessary administrator rights to private cartographies consultation has been sent
     tablelist:
